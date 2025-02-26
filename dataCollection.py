@@ -43,3 +43,56 @@ def fetch_alpha_vantage_indicator(symbol, indicator, date,interval='60min', time
         raise ValueError(f"Failed to fetch {indicator} data. Response: {data}")
 
 
+def merge_indicator_result(data, indicator_result, old_column_name,new_column_name):
+    indicator_result.index.name='timestamp'
+    indicator_result.reset_index(inplace=True)
+    data= pd.merge(data, indicator_result, on='timestamp', how='left')
+    data.rename(columns={old_column_name: new_column_name}, inplace=True)
+
+    return data
+
+def calculate_indicators(data, symbol, date):
+    """
+    Calculate technical indicators using Alpha Vantage's API.
+    """
+    # Fetch SMA 50
+    sma_50 = fetch_alpha_vantage_indicator(symbol, 'SMA', date,time_period=50)
+    data = merge_indicator_result(data, sma_50,'SMA', 'SMA_50')
+    
+    
+    #Fetch EMA 20
+    ema_20 = fetch_alpha_vantage_indicator(symbol, 'EMA', date,time_period=20)
+    data = merge_indicator_result(data, ema_20,'EMA', 'EMA_20')
+
+   
+    
+    # Fetch RSI
+    rsi = fetch_alpha_vantage_indicator(symbol, 'RSI', time_period=14)
+    data = merge_indicator_result(data, rsi,'RSI', 'RSI_14')
+    
+    # Fetch MACD
+    macd = fetch_alpha_vantage_indicator(symbol, 'MACD')
+    data = merge_indicator_result(data, macd,'MACD', 'MACD')
+    
+    # Fetch Bollinger Bands
+    # bollinger = fetch_alpha_vantage_indicator(symbol, 'BBANDS', date, time_period=20)
+    # data = merge_indicator_result(data, bollinger[['Real Upper Band']], 'Real Upper Band', 'Bollinger_Upper')
+    # data = merge_indicator_result(data, bollinger[['Real Lower Band']], 'Real Lower Band', 'Bollinger_Lower')
+    
+    # Fetch ATR
+    atr = fetch_alpha_vantage_indicator(symbol, 'ATR', time_period=14)
+    data = merge_indicator_result(data, atr,'ATR', 'ATR_14')
+    
+    return data
+
+
+
+def append_to_excel(data, filename='data.xlsx'):
+    """
+    Append data to an Excel file. If the file does not exist, create it.
+    """
+    try:
+        with pd.ExcelWriter(filename, mode='a', if_sheet_exists='overlay') as writer:
+            data.to_excel(writer, sheet_name='Sheet1', index=False, header=writer.sheets['Sheet1'].max_row == 0)
+    except FileNotFoundError:
+        data.to_excel(filename, sheet_name='Sheet1', index=False)
