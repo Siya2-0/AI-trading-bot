@@ -67,21 +67,23 @@ def calculate_indicators(data, symbol, date):
    
     
     # Fetch RSI
-    rsi = fetch_alpha_vantage_indicator(symbol, 'RSI', time_period=14)
+    rsi = fetch_alpha_vantage_indicator(symbol, 'RSI',date,time_period=14)
     data = merge_indicator_result(data, rsi,'RSI', 'RSI_14')
     
     # Fetch MACD
-    macd = fetch_alpha_vantage_indicator(symbol, 'MACD')
-    data = merge_indicator_result(data, macd,'MACD', 'MACD')
+    # macd = fetch_alpha_vantage_indicator(symbol, 'MACD', date)
+    # data = merge_indicator_result(data, macd,'MACD', 'MACD')
     
     # Fetch Bollinger Bands
-    # bollinger = fetch_alpha_vantage_indicator(symbol, 'BBANDS', date, time_period=20)
-    # data = merge_indicator_result(data, bollinger[['Real Upper Band']], 'Real Upper Band', 'Bollinger_Upper')
-    # data = merge_indicator_result(data, bollinger[['Real Lower Band']], 'Real Lower Band', 'Bollinger_Lower')
+    bollinger = fetch_alpha_vantage_indicator(symbol, 'BBANDS', date, time_period=20)
+    data = merge_indicator_result(data, bollinger[['Real Upper Band']], 'Real Upper Band', 'Bollinger_Upper')
+    data = merge_indicator_result(data, bollinger[['Real Lower Band']], 'Real Lower Band', 'Bollinger_Lower')
     
     # Fetch ATR
-    atr = fetch_alpha_vantage_indicator(symbol, 'ATR', time_period=14)
+    atr = fetch_alpha_vantage_indicator(symbol, 'ATR',date, time_period=14)
     data = merge_indicator_result(data, atr,'ATR', 'ATR_14')
+
+
     
     return data
 
@@ -96,3 +98,14 @@ def append_to_excel(data, filename='data.xlsx'):
             data.to_excel(writer, sheet_name='Sheet1', index=False, header=writer.sheets['Sheet1'].max_row == 0)
     except FileNotFoundError:
         data.to_excel(filename, sheet_name='Sheet1', index=False)
+
+
+
+if __name__ == "__main__":
+    symbol = 'AAPL'
+    interval = '60min'
+    date = '2023-01'
+    data = fetch_historical_data(symbol, interval, date)
+    data = calculate_indicators(data, symbol, date)
+   
+    append_to_excel(data)
