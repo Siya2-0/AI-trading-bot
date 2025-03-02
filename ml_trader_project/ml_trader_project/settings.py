@@ -76,9 +76,9 @@ WSGI_APPLICATION = 'ml_trader_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'myuser',
-        'PASSWORD': 'mypassword',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'MpEhyet20501',
         'HOST': 'localhost',
         'PORT': '5432',
     }
