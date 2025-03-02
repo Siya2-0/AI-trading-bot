@@ -18,6 +18,7 @@ def fetch_historical_data(symbol, interval, date):#update to collect more data
     url = f"https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval={interval}&apikey={api_key}&outputsize=full&month={date}&datatype=csv"
     response = requests.get(url)
     data = pd.read_csv(io.StringIO(response.text))
+    print(data)
     data['timestamp'] = pd.to_datetime(data['timestamp'])
     data = data.sort_values(by='timestamp', ascending=True)
   
