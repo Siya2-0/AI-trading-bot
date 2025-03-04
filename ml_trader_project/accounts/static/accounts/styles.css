@@ -35,12 +35,16 @@ body{
     height: 4rem;
 
 }
+.Logo{
+    padding-left: 1.5rem;
+}
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
     height: 5rem;
+  
   
 }
 
