@@ -5,9 +5,24 @@
 {% block heading %}Log In{% endblock %}
 
 {% block content %}
+
+    
+    
 <form method="POST">
-    <!-- {% csrf_token %}
-    {{ form.as_p }} -->
-    <button type="submit">Log In</button>
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="usernameInput">Username</label>
+        <input type="text" class="form-control" id="usernameInput" aria-describedby="emailHelp" placeholder="Enter username" name ='usernameInput'>
+        <small id="emailHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>
+    </div>
+
+    <div class="form-group">
+        <label for="passwordInput">Password</label>
+        <input type="password" class="form-control" id="passwordInput" placeholder="Password" name='passwordInput'>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+  
+
 {% endblock %}
