@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Auth{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accounts/styles.css' %}">
+    <script src="{% static 'accounts/scripts.js' %}" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+     
+
+        <div class="Logo">    
+            <img src='assets/images/sm-high-resolution-logo-transparent.png' alt="SM"  id='logoImage'/>
+        </div>
+
+        <!-- <ul class="links">
+            <li>
+                <a href="https://www.linkedin.com/in/siyabonga-mbuyisa-developer/" id="LinkedInLink">
+                    LinkedIn
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/Siya2-0" id="GithubLink">
+                    Github
+                </a>
+            </li>
+        </ul> -->
+     
+    </nav>
+    <main>
+        <div class="con-header">
+            <div class="heading-div">
+                <h1 class="top-heading">AI TRADING SERVICE</h1>
+                <p class="subtext-heading">Harnessing the power of artificial intelligence to optimize your trading strategies and maximize returns.</p>
+            </div>
+        </div>
+       
+
+        <div class="form-container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+   
+</body>
+</html>
