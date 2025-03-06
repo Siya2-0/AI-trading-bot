@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Landing.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import logo from '../assets/images/ai-trading-high-resolution-logo.png'
 
@@ -42,7 +42,7 @@ const Landing = () => {
                     </div>
                          
                     <div className='Login-Button-Container'>
-                        <button type="button" className='Login-Button'><FontAwesomeIcon icon="fa-brands fa-google" />Sign in with Google</button>
+                        <button type="button" className='Login-Button'><i className="google-icon fab fa-google"></i>Sign in with Google</button>
                 
                     </div>
                     <p>Don't have an account? <a href='' className='forgot-password-link'>Sign up</a></p>
