@@ -1,8 +1,8 @@
 
 :root {
-    --color-primary: #F1FFFA;
-    --color-secondary: #CCFCCB;
-    --color-tertiary:#96E6B3;
+    --color-primary: rgb(255,255,255,0);
+    --color-secondary: rgb(251,249,233);
+    --color-tertiary: #05a105;
   
   
     --font-size-small: 0.875rem;
@@ -11,7 +11,7 @@
     --font-size-xlarge: 1.25rem;
   
   }
-.dark {
+/* .dark {
     --color-primary: #494E47;
     --color-secondary: #568259;
     --color-tertiary: #96E6B3;
@@ -23,41 +23,163 @@
     --font-size-xlarge: 1.25rem;
   
 }
+   */
+
+
+
+
+
+  p {
+    font-size: 1em;
+  }
   
-
-.Background
-{
-    min-height: 100vh;
-    width: 100%;
-    background-color: var(--color-primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.grid-container1{
-    height:80%;
-    width: 80%;
-    /* justify-self: center; */
-    /* align-self: center; */
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
-    border: 1px solid black;
-    padding: 1rem;
-}
-
-.grid-element1{
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.15;
+  }
+  
+  h1,
+  .text-size-h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    margin-top: 0;
+    font-size: 3.05em;
+  }
+  
+  h2,
+  .text-size-h2 { font-size: 2.44em; }
+  
+  h3,
+  .text-size-h3 { font-size: 1.95em; }
+  
+  h4,
+  .text-size-h4 { font-size: 1.56em; }
+  
+  h5,
+  .text-size-h5 { font-size: 1.25em; }
+  
+  .text-caption { font-size: 0.8em; }
+  
+  small,
+  .text-small {
+    font-size: 0.64em;
+  }
+                
    
-    box-sizing: border-box;
+.LoginPage{
+    background-color: #f2f7f1;
+    height: 100vh;
+    width: 100%;
+       /* the following deal with fonts*/
+    font-family: 'Open Sans', sans-serif;
+    font-weight: false;
+    line-height: 1.65;
+
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.grid-element1 img {
-    max-width: 100%;
-    max-height: 100%;
-    height: auto;
-    width: auto;
-    display: block;
+.PromptBox{
+    
+    min-height: 80%;
+    min-width:30%;
+    border-radius: var(--font-size-large);
+    background-color: white;
+    padding : 16px;
+
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 -8px 16px rgba(0, 0, 0, 0.1);
+}
+.headerArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.headerArea img{
+    width: 100px;
+    height: 100px;
+    border-radius: var(--font-size-large)
+}
+
+.LogoContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* .TextContainer1{
+    text-align: center;
+} */
+.FormArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input-container input {
+    height: 40px;
+    width: 360px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: var(--font-size-small);
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-container input:focus {
+    border-color: var(--color-tertiary); /* Change border color on focus */
+}
+
+.input-container label {
+    position: absolute;
+    top: 50%;
+    left: 0.5rem;
+    transform: translateY(-50%);
+    background-color: white;
+    padding: 0 0.25rem;
+    color: #999;
+    transition: top 0.3s, transform 0.3s, font-size 0.3s, color 0.3s;
+}
+
+.input-container input:focus + label
+{
+    top: -0.5rem;
+    left: 0.5rem;
+    font-size: 0.75rem;
+    color:  var(--color-tertiary); 
+}
+
+.forgot-password-link{
+    color: black;
+}
+
+.Login-Button{
+    height: 40px;
+    width: 360px;
+    border-radius: var(--font-size-small);
+    background-color: black;
+    color: white;
+    cursor: pointer;
+
+}
+
+.Login-Button:hover {
+    background-color:rgb(31, 31, 31); /* Optional: Change background color on hover */
+}
+
+.Login-Button-Container{
+    margin-bottom: 1.5rem;
 }
