@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Landing from '../src/pages/Landing.js'
+import SignUp from '../src/pages/SignUp.js'
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
     //   </header>
     // </div>
     <>
-    <Landing/>
+    <SignUp/>
     </>
   );
 }

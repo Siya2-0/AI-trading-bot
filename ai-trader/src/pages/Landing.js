@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./Landing.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -34,6 +34,8 @@ const Landing = () => {
                         <input type="password" id="password" name="password" required />
                         <label htmlFor="password">Password*</label>
                     </div>
+
+
                 </div>
                 <p><a href='' className='forgot-password-link'>Forgot Password?</a></p>
                 
