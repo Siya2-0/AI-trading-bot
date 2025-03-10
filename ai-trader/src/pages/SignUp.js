@@ -17,13 +17,13 @@ const SignUp = () => {
             setShowPassword(!showPassword);
         };
 
-        useEffect(() => {
-            if (email && password.length >= 8 && password === confirmPassword && isCheckboxChecked) {
-              setIsButtonDisabled(false);
-            } else {
-              setIsButtonDisabled(true);
-            }
-          }, [email, password, confirmPassword, , isCheckboxChecked]);
+        // useEffect(() => {
+        //     if (email && password.length >= 8 && password === confirmPassword && isCheckboxChecked) {
+        //       setIsButtonDisabled(false);
+        //     } else {
+        //       setIsButtonDisabled(true);
+        //     }
+        //   }, [email, password, confirmPassword, , isCheckboxChecked]);
 
         const handleEmailChange = (e) => {
             setEmail(e.target.value);
@@ -120,7 +120,7 @@ const SignUp = () => {
           
                 
                     <div className='Login-Button-Container'>
-                        <button type="submit" className='Login-Button'  disabled={isButtonDisabled}>Continue</button>
+                        <button className='Login-Button' onSubmit={handleSubmit} >Continue</button>
                     </div>
                     <div className='Login-Button-Container'>
                         <button type="button" className='Login-Button'><i className="google-icon fab fa-google"></i>Sign up with Google</button>
