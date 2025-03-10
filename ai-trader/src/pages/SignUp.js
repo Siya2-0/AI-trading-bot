@@ -11,6 +11,11 @@ const SignUp = () => {
         const [errorMessage, setErrorMessage] = useState('');
         const [isButtonDisabled, setIsButtonDisabled] = useState(true);
         const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+        const [showPassword, setShowPassword] = useState(false);
+    
+        const togglePasswordVisibility = () => {
+            setShowPassword(!showPassword);
+        };
 
         useEffect(() => {
             if (email && password.length >= 8 && password === confirmPassword && isCheckboxChecked) {
@@ -71,18 +76,38 @@ const SignUp = () => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <div className="input-container">
-                        <input type="email" id="email" name="email" required onChange={handleEmailChange} value={email} />
+                        <input type="email" id="email" name="email" required onChange={handleEmailChange} value={email} placeholder=" " />
                         <label htmlFor="email">Email Address*</label>
                     </div>
                             
                     <div className="input-container">
-                        <input type="password" id="password1" name="password1" required value={password} onChange={handlePasswordChange}/>
+                        <input type={showPassword ? "text" : "password"} id="password1" name="password1" required value={password} onChange={handlePasswordChange} placeholder=" "/>
                         <label htmlFor="password">Password*</label>
+                        <span
+                        className="password-toggle-icon"
+                        onClick={togglePasswordVisibility}
+                        >
+                        <i
+                            className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"}
+                            aria-hidden="true">
+
+                        </i>
+                        </span>
                     </div>
 
                     <div className="input-container">
-                        <input type="password" id="password2" name="password2" required value={confirmPassword}  onChange={handleConfirmPasswordChange}/>
+                        <input type={showPassword ? "text" : "password"} id="password2" name="password2" required value={confirmPassword}  onChange={handleConfirmPasswordChange} placeholder=" "/>
                         <label htmlFor="password">Confirm Password*</label>
+                        <span
+                        className="password-toggle-icon"
+                        onClick={togglePasswordVisibility}
+                        >
+                        <i
+                            className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"}
+                            aria-hidden="true">
+
+                        </i>
+                        </span>
                     </div>
 
                     
@@ -96,6 +121,10 @@ const SignUp = () => {
                 
                     <div className='Login-Button-Container'>
                         <button type="submit" className='Login-Button'  disabled={isButtonDisabled}>Continue</button>
+                    </div>
+                    <div className='Login-Button-Container'>
+                        <button type="button" className='Login-Button'><i className="google-icon fab fa-google"></i>Sign up with Google</button>
+                
                     </div>
                         
                     <p>Already have an account? <a href='' className='forgot-password-link'>Log in</a></p>

@@ -72,7 +72,7 @@
    
 .LoginPage{
     background-color: #f2f7f1;
-    height: 100vh;
+    min-height: 140vh;
     width: 100%;
        /* the following deal with fonts*/
     font-family: 'Open Sans', sans-serif;
@@ -159,7 +159,23 @@
     top: -0.5rem;
     left: 0.5rem;
     font-size: 0.75rem;
-    color:  var(--color-tertiary); 
+    /* color:  var(--color-tertiary);  */
+}
+
+.input-container input:not(:placeholder-shown) + label {
+    top: -0.5rem;
+    left: 0.5rem;
+    font-size: 0.75rem;
+
+}
+
+.input-container input:placeholder-shown + label {
+    top: 50%;
+    left: 0.5rem;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #999;
+    
 }
 
 .forgot-password-link{

@@ -49,7 +49,7 @@ const Landing = () => {
                             aria-hidden="true">
 
                         </i>
-                    </span>
+                        </span>
                     </div>
 
 
