@@ -1,12 +1,19 @@
 import React, {useState} from 'react';
-import "./Landing.css";
+import "./SignIn.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import logo from '../assets/images/ai-trading-high-resolution-logo.png'
 
 const Landing = () => {
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
   return (
      <>
+     
    
     <main className='LoginPage'>
         <section className='PromptBox'>
@@ -26,13 +33,23 @@ const Landing = () => {
             <form>
                 <div>
                     <div className="input-container">
-                        <input type="email" id="email" name="email" required />
+                        <input type="email" id="email" name="email" required  placeholder=" "/>
                         <label htmlFor="email">Email Address*</label>
                     </div>
                             
                     <div className="input-container">
-                        <input type="password" id="password" name="password" required />
+                        <input type={showPassword ? "text" : "password"} id="password" name="password" required  placeholder=" "/>
                         <label htmlFor="password">Password*</label>
+                        <span
+                        className="password-toggle-icon"
+                        onClick={togglePasswordVisibility}
+                        >
+                        <i
+                            className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"}
+                            aria-hidden="true">
+
+                        </i>
+                    </span>
                     </div>
 
 
