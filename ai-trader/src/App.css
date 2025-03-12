@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,6 +35,23 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.App {
+  display: flex;
 }
+
+.content {
+  margin-left: 250px; /* Adjust based on side menu width */
+  padding: 20px;
+  flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0; /* Remove margin on mobile */
+  }
+}
+
 
 @import '~@fortawesome/fontawesome-free/css/all.min.css';

@@ -1,0 +1,94 @@
+/* SideMenu.css */
+@import url('../../variables.css');
+
+/* Hamburger menu (visible only on mobile) */
+.hamburger-menu {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 1000;
+  }
+  
+  /* Side menu */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: #f1f1f1;
+    color: black;
+    transition: width 0.3s ease;
+    padding-top: 20px;
+    z-index: 999;
+    border-radius: 1.5rem;
+    margin:12px;
+  }
+  
+.LogoContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:24px;
+}
+.LogoContainer img{
+    width: 80px;
+    height: 80px;
+    border-radius: var(--font-size-large)
+}
+.subtext{
+    padding: 0px 20px;
+    color: hsl(0, 0%, 50%);
+    
+}
+  
+  /* Collapsed state */
+  .side-menu.collapsed {
+    width: 60px;
+  }
+  
+  /* Menu items */
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .menu-item:hover {
+    background-color: #444;
+  }
+  
+  .menu-item i {
+    margin-right: 10px;
+  }
+  
+  /* Hide text when collapsed */
+  .side-menu.collapsed .menu-item span {
+    display: none;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .hamburger-menu {
+      display: block; /* Show hamburger menu on mobile */
+    }
+  
+    .side-menu {
+      width: 250px;
+      left: -250px; /* Hide menu by default on mobile */
+      transition: left 0.3s ease;
+    }
+  
+    .side-menu.open {
+      left: 0; /* Show menu when toggled */
+    }
+  
+    .side-menu.collapsed {
+      width: 250px; /* Override collapsed state on mobile */
+    }
+  }
