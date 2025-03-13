@@ -28,20 +28,46 @@ const SideMenu = () => {
         </div>
   
         {/* Side Menu */}
-        <div className={`side-menu ${isMenuOpen ? "open" : ""} ${isCollapsed ? "collapsed" : ""}`}>
-            <div className='LogoContainer'>
+        <div className={`side-menu ${isMenuOpen ? "open" : ""} ${isCollapsed ? "collapsed" : ""}`} >
+            <div className='LogoContainer'  onClick={toggleCollapse}>
                 <img src={logo} alt="AI-trading" id="logoImage"/> 
             </div>
-
-            <p className='text-caption subtext'>menu</p>
-          <div className="menu-item" onClick={toggleCollapse}>
-            <i class="fa fa-bars" aria-hidden="true"></i>
-            {!isCollapsed && <span>Home</span>}
+          <div className='text-caption-container'>
+            <p className='text-caption subtext'>MENU</p>
           </div>
           <div className="menu-item">
-            <i class="fa fa-bars" aria-hidden="true"></i>
-            {!isCollapsed && <span>Profile</span>}
+          <i class="fa fa-th" aria-hidden="true"></i>
+            {!isCollapsed && <span>Dashboard</span>}
           </div>
+          <div className="menu-item">
+          <i class="fa fa-folder-open" aria-hidden="true"></i>
+            {!isCollapsed && <span>Active Trades</span>}
+          </div>
+          <div className="menu-item">
+          <i class="fa fa-history" aria-hidden="true"></i>
+            {!isCollapsed && <span>Historical Trades</span>}
+          </div>
+          <div className="menu-item">
+          <i class="fa fa-pie-chart" aria-hidden="true"></i>
+            {!isCollapsed && <span>Model Performance</span>}
+          </div>
+          <div className='text-caption-container'>
+            <p className='text-caption subtext general-top-spacing'>GENERAL</p>
+          </div>
+          <div className="menu-item">
+          <i class="fa fa-cogs" aria-hidden="true"></i>
+            {!isCollapsed && <span>Settings</span>}
+          </div>
+          <div className="menu-item">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+            {!isCollapsed && <span>Help</span>}
+          </div>
+          <div className="menu-item">
+          <i class="fa fa-sign-out" aria-hidden="true"></i>
+            {!isCollapsed && <span>Logout</span>}
+          </div>
+          
+          
           {/* Add more menu items as needed */}
         </div>
       </>
