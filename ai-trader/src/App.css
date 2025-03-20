@@ -39,11 +39,12 @@
 
 .App {
   display: flex;
+  padding: 20px;
 }
 
 .content {
   margin-left: 250px; /* Adjust based on side menu width */
-  padding: 20px;
+
   flex-grow: 1;
 }
 

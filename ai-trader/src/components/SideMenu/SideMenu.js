@@ -5,9 +5,9 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 //import logo from '../assets/images/ai-trading-high-resolution-logo.png'
 
-const SideMenu = () => {
+const SideMenu = ({ isCollapsed, setCollapsed }) => {
     const [isMenuOpen, setMenuOpen] = useState(false); // State to manage menu visibility
-    const [isCollapsed, setCollapsed] = useState(false); // State to manage collapsed state
+   // const [isCollapsed, setCollapsed] = useState(false); // State to manage collapsed state
   
     // Toggle menu visibility (for mobile)
     const toggleMenu = () => {

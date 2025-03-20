@@ -1,10 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
+import React, {useState} from 'react';
 import Landing from './pages/SignIn.js'
 import SignUp from '../src/pages/SignUp.js'
 import SideMenu from '../src/components/SideMenu/SideMenu.js'
+import Dashboard from '../src/components/Dashboard/Dashboard.js'
 
 function App() {
+  const [isCollapsed, setCollapsed] = useState(false);
   return (
     // <div className="App">
     //   <header className="App-header">
@@ -23,11 +26,8 @@ function App() {
     //   </header>
     // </div>
     <div className="App">
-      <SideMenu/>
-      <div className="content">
-        <h1>Welcome to My App</h1>
-        <p>This is the main content area.</p>
-      </div>
+      <SideMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed} />
+      <Dashboard isCollapsed={isCollapsed} />
     </div>
   );
 }

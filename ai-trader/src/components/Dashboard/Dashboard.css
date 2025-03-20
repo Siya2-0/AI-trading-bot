@@ -1,0 +1,28 @@
+@import url('../../variables.css');
+
+
+
+/* Dashboard.css */
+
+.dashboard {
+    background-color: #f1f1f1; /* Grey background */
+    border-radius: 10px; /* Rounded borders */
+    padding: 20px;
+    margin-left: 260px; /* Default margin to account for side menu width */
+    transition: margin-left 0.3s ease; /* Smooth transition */
+    height: 100vh; /* Full height minus padding */
+    width: 100%;
+    overflow-y: auto; /* Scrollable content if needed */
+  }
+  
+  /* Adjust margin when side menu is collapsed */
+  .dashboard.collapsed {
+    margin-left: 70px; /* Adjusted margin for collapsed side menu */
+  }
+  
+  /* Full width on mobile */
+  @media (max-width: 768px) {
+    .dashboard {
+      margin-left: 0; /* No margin on mobile */
+    }
+  }
