@@ -26,3 +26,84 @@
       margin-left: 0; /* No margin on mobile */
     }
   }
+
+.profileImage{
+  width:60px;
+  height:60px;
+  border-radius: 50%;
+  margin-left: 20px;
+}
+
+.user-detail-container{
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+.greeting-text p{
+  font-size: var(--font-size-xlarge);
+  font-weight: 700;
+  height:100%
+}
+
+.profile {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  height:100%
+}
+
+
+.bell-icon{
+  font-size:1.6rem ;
+
+}
+
+.balance-container{
+  height: 10rem;
+  width: 15rem;
+  background-color: aliceblue;
+  margin:1rem;
+  border-radius: var(--font-size-xlarge);
+}
+
+.broker-container{
+  height: 10rem;
+  width: 15rem;
+  background-color: aliceblue;
+  margin:1rem;
+  border-radius: var(--font-size-xlarge);
+}
+
+.open-trades-container{
+  height: 10rem;
+  width: 10rem;
+  background-color: aliceblue;
+  margin:1rem;
+  border-radius: var(--font-size-xlarge);
+}
+
+.closed-trades-container{
+  height: 10rem;
+  width: 10rem;
+  background-color: aliceblue;
+  margin:1rem;
+  border-radius: var(--font-size-xlarge);
+}
+
+
+.chart-container{
+  height: 20rem;
+  width: 45%;
+  background-color: aliceblue;
+  margin:1rem;
+  border-radius: var(--font-size-xlarge);
+}
+
+.news-events-container{
+  height: 20rem;
+  width: 45%;
+  background-color: aliceblue;
+  margin:1rem;
+  border-radius: var(--font-size-xlarge);
+}
