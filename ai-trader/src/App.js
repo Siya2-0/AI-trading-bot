@@ -26,8 +26,10 @@ function App() {
     //   </header>
     // </div>
     <div className="App">
-      <SideMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed} />
-      <Dashboard isCollapsed={isCollapsed} />
+     
+        <SideMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed} />
+        <Dashboard isCollapsed={isCollapsed} />
+   
     </div>
   );
 }

@@ -8,12 +8,15 @@
     background-color: #f1f1f1; /* Grey background */
     border-radius: 1.5rem; /* Rounded borders */
     padding: 20px;
-    margin-left: 260px; /* Default margin to account for side menu width */
+    /* margin-left: 268px; Default margin to account for side menu width */
     transition: margin-left 0.3s ease; /* Smooth transition */
     height: 100vh; /* Full height minus padding */
-    width: 100%;
+    width: calc(100% - 23%);
     overflow-y: auto; /* Scrollable content if needed */
-    margin-bottom:4px;
+    right:0;
+    top:0;
+    position: fixed;
+    margin:8px;
     
   }
   
@@ -26,6 +29,7 @@
   @media (max-width: 768px) {
     .dashboard {
       margin-left: 0; /* No margin on mobile */
+      width: calc(100% - 15%);
     }
   }
 
