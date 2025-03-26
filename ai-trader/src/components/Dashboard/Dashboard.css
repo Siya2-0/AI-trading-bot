@@ -6,13 +6,15 @@
 
 .dashboard {
     background-color: #f1f1f1; /* Grey background */
-    border-radius: 10px; /* Rounded borders */
+    border-radius: 1.5rem; /* Rounded borders */
     padding: 20px;
     margin-left: 260px; /* Default margin to account for side menu width */
     transition: margin-left 0.3s ease; /* Smooth transition */
     height: 100vh; /* Full height minus padding */
     width: 100%;
     overflow-y: auto; /* Scrollable content if needed */
+    margin-bottom:4px;
+    
   }
   
   /* Adjust margin when side menu is collapsed */
@@ -59,7 +61,7 @@
 
 }
 
-.balance-container{
+/* .balance-container{
   height: 10rem;
   width: 15rem;
   background-color: aliceblue;
@@ -106,4 +108,57 @@
   background-color: aliceblue;
   margin:1rem;
   border-radius: var(--font-size-xlarge);
+} */
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+.balance-container, 
+.broker-container,
+.open-trades-container,
+.closed-trades-container {
+  height: 10rem;
+  min-width: 15rem; /* or use 100% width with flex/grid */
+  background-color: aliceblue;
+  border-radius: var(--font-size-xlarge);
+}
+
+.chart-container,
+.news-events-container {
+  height: 20rem;
+  width: 100%; /* Let grid handle the width */
+  background-color: aliceblue;
+  border-radius: var(--font-size-xlarge);
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .stats-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
 }

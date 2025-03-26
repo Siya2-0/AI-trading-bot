@@ -19,27 +19,18 @@ const Dashboard = ({ isCollapsed }) => {
                     
                 </div>
             </div>
-            <div className='dashboard-content'>
-                <div className='balance-container'>
-
-                </div>
-                <div className='broker-container'>
-
-                </div>
-                <div className='open-trades-container'>
-
-                </div>
-                <div className='closed-trades-container'>
-
-                </div>
-
-                <div className='chart-container'>
-
-                </div>
-                <div className='news-events-container'>
-
-                </div>
-
+            <div class='dashboard-content'>
+            <div class='stats-row'>
+                <div class='balance-container'></div>
+                <div class='broker-container'></div>
+                <div class='open-trades-container'></div>
+                <div class='closed-trades-container'></div>
+            </div>
+            
+            <div class='main-content'>
+                <div class='chart-container'></div>
+                <div class='news-events-container'></div>
+            </div>
             </div>
 
         </div>
