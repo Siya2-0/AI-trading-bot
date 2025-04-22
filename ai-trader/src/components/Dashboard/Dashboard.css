@@ -5,7 +5,7 @@
 /* Dashboard.css */
 
 .dashboard {
-    background-color: #f1f1f1; /* Grey background */
+    background-color: rgb(120, 150, 200); 
     border-radius: 1.5rem; /* Rounded borders */
     padding: 20px;
     /* margin-left: 268px; Default margin to account for side menu width */
@@ -126,7 +126,7 @@
 .closed-trades-container {
   height: 10rem;
   min-width: 15rem; /* or use 100% width with flex/grid */
-  background-color: aliceblue;
+  background-color: rgb(240, 248, 255);
   border-radius: var(--font-size-xlarge);
 }
 

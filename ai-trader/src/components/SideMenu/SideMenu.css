@@ -19,14 +19,27 @@
     left: 0;
     height: 100vh;
     width: 18%;
-    background-color: #f1f1f1;
-    color: black;
+    background-color:  rgb(120, 150, 200); 
+    color: white;
     transition: width 0.3s ease;
     padding-top: 20px;
     z-index: 999;
     border-radius: 1.5rem;
     margin:8px;
   }
+  .right-border-icon {
+    position: absolute;
+    top: 10%; /* Center vertically */
+    right: -20px; /* Position outside the right border */
+    transform: translateY(-50%);
+    background-color: white; 
+    color: rgb(120, 150, 200); /* Match the side menu color */
+    border-radius: 50%; /* Make it circular */
+    padding: 10px; /* Add padding for size */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+    cursor: pointer; /* Change cursor to pointer */
+    z-index: 1000; /* Ensure it appears above other elements */
+}
   
 .LogoContainer{
     width: 100%;
@@ -55,7 +68,7 @@
 }
 .subtext{
     padding: 0px 20px;
-    color: hsl(0, 0%, 50%);
+    color: black;
     
 }
 .general-top-spacing{
@@ -84,8 +97,8 @@
   }
   
   .menu-item:hover {
-    background-color: var( --color-tertiary);
-    color: white;
+    background-color: aliceblue;
+    color: black;
     border-radius: var(--font-size-large)
   }
   

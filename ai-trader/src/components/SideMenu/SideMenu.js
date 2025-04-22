@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./SideMenu.css"; // Styling for the side menu
 import logo from '../../assets/images/ai-trading-high-resolution-logo.png'; // Logo image
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 //import logo from '../assets/images/ai-trading-high-resolution-logo.png'
 
@@ -26,12 +28,17 @@ const SideMenu = ({ isCollapsed, setCollapsed }) => {
         <div className="hamburger-menu" onClick={toggleMenu}>
             <i class="fa fa-bars" aria-hidden="true"></i>
         </div>
-  
+      
         {/* Side Menu */}
         <div className={`side-menu ${isMenuOpen ? "open" : ""} ${isCollapsed ? "collapsed" : ""}`} >
-            <div className='LogoContainer'  onClick={toggleCollapse}>
+            <div className='LogoContainer' >
                 <img src={logo} alt="AI-trading" id="logoImage"/> 
             </div>
+
+            <div className="right-border-icon"   onClick={toggleCollapse}>
+              <FontAwesomeIcon icon={faCircleChevronRight} />
+            </div>
+
           <div className='text-caption-container'>
             <p className='text-caption subtext'>MENU</p>
           </div>
