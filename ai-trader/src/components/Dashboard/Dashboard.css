@@ -127,9 +127,11 @@
 .open-trades-container,
 .closed-trades-container {
   height: 10rem;
-  min-width: 15rem; /* or use 100% width with flex/grid */
+  width: 20rem; /* or use 100% width with flex/grid */
   background-color: rgb(240, 248, 255);
   border-radius: var(--font-size-xlarge);
+  margin: 20px;
+  padding: 20px;
 }
 
 .chart-container,
@@ -138,6 +140,22 @@
   width: 100%; /* Let grid handle the width */
   background-color: aliceblue;
   border-radius: var(--font-size-xlarge);
+  margin: 20px;
+}
+
+.wallet-container {
+  font-size: 2rem; /* Adjust the size as needed */
+  color: #333; /* Optional: Change the color */
+}
+.balance{
+  color:grey
+}
+.amount{
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin:0;
+  padding: 0;
+  /* line-height: 1.2; */
 }
 
 .stats-row {

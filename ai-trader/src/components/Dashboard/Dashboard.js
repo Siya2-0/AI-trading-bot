@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Dashboard.css";
 import defaultProfileImage from '../../assets/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWallet } from '@fortawesome/free-solid-svg-icons'
 
 const Dashboard = ({ isCollapsed }) => {
 
@@ -21,7 +23,19 @@ const Dashboard = ({ isCollapsed }) => {
             </div>
             <div class='dashboard-content'>
             <div class='stats-row'>
-                <div class='balance-container'></div>
+                <div class='balance-container'>
+                    <div class='wallet-container'>
+                    <FontAwesomeIcon icon={faWallet} />
+                    </div>
+
+                    <div class='balance-text'>
+                        <p class='amount'>R 10,000.00</p>
+                        <p class='balance'>Account Balance</p>
+                      
+                    </div>
+
+
+                </div>
                 <div class='broker-container'></div>
                 <div class='open-trades-container'></div>
                 <div class='closed-trades-container'></div>
