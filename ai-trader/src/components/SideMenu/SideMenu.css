@@ -62,9 +62,14 @@
 }
 
 .side-menu.collapsed .LogoContainer img{
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     border-radius: var(--font-size-large)
+}
+
+.side-menu.collapsed .subtext{
+    display: none;
+
 }
 .subtext{
     padding: 0px 20px;

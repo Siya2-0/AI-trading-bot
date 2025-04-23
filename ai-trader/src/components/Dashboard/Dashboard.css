@@ -22,7 +22,9 @@
   
   /* Adjust margin when side menu is collapsed */
   .dashboard.collapsed {
-    margin-left: 70px; /* Adjusted margin for collapsed side menu */
+   /*margin-left: 40px;/* Adjusted margin for collapsed side menu */
+   width: calc(100% - 120px);
+   transition: margin-left 0.3s ease; 
   }
   
   /* Full width on mobile */
