@@ -42,8 +42,14 @@ const Dashboard = ({ isCollapsed }) => {
                          <p className='broker-visit'>Visit Website</p>                       
                     </div>
                 </div>
-                <div class='open-trades-container'></div>
-                <div class='closed-trades-container'></div>
+                <div class='open-trades-container'>
+                    <div className='color-box-open-trades'> green</div>
+                   <div className='count-open-trades'> 5</div>
+                </div>
+                <div class='closed-trades-container'>
+                    <div className='color-box-closed-trades'> red</div>
+                    <div className='count-closed-trades'> 2</div>
+                </div>
             </div>
             
             <div class='main-content'>
