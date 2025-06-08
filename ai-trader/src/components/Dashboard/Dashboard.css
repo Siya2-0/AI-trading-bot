@@ -67,54 +67,6 @@
 
 }
 
-/* .balance-container{
-  height: 10rem;
-  width: 15rem;
-  background-color: aliceblue;
-  margin:1rem;
-  border-radius: var(--font-size-xlarge);
-}
-
-.broker-container{
-  height: 10rem;
-  width: 15rem;
-  background-color: aliceblue;
-  margin:1rem;
-  border-radius: var(--font-size-xlarge);
-}
-
-.open-trades-container{
-  height: 10rem;
-  width: 10rem;
-  background-color: aliceblue;
-  margin:1rem;
-  border-radius: var(--font-size-xlarge);
-}
-
-.closed-trades-container{
-  height: 10rem;
-  width: 10rem;
-  background-color: aliceblue;
-  margin:1rem;
-  border-radius: var(--font-size-xlarge);
-}
-
-
-.chart-container{
-  height: 20rem;
-  width: 45%;
-  background-color: aliceblue;
-  margin:1rem;
-  border-radius: var(--font-size-xlarge);
-}
-
-.news-events-container{
-  height: 20rem;
-  width: 45%;
-  background-color: aliceblue;
-  margin:1rem;
-  border-radius: var(--font-size-xlarge);
-} */
 
 .dashboard-content {
   display: grid;
@@ -129,13 +81,14 @@
 .closed-trades-container {
   height: 10rem;
   /*width: 20rem;  or use 100% width with flex/grid */
-  min-width: 0; 
+  min-width: 10rem; 
   background-color: rgb(240, 248, 255);
   border-radius: var(--font-size-xlarge);
   margin: 20px;
   padding: 20px;
   border: 1px solid black
 }
+
 
 .chart-container,
 .news-events-container {
