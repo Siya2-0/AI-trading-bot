@@ -22,7 +22,7 @@ const Dashboard = ({ isCollapsed }) => {
                 </div>
             </div>
             <div class='dashboard-content'>
-            <div class='stats-row'>{/*need to fix content get squeezed  in small screen*/}
+            
                 <div class='balance-container'>
                     <div class='wallet-container'>
                     <FontAwesomeIcon icon={faWallet} />
@@ -50,12 +50,10 @@ const Dashboard = ({ isCollapsed }) => {
                     <div className='color-box-closed-trades'> red</div>
                     <div className='count-closed-trades'> 2</div>
                 </div>
-            </div>
             
-            <div class='main-content'>
                 <div class='chart-container'></div>
                 <div class='news-events-container'></div>
-            </div>
+          
             </div>
 
         </div>
