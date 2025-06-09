@@ -24,16 +24,10 @@ const Dashboard = ({ isCollapsed }) => {
             <div class='dashboard-content'>
             
                 <div class='balance-container'>
-                    <div class='wallet-container'>
-                    <FontAwesomeIcon icon={faWallet} />
-                    </div>
-
-                    <div class='balance-text'>
-                        <p class='amount'>R 10,000.00</p>
-                        <p class='balance'>Account Balance</p>
-                      
-                    </div>
-
+                  
+                  
+                    <p class='balance'>Total Account Balance</p>
+                    <p class='amount'>R 10,000.00</p>
 
                 </div>
                 <div class='broker-container'>
