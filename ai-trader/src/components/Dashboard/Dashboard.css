@@ -89,6 +89,12 @@
   border: 1px solid black
 }
 
+.broker-container{
+background-image : url('../../assets/images/0_nof8z5IpZaQiG1-7.png');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
 .balance-container{
   height:6rem;
   min-width: 10rem;

@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import defaultProfileImage from '../../assets/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWallet } from '@fortawesome/free-solid-svg-icons'
+import alphaVintageLogo from '../../assets/images/0_nof8z5IpZaQiG1-7.png';
 
 const Dashboard = ({ isCollapsed }) => {
 
@@ -31,10 +32,7 @@ const Dashboard = ({ isCollapsed }) => {
 
                 </div>
                 <div class='broker-container'>
-                    <div classname='broker-image-container' >
-                         <img src="" alt='' clasName='broker-image'></img>
-                         <p className='broker-visit'>Visit Website</p>                       
-                    </div>
+                    
                 </div>
                 <div class='open-trades-container'>
                     <div className='color-box-open-trades'> green</div>
