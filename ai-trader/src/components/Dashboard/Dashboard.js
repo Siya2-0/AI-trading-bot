@@ -31,9 +31,13 @@ const Dashboard = ({ isCollapsed }) => {
                     <p class='amount'>R 10,000.00</p>
 
                 </div>
-                <div class='broker-container'>
-                    
-                </div>
+
+                <a href='https://www.alphavantage.co/'target='_blank' rel='noopener noreferrer'>
+                    <div class='broker-container'>
+                        
+                    </div>
+                </a>
+                
                 <div class='open-trades-container'>
                     <div className='color-box-open-trades'> green</div>
                    <div className='count-open-trades'> 5</div>
