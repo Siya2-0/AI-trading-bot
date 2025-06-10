@@ -3,8 +3,9 @@ import './App.css';
 import React, {useState} from 'react';
 import Landing from './pages/SignIn.js'
 import SignUp from '../src/pages/SignUp.js'
-import SideMenu from '../src/components/SideMenu/SideMenu.js'
-import Dashboard from '../src/components/Dashboard/Dashboard.js'
+import DashboardPage from '../src/pages/dashboardPage/DashboardPage.js'
+
+
 
 function App() {
   const [isCollapsed, setCollapsed] = useState(false);
@@ -27,8 +28,9 @@ function App() {
     // </div>
     <div className="App">
      
-        <SideMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed} />
-        <Dashboard isCollapsed={isCollapsed} />
+     <DashboardPage/>
+        
+       
    
     </div>
   );

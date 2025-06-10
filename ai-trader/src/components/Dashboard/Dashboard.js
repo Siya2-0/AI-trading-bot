@@ -10,6 +10,7 @@ const Dashboard = ({ isCollapsed }) => {
 
     return (
         <>
+
         <div className={`dashboard ${isCollapsed ? "collapsed" : ""}`} >
           
             <div className="user-detail-container">
@@ -49,12 +50,19 @@ const Dashboard = ({ isCollapsed }) => {
                     
                 </div>
             
-                <div className='chart-container'></div>
-                <div className='news-events-container'></div>
+                <div className='chart-container'>
+
+                    Apple charts requires API
+                </div>
+                <div className='news-events-container'>
+                    News Requires API
+
+                </div>
           
             </div>
 
         </div>
+
         </>
     );
 

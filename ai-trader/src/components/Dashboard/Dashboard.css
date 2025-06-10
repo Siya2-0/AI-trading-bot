@@ -26,6 +26,7 @@
    width: calc(100% - 120px);
    transition: margin-left 0.3s ease; 
   }
+
   
   /* Full width on mobile */
   @media (max-width: 768px) {
