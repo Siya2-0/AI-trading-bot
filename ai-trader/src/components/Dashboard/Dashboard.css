@@ -76,9 +76,8 @@
   margin-bottom:1rem;
 }
 
-.broker-container,
-.open-trades-container,
-.closed-trades-container {
+.broker-container
+{
   height: 6rem;
   /*width: 20rem;  or use 100% width with flex/grid */
   min-width: 10rem; 
@@ -102,12 +101,27 @@ background-repeat: no-repeat;
   border-radius: var(--font-size-xlarge);
   margin: 20px;
   border: 1px solid black;
+  text-align:center
 
 }
+.open-trades-container{
+  text-align:center;
+  height:6rem;
+  width: 10rem;
+  background-color: rgb(21, 135, 33);
+  border-radius: var(--font-size-xlarge);
+  margin: 20px;
+  border: 1px solid black;
+}
 
-.balance-container{
-
-  text-align: center;
+.closed-trades-container{
+  text-align:center;
+  height:6rem;
+  width: 10rem;
+  background-color: rgb(208, 22, 22);
+  border-radius: var(--font-size-xlarge);
+  margin: 20px;
+  border: 1px solid black;
 }
 
 .chart-container,
@@ -137,7 +151,18 @@ background-repeat: no-repeat;
  /* text-align:center;*/
   line-height: 1.5px;
 }
+.title_trades_block{
+  color: white;
+}
 
+.amount_trades_block{
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin:0;
+  padding: 0;
+  line-height: 1.5px;
+  
+}
 
 
 @media (max-width: 768px) {

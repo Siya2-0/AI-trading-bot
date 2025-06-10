@@ -17,38 +17,40 @@ const Dashboard = ({ isCollapsed }) => {
                     <p>Good day, Siyabonga Mbuyisa!</p>
                 </div>
                 <div className='profile'>
-                    <i class="fa fa-bell bell-icon" aria-hidden="true"></i>
+                    <i className="fa fa-bell bell-icon" aria-hidden="true"></i>
                     <img className='profileImage' src={defaultProfileImage} alt='profileImage'></img>
                     
                 </div>
             </div>
-            <div class='dashboard-content'>
+            <div className='dashboard-content'>
             
-                <div class='balance-container'>
+                <div className='balance-container'>
                   
                   
-                    <p class='balance'>Total Account Balance</p>
-                    <p class='amount'>R 10,000.00</p>
+                    <p className='balance'>Total Account Balance</p>
+                    <p className='amount'>R 10,000.00</p>
 
                 </div>
 
                 <a href='https://www.alphavantage.co/'target='_blank' rel='noopener noreferrer'>
-                    <div class='broker-container'>
+                    <div className='broker-container'>
                         
                     </div>
                 </a>
                 
-                <div class='open-trades-container'>
-                    <div className='color-box-open-trades'> green</div>
-                   <div className='count-open-trades'> 5</div>
+                <div className='open-trades-container'>
+                    
+                   <p className='title_trades_block'>Open Trades</p>
+                    <p className='amount_trades_block'>7</p>
                 </div>
-                <div class='closed-trades-container'>
-                    <div className='color-box-closed-trades'> red</div>
-                    <div className='count-closed-trades'> 2</div>
+                <div className='closed-trades-container'>
+                    <p className='title_trades_block'>Closed Trades</p>
+                    <p className='amount_trades_block'>3</p>
+                    
                 </div>
             
-                <div class='chart-container'></div>
-                <div class='news-events-container'></div>
+                <div className='chart-container'></div>
+                <div className='news-events-container'></div>
           
             </div>
 
