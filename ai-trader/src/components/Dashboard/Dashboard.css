@@ -32,8 +32,9 @@
   @media (max-width: 768px) {
     .dashboard {
       margin-left: 0; /* No margin on mobile */
-      width: calc(100% - 15%);
+      width: calc(100% - 10%);
     }
+ 
   }
 
 .profileImage{

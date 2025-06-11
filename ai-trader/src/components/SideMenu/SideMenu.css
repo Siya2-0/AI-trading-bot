@@ -126,16 +126,17 @@
     }
   
     .side-menu {
-      width: 250px;
-      left: -250px; /* Hide menu by default on mobile */
-      transition: left 0.3s ease;
+      /* width: 250px;
+      left: -250px; Hide menu by default on mobile */
+      /* transition: left 0.3s ease; */
+      display:none
     }
   
-    .side-menu.open {
-      left: 0; /* Show menu when toggled */
+    /* .side-menu.open {
+      left: 0; /* Show menu when toggled 
     }
   
     .side-menu.collapsed {
-      width: 250px; /* Override collapsed state on mobile */
-    }
+      width: 250px; /* Override collapsed state on mobile 
+    } */
   }
