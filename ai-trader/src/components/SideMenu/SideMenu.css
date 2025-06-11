@@ -126,17 +126,20 @@
     }
   
     .side-menu {
-      /* width: 250px;
-      left: -250px; Hide menu by default on mobile */
-      /* transition: left 0.3s ease; */
-      display:none
+      width: 250px;
+      left: -250px;/* Hide menu by default on mobile  */
+      transition: left 0.3s ease;
+      
+    }
+    .right-border-icon{
+      display: none; /* Hide right border icon on mobile */
     }
   
-    /* .side-menu.open {
-      left: 0; /* Show menu when toggled 
+    .side-menu.open {
+      left: 0; /* Show menu when toggled*/ 
     }
   
     .side-menu.collapsed {
-      width: 250px; /* Override collapsed state on mobile 
-    } */
+      width: 250px; /* Override collapsed state on mobile */
+    } 
   }
