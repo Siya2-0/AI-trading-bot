@@ -5,8 +5,8 @@
 .hamburger-menu {
     display: none; /* Hidden by default */
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 40px;
+    right: 180px;
     cursor: pointer;
     font-size: 24px;
     z-index: 1000;
