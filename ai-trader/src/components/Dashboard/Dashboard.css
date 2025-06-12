@@ -47,14 +47,15 @@
 
 .user-detail-container{
   width: 100%;
-  min-height: 100px;
+  min-height: 60px;
   display: flex;
   justify-content: space-between;
 }
 .greeting-text p{
   font-size: var(--font-size-xlarge);
   font-weight: 700;
-  height:100%
+  height:100%;
+  color:white;
 }
 
 .profile {
@@ -73,7 +74,7 @@
 
 .dashboard-content {
  
-  padding: 50px;
+  /* padding: 10px; */
  
   display: flex;
   flex-direction:row;
