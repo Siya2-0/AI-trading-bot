@@ -1,8 +1,8 @@
 
 :root {
-    --color-primary: rgb(255,255,255,0);
-    --color-secondary: rgb(251,249,233);
-    --color-tertiary: #05a105;
+    --color-primary: rgba(20, 49, 9, 1);
+    --color-secondary: rgba(170, 174, 127, 1);
+    --color-tertiary: rgba(208, 214, 179, 1);
   
   
     --font-size-small: 0.875rem;
