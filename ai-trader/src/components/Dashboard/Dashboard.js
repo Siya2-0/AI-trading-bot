@@ -4,6 +4,7 @@ import defaultProfileImage from '../../assets/images/307ce493-b254-4b2d-8ba4-d12
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWallet } from '@fortawesome/free-solid-svg-icons'
 import alphaVintageLogo from '../../assets/images/0_nof8z5IpZaQiG1-7.png';
+import { FaRegBell } from "react-icons/fa";
 
 const Dashboard = ({ isCollapsed }) => {
 
@@ -18,7 +19,8 @@ const Dashboard = ({ isCollapsed }) => {
                     <p>Good day, Siyabonga Mbuyisa!</p>
                 </div>
                 <div className='profile'>
-                    <i className="fa fa-bell bell-icon" aria-hidden="true"></i>
+                    {/* <i className="fa fa-bell bell-icon" aria-hidden="true"></i> */}
+                    <FaRegBell className='bell-icon' />
                     <img className='profileImage' src={defaultProfileImage} alt='profileImage'></img>
                     
                 </div>
