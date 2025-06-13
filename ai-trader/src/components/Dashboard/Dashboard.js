@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWallet } from '@fortawesome/free-solid-svg-icons'
 import alphaVintageLogo from '../../assets/images/0_nof8z5IpZaQiG1-7.png';
 import { FaRegBell } from "react-icons/fa";
+import profileImage from '../../assets/images/david-french-N0e6W2WDa5U-unsplash.jpg'
 
 const Dashboard = ({ isCollapsed }) => {
 
@@ -21,7 +22,7 @@ const Dashboard = ({ isCollapsed }) => {
                 <div className='profile'>
                     {/* <i className="fa fa-bell bell-icon" aria-hidden="true"></i> */}
                     <FaRegBell className='bell-icon' />
-                    <img className='profileImage' src={defaultProfileImage} alt='profileImage'></img>
+                    <img className='profileImage' src={profileImage} alt='profileImage'></img>
                     
                 </div>
             </div>
