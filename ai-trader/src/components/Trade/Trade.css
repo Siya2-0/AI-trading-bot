@@ -1,0 +1,34 @@
+@import url('../../variables.css');
+
+.Temp-Trade-Container{
+    width:90%;
+    background-color: var(--color-primary);
+    height: 100vh;
+}
+
+.stock-header{
+    background-color: var(--color-secondary) ;
+}
+
+.stock-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.stock-name {
+  flex: 0 0 auto;      /* stays at the left */
+  font-weight: bold;
+}
+
+.stock-status {
+  margin-left: 1rem;   /* space after stock name */
+  color: green;        /* or red for Sell */
+}
+
+.stock-winning {
+  margin-left: auto;   /* pushes to far right */
+  font-weight: bold;
+  color: red;      /* example color */
+  margin-right: 1rem; /* space from right edge */
+}
