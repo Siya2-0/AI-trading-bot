@@ -4,6 +4,8 @@ import React, {useState} from 'react';
 import Landing from './pages/SignIn.js'
 import SignUp from '../src/pages/SignUp.js'
 import DashboardPage from '../src/pages/dashboardPage/DashboardPage.js'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Trade from '../src/components/Trade/Trade.js'
 
 
 
@@ -28,7 +30,7 @@ function App() {
     // </div>
     <div className="App">
      
-     <DashboardPage/>
+     <Trade/>
         
        
    

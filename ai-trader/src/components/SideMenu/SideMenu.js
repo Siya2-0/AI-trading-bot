@@ -81,5 +81,5 @@ const SideMenu = ({ isCollapsed, setCollapsed }) => {
     );
   };
   
-  export default SideMenu;
+export default SideMenu;
   
