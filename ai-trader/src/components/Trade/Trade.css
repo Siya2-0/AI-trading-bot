@@ -32,3 +32,25 @@
   color: red;      /* example color */
   margin-right: 1rem; /* space from right edge */
 }
+
+.acc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.acc-left {
+  flex: 0 0 auto;
+  text-align: left;
+}
+
+.acc-center {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.acc-right {
+  flex: 0 0 auto;
+  text-align: right;
+}
