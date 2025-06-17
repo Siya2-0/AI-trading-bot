@@ -21,15 +21,27 @@
   font-weight: bold;
 }
 
-.stock-status {
+.stock-status-buy {
   margin-left: 1rem;   /* space after stock name */
   color: green;        /* or red for Sell */
+}
+
+.stock-status-sell {
+  margin-left: 1rem;   /* space after stock name */
+  color: red;        /* or red for Sell */
+}
+
+.stock-losing {
+  margin-left: auto;   /* pushes to far right */
+  font-weight: bold;
+  color: red;      /* example color */
+  margin-right: 1rem; /* space from right edge */
 }
 
 .stock-winning {
   margin-left: auto;   /* pushes to far right */
   font-weight: bold;
-  color: red;      /* example color */
+  color: green;      /* example color */
   margin-right: 1rem; /* space from right edge */
 }
 
@@ -38,6 +50,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.25rem;
+  color:rgb(117, 117, 117)
 }
 
 .acc-left {
@@ -46,8 +59,10 @@
 }
 
 .acc-center {
-  flex: 1 1 auto;
-  text-align: center;
+  flex: 1  1 auto; /* Takes available space */
+  text-align:right; /* Centered with space on both sides */
+  margin-right: 40%; /* Space from right edge */
+  
 }
 
 .acc-right {
