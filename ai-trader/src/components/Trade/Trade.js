@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Trade.css';
 import Accordion from 'react-bootstrap/Accordion';
 
-const Trade =()=>{
+const Trade =(props)=>{
 
 
     return (
@@ -12,27 +12,27 @@ const Trade =()=>{
             <Accordion.Header className="stock-header"> 
                 <div className="stock-row">
                     <span className="stock-name">AAPL</span>
-                    <span className="stock-status-buy">Buy 0.01</span>
-                    <span className="stock-losing">- 0.76</span>
+                    <span className="stock-status-buy">{props.trade_type}</span>
+                    <span className="stock-losing">{props.profits}</span>
                 </div>
             </Accordion.Header>
             <Accordion.Body>
                  {/* First line */}
                 <div className="acc-row">
-                    <span className="acc-left">Order #1479175808</span>
+                    <span className="acc-left">{props.orderNumber}</span>
                     <span className="acc-right">Apple Inc Corporation</span>
                 </div>
                 {/* Second line */}
                 <div className="acc-row">
-                    <span className="acc-left">Swap: 0.50</span>
-                    <span className="acc-center">0.64687</span>
-                    <span className="acc-right">S/L: 0.65703</span>
+                    <span className="acc-left">Swap: {props.swap}</span>
+                    <span className="acc-center">{props.start_price}</span>
+                    <span className="acc-right">S/L: {props.stop_loss}</span>
                 </div>
                 {/* Third line */}
                 <div className="acc-row">
-                    <span className="acc-left">2024-06-14 10:30</span>
-                    <span className="acc-center">0.64763</span>
-                    <span className="acc-right">T/P: 0.63667</span>
+                    <span className="acc-left">{props.date_time}</span>
+                    <span className="acc-center">{props.current_price}</span>
+                    <span className="acc-right">T/P: {props.take_profit}</span>
                 </div>
                                 
             </Accordion.Body>
