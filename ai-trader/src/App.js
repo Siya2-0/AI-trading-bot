@@ -6,6 +6,7 @@ import SignUp from '../src/pages/SignUp.js'
 import DashboardPage from '../src/pages/dashboardPage/DashboardPage.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Trade from '../src/components/Trade/Trade.js'
+import TradesPage from '../src/pages/TradesPage/TradesPage.js'
 
 
 
@@ -30,8 +31,8 @@ function App() {
     // </div>
     <div className="App">
      
-     <Trade/>
-        
+     
+        <TradesPage/>
        
    
     </div>

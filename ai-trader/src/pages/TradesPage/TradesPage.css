@@ -1,0 +1,5 @@
+.Trade-Container{
+    width:100%;
+    background-color: var(--color-primary);
+    height: 100vh;
+}
