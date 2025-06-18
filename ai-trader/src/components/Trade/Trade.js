@@ -4,16 +4,15 @@ import Accordion from 'react-bootstrap/Accordion';
 
 const Trade =(props)=>{
 
-
     return (
-    <div className='Temp-Trade-Container'>    
+       
         <Accordion defaultActiveKey="0" flush>
             <Accordion.Item eventKey="0">
             <Accordion.Header className="stock-header"> 
                 <div className="stock-row">
                     <span className="stock-name">AAPL</span>
-                    <span className="stock-status-buy">{props.trade_type}</span>
-                    <span className="stock-losing">{props.profits}</span>
+                    <span className={props.IsBuy ? 'stock-status-buy': 'stock-status-sell'}>{props.trade_type}</span>
+                    <span className={props.IsWinning ? 'stock-winning ' : 'stock-losing'}>{props.profits}</span>
                 </div>
             </Accordion.Header>
             <Accordion.Body>
@@ -38,7 +37,7 @@ const Trade =(props)=>{
             </Accordion.Body>
             </Accordion.Item>
         </Accordion>
-    </div>
+
   );
 
 
