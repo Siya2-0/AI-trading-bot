@@ -69,3 +69,8 @@
   flex: 0 0 auto;
   text-align: right;
 }
+
+.trade-accordion{
+  margin: 5px; /* Adds space on all sides */
+
+}

@@ -1,5 +1,15 @@
 .Trades-Container{
     width:70%;
     background-color: var(--color-primary);
+    min-height: 60vh;
+}
+
+.TradesPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
+    width: 100%;
+    background-color: var(--color-tertiary);
+    
 }

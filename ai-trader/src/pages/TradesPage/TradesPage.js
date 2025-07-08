@@ -87,14 +87,13 @@ const TradesPage = () => {
 
     return (
         <>
-            <div className='Trades-Container'>
-
-                {exampleTrades.map((trade) => (
-                <Trade key={trade.orderNumber} trade={trade} />
-                ))}
-
+            <div className='TradesPage'>
+                <div className='Trades-Container'>
+                    {exampleTrades.map((trade) => (
+                    <Trade key={trade.orderNumber} trade={trade} />
+                    ))}
+                </div>
             </div>
-        
         </>
 
     );
