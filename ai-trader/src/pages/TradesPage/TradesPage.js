@@ -4,6 +4,7 @@ import Trade from '../../components/Trade/Trade'
 
 
 const TradesPage = () => {
+    const [filter, setFilter] = useState('all');
   
     const exampleTrades = [
     {
@@ -49,7 +50,7 @@ const TradesPage = () => {
         swap: 3.10,
         take_profit: 2800.00,
         date_time: "2025-06-16 09:45",
-        trade_type: false,
+        trade_type: true,
         profits:'+23 051,56'
     },
     {
@@ -83,13 +84,24 @@ const TradesPage = () => {
         profits: '-23 051,56'
     }
     ];
-
+    const filteredTrades = exampleTrades.filter(trade => {
+        if (filter === "all") return true;
+        if (filter === "buy") return trade.IsBuy;
+        if (filter === "sell") return !trade.IsBuy;
+        return true;
+    });
 
     return (
         <>
             <div className='TradesPage'>
+
+                <select value={filter} onChange={e => setFilter(e.target.value)}>
+                    <option value="all">All</option>
+                    <option value="buy">Buy Orders</option>
+                    <option value="sell">Sell Orders</option>
+                </select>
                 <div className='Trades-Container'>
-                    {exampleTrades.map((trade) => (
+                    {filteredTrades.map((trade) => (
                     <Trade key={trade.orderNumber} trade={trade} />
                     ))}
                 </div>
