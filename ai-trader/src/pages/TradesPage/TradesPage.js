@@ -87,7 +87,7 @@ const TradesPage = () => {
 
     return (
         <>
-            <div className='Trade-Container'>
+            <div className='Trades-Container'>
 
                 {exampleTrades.map((trade) => (
                 <Trade key={trade.orderNumber} trade={trade} />

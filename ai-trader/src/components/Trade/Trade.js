@@ -6,7 +6,7 @@ const Trade =({trade})=>{
 
     return (
        
-        <Accordion defaultActiveKey="0" flush>
+        <Accordion flush>
             <Accordion.Item eventKey="0">
             <Accordion.Header className="stock-header"> 
                 <div className="stock-row">
