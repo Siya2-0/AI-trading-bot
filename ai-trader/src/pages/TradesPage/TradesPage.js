@@ -94,17 +94,19 @@ const TradesPage = () => {
     return (
         <>
             <div className='TradesPage'>
+                {/* <div className='TradesPage-Row'>     */}
+                    <select value={filter} onChange={e => setFilter(e.target.value)} id='Trades-Filter'>
+                        <option value="all">All</option>
+                        <option value="buy">Buy Orders</option>
+                        <option value="sell">Sell Orders</option>
+                    </select>
+                    <div className='Trades-Container'>
+                        {filteredTrades.map((trade) => (
+                        <Trade key={trade.orderNumber} trade={trade} />
+                        ))}
+                    </div>
+                {/* </div> */}
 
-                <select value={filter} onChange={e => setFilter(e.target.value)}>
-                    <option value="all">All</option>
-                    <option value="buy">Buy Orders</option>
-                    <option value="sell">Sell Orders</option>
-                </select>
-                <div className='Trades-Container'>
-                    {filteredTrades.map((trade) => (
-                    <Trade key={trade.orderNumber} trade={trade} />
-                    ))}
-                </div>
             </div>
         </>
 
