@@ -94,7 +94,7 @@ const TradesPage = () => {
     return (
         <>
             <div className='TradesPage'>
-                {/* <div className='TradesPage-Row'>     */}
+                <div className='TradesPage-Row'>    
                     <select value={filter} onChange={e => setFilter(e.target.value)} id='Trades-Filter'>
                         <option value="all">All</option>
                         <option value="buy">Buy Orders</option>
@@ -105,7 +105,7 @@ const TradesPage = () => {
                         <Trade key={trade.orderNumber} trade={trade} />
                         ))}
                     </div>
-                {/* </div> */}
+                </div>
 
             </div>
         </>

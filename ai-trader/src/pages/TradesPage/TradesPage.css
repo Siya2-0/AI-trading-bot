@@ -2,17 +2,13 @@
     width:70%;
     background-color: var(--color-primary);
     min-height: 60vh;
-    /* margin: 0 auto;          
-  flex: 1;                 
-  display: flex;
-  flex-direction: column;
-  align-items: center;      */
+    
 }
 
 .TradesPage{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
     min-height: 100vh;
     width: 100%;
     background-color: var(--color-tertiary);
@@ -20,22 +16,29 @@
 }
 
 #Trades-Filter {
-    position: absolute;
-    top: 90px;
-    left: 70px;
+    /* position: relative; */
+    /* top: -220px; */
+    /* left: 120px;   */
     padding: 10px;
     border-radius: var(--font-size-small);
     background-color: var(--color-primary);
     color: white;
     border-color: var(--color-secondary);
     cursor: pointer;
-    /* flex-shrink: 0;          
-    margin-top: 0.5rem; */
+    align-self: center;
+    margin: 5px;
+
+    
+   
 }
-/* 
-.TradesPage-Row {
-  display: flex;
-  align-items: flex-start; 
-  gap: 2rem;   
-  width: 100%;            
-} */
+
+.TradesPage-Row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    
+    
+
+}
