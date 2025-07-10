@@ -16,9 +16,7 @@
 }
 
 #Trades-Filter {
-    /* position: relative; */
-    /* top: -220px; */
-    /* left: 120px;   */
+   
     padding: 10px;
     border-radius: var(--font-size-small);
     background-color: var(--color-primary);
@@ -42,9 +40,15 @@
     right:0;
     top:0;
     position: fixed;
-    border-style: solid;
+    
     
     
     
 
 }
+
+ .TradesPage-Row.collapsed {
+   /*margin-left: 40px;/* Adjusted margin for collapsed side menu */
+   width: calc(100% - 6%);
+   transition: margin-left 0.3s ease; 
+  }

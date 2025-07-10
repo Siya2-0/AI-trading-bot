@@ -94,9 +94,9 @@ const TradesPage = () => {
 
     return (
         <>
-            <div className='TradesPage'>
+            <div className='TradesPage' >
                  <SideMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed} />
-                <div className='TradesPage-Row'>    
+                <div className={`TradesPage-Row ${isCollapsed ? "collapsed" : ""}`}>    
                     <select value={filter} onChange={e => setFilter(e.target.value)} id='Trades-Filter'>
                         <option value="all">All</option>
                         <option value="buy">Buy Orders</option>
