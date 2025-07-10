@@ -6,7 +6,7 @@ import SideMenu from '../../components/SideMenu/SideMenu';
 
 const TradesPage = () => {
     const [filter, setFilter] = useState('all');
-  
+    const [isCollapsed, setCollapsed] = useState(false);
     const exampleTrades = [
     {
       
@@ -95,7 +95,7 @@ const TradesPage = () => {
     return (
         <>
             <div className='TradesPage'>
-                
+                 <SideMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed} />
                 <div className='TradesPage-Row'>    
                     <select value={filter} onChange={e => setFilter(e.target.value)} id='Trades-Filter'>
                         <option value="all">All</option>
