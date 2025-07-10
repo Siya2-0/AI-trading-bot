@@ -30,7 +30,7 @@ const SideMenu = ({ isCollapsed, setCollapsed }) => {
         </div>
       
         {/* Side Menu */}
-        <div className={`side-menu ${isMenuOpen ? "open" : ""} ${isCollapsed ? "collapsed" : ""}`} >
+        <div className={`side-menu  ${isMenuOpen ? "open" : ""} ${isCollapsed ? "collapsed" : ""}`} >
             <div className='LogoContainer' >
                 <img src={logo} alt="AI-trading" id="logoImage"/> 
             </div>
