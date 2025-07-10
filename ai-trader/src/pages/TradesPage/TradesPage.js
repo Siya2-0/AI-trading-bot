@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './TradesPage.css';
 import Trade from '../../components/Trade/Trade'
+import SideMenu from '../../components/SideMenu/SideMenu';
 
 
 const TradesPage = () => {
@@ -94,6 +95,7 @@ const TradesPage = () => {
     return (
         <>
             <div className='TradesPage'>
+                
                 <div className='TradesPage-Row'>    
                     <select value={filter} onChange={e => setFilter(e.target.value)} id='Trades-Filter'>
                         <option value="all">All</option>

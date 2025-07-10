@@ -32,7 +32,8 @@ function App() {
     <div className="App">
      
      
-        <TradesPage/>
+        {/* <TradesPage/> */}
+        <DashboardPage/>
       
        
    
