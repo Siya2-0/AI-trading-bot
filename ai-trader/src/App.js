@@ -1,12 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {useState} from 'react';
-import Landing from './pages/SignIn.js'
-import SignUp from '../src/pages/SignUp.js'
+import Landing from './pages/SignInPage/SignIn.js'
+import SignUp from './pages/SignUpPage/SignUp.js'
 import DashboardPage from '../src/pages/dashboardPage/DashboardPage.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Trade from '../src/components/Trade/Trade.js'
 import TradesPage from '../src/pages/TradesPage/TradesPage.js'
+import HistoryPage from '../src/pages/HistoryPage/HistoryPage.js'
 
 
 
@@ -32,7 +33,7 @@ function App() {
     <div className="App">
      
      
-        <TradesPage/>
+        <HistoryPage/>
         {/* <DashboardPage/> */}
       
        

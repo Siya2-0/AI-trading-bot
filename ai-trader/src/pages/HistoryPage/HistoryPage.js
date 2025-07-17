@@ -94,15 +94,15 @@ const HistoryPage = () => {
 
     return (
         <>
-            <div className='TradesPage' >
+            <div className='HistoryPage' >
                  <SideMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed} />
-                <div className={`TradesPage-Row ${isCollapsed ? "collapsed" : ""}`}>    
-                    <select value={filter} onChange={e => setFilter(e.target.value)} id='Trades-Filter'>
+                <div className={`HistoryPage-Row ${isCollapsed ? "collapsed" : ""}`}>    
+                    <select value={filter} onChange={e => setFilter(e.target.value)} id='History-Filter'>
                         <option value="all">All</option>
                         <option value="buy">Buy Orders</option>
                         <option value="sell">Sell Orders</option>
                     </select>
-                    <div className='Trades-Container'>
+                    <div className='History-Container'>
                         {filteredTrades.map((trade) => (
                         <Trade key={trade.orderNumber} trade={trade} />
                         ))}
