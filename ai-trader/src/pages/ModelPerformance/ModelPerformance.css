@@ -4,3 +4,16 @@
     width: 100%;
     min-height: 100vh;
 }
+
+.MP-dashboardz {
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.boxes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+}
