@@ -1,0 +1,6 @@
+
+.MP-Background{
+    background-color: var(--color-tertiary);
+    width: 100%;
+    min-height: 100vh;
+}
