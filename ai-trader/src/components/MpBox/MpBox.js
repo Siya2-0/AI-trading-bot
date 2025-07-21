@@ -2,7 +2,7 @@ import React from 'react';
 import './MpBox.css';
 import { IoIosWallet } from "react-icons/io";
 
-const MpBox = () => {
+const MpBox = (props) => {
 
 
     return (
@@ -11,7 +11,8 @@ const MpBox = () => {
                 <IoIosWallet className="wallet-icon" />
                 <div className="balance-text">
                     <div className="balance-title">Total Account Balance</div>
-                    <div className="balance-change positive">+2.7%</div>
+                    <div className={props.balance_change_status ?"balance-change positive": "balance-change negative"}>+2.7%</div> 
+                    {/* <div className="balance-change negative">+2.7%</div> */}
                 </div>
                 
             </div>

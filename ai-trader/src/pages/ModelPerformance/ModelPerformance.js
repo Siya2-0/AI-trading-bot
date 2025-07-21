@@ -16,7 +16,7 @@ const HistoryPage = () => {
                     <MpBox />
                     <MpBox />
                     <MpBox />
-                    <MpBox />
+                    {/* <MpBox /> */}
                 </div>
                 
                 {/* Second container (you can add content here later) */}

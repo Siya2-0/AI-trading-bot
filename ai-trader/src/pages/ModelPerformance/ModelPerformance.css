@@ -5,10 +5,13 @@
     min-height: 100vh;
 }
 
-.MP-dashboardz {
+.MP-dashboard {
   width: 100%;
   padding: 16px;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .boxes-container {
@@ -16,4 +19,6 @@
   flex-wrap: wrap;
   gap: 16px;
   margin-bottom: 16px;
+  width: 90%;
+  
 }
