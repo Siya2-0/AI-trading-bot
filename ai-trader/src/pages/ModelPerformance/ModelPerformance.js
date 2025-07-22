@@ -3,15 +3,18 @@ import './ModelPerformance.css';
 import MpBox from '../../components/MpBox/MpBox'
 import { MdOutlineTimeline } from "react-icons/md";
 import { IoTime } from "react-icons/io5";
+import SideMenu from '../../components/SideMenu/SideMenu'
 
 
 
 
 
 const HistoryPage = () => {
+    const [isCollapsed, setCollapsed] = useState(false);
 
     return (
         <div className='MP-Background' >
+            <SideMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed}  />
             <div className="MP-dashboard">
                 {/* First container with 3 rectangular boxes */}
                 <div className="boxes-container">

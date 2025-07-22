@@ -6,12 +6,17 @@
 }
 
 .MP-dashboard {
-  width: 100%;
+  /* width: 100%; */
   padding: 16px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  width: calc(100% - 20%);
+  right:0;
+  top:0;
+  position: fixed;
 }
 
 .boxes-container {
