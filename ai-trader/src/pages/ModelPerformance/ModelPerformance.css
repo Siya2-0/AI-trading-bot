@@ -19,6 +19,12 @@
   position: fixed;
 }
 
+.MP-dashboard.collapsed {
+   /*margin-left: 40px;/* Adjusted margin for collapsed side menu */
+   width: calc(100% - 6%);
+   transition: margin-left 0.3s ease; 
+  }
+
 .boxes-container {
   display: flex;
   flex-wrap: wrap;

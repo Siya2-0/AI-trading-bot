@@ -15,7 +15,7 @@ const HistoryPage = () => {
     return (
         <div className='MP-Background' >
             <SideMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed}  />
-            <div className="MP-dashboard">
+            <div className={`MP-dashboard ${isCollapsed ? "collapsed" : ""}`}>
                 {/* First container with 3 rectangular boxes */}
                 <div className="boxes-container">
                     <MpBox 
