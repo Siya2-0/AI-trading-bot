@@ -9,7 +9,7 @@ import SideMenu from '../../components/SideMenu/SideMenu'
 
 
 
-const HistoryPage = () => {
+const ModelPerformancePage = () => {
     const [isCollapsed, setCollapsed] = useState(false);
 
     return (
@@ -60,4 +60,4 @@ const HistoryPage = () => {
 
 
 
-export default HistoryPage;
+export default ModelPerformancePage;
