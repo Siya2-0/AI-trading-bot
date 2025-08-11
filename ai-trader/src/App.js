@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {useState} from 'react';
-// import Landing from './pages/SignInPage/SignIn.js'
-// import SignUp from './pages/SignUpPage/SignUp.js'
+ import SignIn from '../src/pages/SignInPage/SignIn.js'
+import SignUp from '../src/pages/SignUpPage/SignUp.js'
 import DashboardPage from '../src/pages/dashboardPage/DashboardPage.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Trade from '../src/components/Trade/Trade.js'
@@ -34,7 +34,7 @@ function App() {
     <div className="App">
      
      
-        <ModelPerformance/>
+        <SignIn/>
         {/* <DashboardPage/> */}
       
        

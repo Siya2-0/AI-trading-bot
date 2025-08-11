@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 import "./SignUp.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-import logo from '../assets/images/ai-trading-high-resolution-logo.png'
+import logo from '../../../src/assets/images/ai-trading-high-resolution-logo.png'
 
 const SignUp = () => {
         const [email, setEmail] = useState('');
