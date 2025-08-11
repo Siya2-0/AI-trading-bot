@@ -181,8 +181,14 @@
     
 } */
 
-.forgot-password-link{
+#forgot-password-link{
     color: blue;
+    text-decoration: none;
+}
+
+#sign-up-link{
+    color: blue;
+    text-decoration: none;
 }
 
 .Login-Button{

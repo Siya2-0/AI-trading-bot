@@ -54,7 +54,7 @@ const Landing = () => {
 
 
                 </div>
-                <p><a href='' className='forgot-password-link'>Forgot Password?</a></p>
+                <p><a href='' id='forgot-password-link'>Forgot Password?</a></p>
                 
                     <div className='Login-Button-Container'>
                         <button type="submit" className='Login-Button'>Sign In</button>
@@ -64,7 +64,7 @@ const Landing = () => {
                         <button type="button" className='Login-Button'><i className="google-icon fab fa-google"></i>Sign in with Google</button>
                 
                     </div>
-                    <p>Don't have an account? <a href='' className='forgot-password-link'>Sign up</a></p>
+                    <p>Don't have an account? <a href='' id='sign-up-link'>Sign up</a></p>
                 
                        
                          
