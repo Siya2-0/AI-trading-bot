@@ -74,7 +74,7 @@ const SignUp = () => {
                     <div><p>Create an account to proceed</p></div>
                 </div>    
             </header>
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {/* {errorMessage && <p className="error-message">{errorMessage}</p>} */}
             <div className='FormArea'>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -112,16 +112,16 @@ const SignUp = () => {
                         </i>
                         </span>
                     </div>
-
+                    
                     
                     <div className="checkbox-container">
                         <input type="checkbox" required checked={isCheckboxChecked} onChange={handleCheckboxChange}/>
                         <div><p>I accept the <a className='forgot-password-link' href=''>terms and conditions</a></p></div>
 
                     </div>
-                </div>
-          
-                
+
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
+
                     <div className='Login-Button-Container'>
                         <button className='Login-Button' onSubmit={handleSubmit} >Continue</button>
                     </div>
@@ -129,6 +129,10 @@ const SignUp = () => {
                         <button type="button" className='Login-Button'><i className="google-icon fab fa-google"></i>Sign up with Google</button>
                 
                     </div>
+                </div>
+          
+                
+                    
                         
                     <p>Already have an account? <Link to='/signin' className='forgot-password-link'>Log in</Link></p>      
                          
