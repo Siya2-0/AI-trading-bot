@@ -214,5 +214,11 @@
 }
 
 .checkbox-container{
-    display:flex
+    display:flex;
+    align-items: center;
+    gap:8px;
+}
+
+.checkbox-container div{
+    margin-top: 8px;   
 }
