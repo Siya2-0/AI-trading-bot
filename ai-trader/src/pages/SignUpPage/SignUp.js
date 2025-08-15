@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import "./SignUp.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import {Link} from 'react-router-dom';
 
 import logo from '../../../src/assets/images/ai-trading-high-resolution-logo.png'
 
@@ -127,9 +128,7 @@ const SignUp = () => {
                 
                     </div>
                         
-                    <p>Already have an account? <a href='' className='forgot-password-link'>Log in</a></p>
-                
-                       
+                    <p>Already have an account? <Link to='/signin' className='forgot-password-link'>Log in</Link></p>      
                          
             </form>
 

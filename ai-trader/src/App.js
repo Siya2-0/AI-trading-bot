@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import React, {useState} from 'react';
- import SignIn from '../src/pages/SignInPage/SignIn.js'
+import SignIn from '../src/pages/SignInPage/SignIn.js'
 import SignUp from '../src/pages/SignUpPage/SignUp.js'
 import DashboardPage from '../src/pages/dashboardPage/DashboardPage.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Trade from '../src/components/Trade/Trade.js'
 import TradesPage from '../src/pages/TradesPage/TradesPage.js'
 import HistoryPage from '../src/pages/HistoryPage/HistoryPage.js'
 import ModelPerformance from '../src/pages/ModelPerformance/ModelPerformance.js'
@@ -31,15 +31,19 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <div className="App">
-     
-     
-        <SignUp/>
-        {/* <DashboardPage/> */}
-      
-       
-   
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<SignIn />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/trades" element={<TradesPage />} />
+          <Route path="/history" element={<HistoryPage />} />
+          <Route path="/performance" element={<ModelPerformance />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

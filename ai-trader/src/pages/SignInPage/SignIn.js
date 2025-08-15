@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import "./SignIn.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import {Link} from 'react-router-dom';
 
 import logo from '../../../src/assets/images/ai-trading-high-resolution-logo.png'
 
@@ -64,7 +65,7 @@ const Landing = () => {
                         <button type="button" className='Login-Button'><i className="google-icon fab fa-google"></i>Sign in with Google</button>
                 
                     </div>
-                    <p>Don't have an account? <a href='' id='sign-up-link'>Sign up</a></p>
+                    <p>Don't have an account? <Link to='/signup' id='sign-up-link'>Sign up</Link></p>
                 
                        
                          
