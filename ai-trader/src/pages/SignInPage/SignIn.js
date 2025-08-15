@@ -1,17 +1,48 @@
 import React, {useState} from 'react';
 import "./SignIn.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 import logo from '../../../src/assets/images/ai-trading-high-resolution-logo.png'
 
 const Landing = () => {
-
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
+    const handleEmailChange = (e) => {
+            setEmail(e.target.value);
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
+        
+    
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!email) {
+            setErrorMessage('Email is required.');
+        } else if (password.length < 8) {
+            setErrorMessage('Password must be at least 8 characters long.');
+        } 
+        else {
+            setErrorMessage('');
+            // Proceed with form submission
+            console.log('Email:', email);
+            navigate('/dashboard');
+          
+        }
+    };
+
   return (
      <>
      
@@ -31,15 +62,15 @@ const Landing = () => {
             </header>
 
             <div className='FormArea'>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <div className="input-container">
-                        <input type="email" id="email" name="email" required  placeholder=" "/>
+                        <input type="email" id="email" name="email" required  placeholder=" " value={email} onChange={handleEmailChange}/>
                         <label htmlFor="email">Email Address*</label>
                     </div>
                             
                     <div className="input-container">
-                        <input type={showPassword ? "text" : "password"} id="password" name="password" required  placeholder=" "/>
+                        <input type={showPassword ? "text" : "password"} id="password" name="password" required  placeholder=" " value={password} onChange={handlePasswordChange} />
                         <label htmlFor="password">Password*</label>
                         <span
                         className="password-toggle-icon"
@@ -55,15 +86,15 @@ const Landing = () => {
 
 
                 </div>
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
                 <p><a href='' id='forgot-password-link'>Forgot Password?</a></p>
                 
                     <div className='Login-Button-Container'>
-                        <button type="submit" className='Login-Button'>Sign In</button>
+                        <button type="submit" className='Login-Button' >Sign In</button>
                     </div>
                          
                     <div className='Login-Button-Container'>
                         <button type="button" className='Login-Button'><i className="google-icon fab fa-google"></i>Sign in with Google</button>
-                
                     </div>
                     <p>Don't have an account? <Link to='/signup' id='sign-up-link'>Sign up</Link></p>
                 

@@ -1,11 +1,12 @@
 import React,{useState, useEffect} from 'react';
 import "./SignUp.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 import logo from '../../../src/assets/images/ai-trading-high-resolution-logo.png'
 
 const SignUp = () => {
+        const navigate = useNavigate();
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
         const [confirmPassword, setConfirmPassword] = useState('');
@@ -55,6 +56,7 @@ const SignUp = () => {
             else {
               setErrorMessage('');
               // Proceed with form submission
+               navigate('/dashboard');
             }
         };
   return (
