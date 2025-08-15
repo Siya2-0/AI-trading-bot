@@ -139,9 +139,9 @@
     transition: border-color 0.3s;
 }
 
-/* .input-container input:focus {
-    border-color: var(--color-tertiary); /* Change border color on focus 
-} */
+.input-container input:focus {
+    border-color: var(--color-primary); /* Change border color on focus */
+}
 
 .input-container label:hover{
     cursor:text;
@@ -160,20 +160,20 @@
     transition: top 0.3s, transform 0.3s, font-size 0.3s, color 0.3s;
 }
 
-/* .input-container input:focus + label
+.input-container input:focus + label
 {
     top: -0.5rem;
     left: 0.5rem;
     font-size: 0.75rem;
-    /* color:  var(--color-tertiary);  
-} */
-/* 
+    color:  var(--color-primary); /* Change color on focus */
+}
+
 .input-container input:not(:placeholder-shown) + label {
     top: -0.5rem;
     left: 0.5rem;
     font-size: 0.75rem;
-
-} */
+    color: var(--color-primary); 
+}
 
 /* .input-container input:placeholder-shown + label {
     top: 50%;

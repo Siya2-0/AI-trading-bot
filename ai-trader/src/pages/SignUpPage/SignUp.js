@@ -82,7 +82,7 @@ const SignUp = () => {
                             
                     <div className="input-container">
                         <input type={showPassword ? "text" : "password"} id="password1" name="password1" required value={password} onChange={handlePasswordChange} placeholder=" "/>
-                        <label htmlFor="password">Password*</label>
+                        <label htmlFor="password1">Password*</label>
                         <span
                         className="password-toggle-icon"
                         onClick={togglePasswordVisibility}
@@ -97,7 +97,7 @@ const SignUp = () => {
 
                     <div className="input-container">
                         <input type={showPassword ? "text" : "password"} id="password2" name="password2" required value={confirmPassword}  onChange={handleConfirmPasswordChange} placeholder=" "/>
-                        <label htmlFor="password">Confirm Password*</label>
+                        <label htmlFor="password2">Confirm Password*</label>
                         <span
                         className="password-toggle-icon"
                         onClick={togglePasswordVisibility}

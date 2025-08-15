@@ -34,7 +34,7 @@ function App() {
     <div className="App">
      
      
-        <SignIn/>
+        <SignUp/>
         {/* <DashboardPage/> */}
       
        
