@@ -1,5 +1,5 @@
 
-:root {
+/* :root {
     --color-primary: rgb(255,255,255,0);
     --color-secondary: rgb(251,249,233);
     --color-tertiary: #05a105;
@@ -10,7 +10,7 @@
     --font-size-large: 1.125rem;
     --font-size-xlarge: 1.25rem;
   
-  }
+  } */
 /* .dark {
     --color-primary: #494E47;
     --color-secondary: #568259;
@@ -26,10 +26,10 @@
    */
 
 
+@import url('../../variables.css');
 
 
-
-  p {
+  /* p {
     font-size: 1em;
   }
   
@@ -67,7 +67,7 @@
   small,
   .text-small {
     font-size: 0.64em;
-  }
+  } */
                 
    
 .LoginPage{
@@ -114,9 +114,9 @@
 
 }
 
-/* .TextContainer1{
+.TextContainer1{
     text-align: center;
-} */
+}
 .FormArea{
     display: flex;
     justify-content: center;
@@ -133,15 +133,21 @@
     width: 360px;
     padding: 0.5rem;
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-tertiary);
     border-radius: var(--font-size-small);
     outline: none;
     transition: border-color 0.3s;
 }
 
-.input-container input:focus {
-    border-color: var(--color-tertiary); /* Change border color on focus */
+/* .input-container input:focus {
+    border-color: var(--color-tertiary); /* Change border color on focus 
+} */
+
+.input-container label:hover{
+    cursor:text;
+
 }
+
 
 .input-container label {
     position: absolute;
@@ -154,32 +160,33 @@
     transition: top 0.3s, transform 0.3s, font-size 0.3s, color 0.3s;
 }
 
-.input-container input:focus + label
+/* .input-container input:focus + label
 {
     top: -0.5rem;
     left: 0.5rem;
     font-size: 0.75rem;
-    /* color:  var(--color-tertiary);  */
-}
-
+    /* color:  var(--color-tertiary);  
+} */
+/* 
 .input-container input:not(:placeholder-shown) + label {
     top: -0.5rem;
     left: 0.5rem;
     font-size: 0.75rem;
 
-}
+} */
 
-.input-container input:placeholder-shown + label {
+/* .input-container input:placeholder-shown + label {
     top: 50%;
     left: 0.5rem;
     transform: translateY(-50%);
     font-size: 1rem;
     color: #999;
     
-}
+} */
 
 .forgot-password-link{
-    color: black;
+    color: blue;
+    text-decoration: none;
 }
 
 .Login-Button{

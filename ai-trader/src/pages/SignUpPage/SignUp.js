@@ -113,7 +113,7 @@ const SignUp = () => {
                     
                     <div className="checkbox-container">
                         <input type="checkbox" required checked={isCheckboxChecked} onChange={handleCheckboxChange}/>
-                        <div><p>I accept the <a href=''>terms and conditions</a></p></div>
+                        <div><p>I accept the <a className='forgot-password-link' href=''>terms and conditions</a></p></div>
 
                     </div>
                 </div>
