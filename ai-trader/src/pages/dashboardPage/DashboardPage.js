@@ -12,7 +12,7 @@ return (
     <>
         <div className='dashboard-page-background'>
             <SideMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed} />
-            <Dashboard2 isCollapsed={isCollapsed} />
+            <Dashboard isCollapsed={isCollapsed} />
         </div>
     </>
 
