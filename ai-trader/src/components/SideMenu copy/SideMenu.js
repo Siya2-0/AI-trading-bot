@@ -50,7 +50,7 @@ const SideMenu = () => {
   };
 
   return (
-    <div className={`flex flex-col h-screen bg-gray-800 text-white transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}>
+    <div className={`flex flex-col h-screen bg-gray-800 text-white transition-all duration-300 ${isCollapsed ? 'w-5.5%' : 'w-19.5%'}`}>
       {/* Header with logo and collapse button */}
       <div className="flex items-center justify-between p-4 border-b border-gray-700">
         {!isCollapsed && (
