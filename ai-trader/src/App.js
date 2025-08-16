@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import TradesPage from '../src/pages/TradesPage/TradesPage.js'
 import HistoryPage from '../src/pages/HistoryPage/HistoryPage.js'
 import ModelPerformance from '../src/pages/ModelPerformance/ModelPerformance.js'
-
+import Dashboard2 from '../src/components/Dashboard copy/Dashboard.js';
 
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<SignIn />} />
+          <Route path="/" element={<Dashboard2/>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/dashboard" element={<DashboardPage />} />
