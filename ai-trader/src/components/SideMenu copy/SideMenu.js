@@ -12,9 +12,10 @@ import {
   FiChevronUp
 } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import './SideMenu.css';
 
-const SideMenu = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+const SideMenu = ({ isCollapsed, setCollapsed }) => {
+  //const [isCollapsed, setIsCollapsed] = useState(false);
   const [showTradeStats, setShowTradeStats] = useState(false);
   const navigate = useNavigate();
 
@@ -39,7 +40,7 @@ const SideMenu = () => {
   ];
 
   const toggleMenu = () => {
-    setIsCollapsed(!isCollapsed);
+    setCollapsed(!isCollapsed);
     if (!isCollapsed) {
       setShowTradeStats(false);
     }
@@ -50,7 +51,7 @@ const SideMenu = () => {
   };
 
   return (
-    <div className={`flex flex-col h-screen bg-gray-800 text-white transition-all duration-300 ${isCollapsed ? 'w-5.5%' : 'w-19.5%'}`}>
+    <div className={`flex flex-col h-screen side-menu text-white transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-64'}`}>
       {/* Header with logo and collapse button */}
       <div className="flex items-center justify-between p-4 border-b border-gray-700">
         {!isCollapsed && (
@@ -84,7 +85,7 @@ const SideMenu = () => {
             <li key={index}>
               <button
                 onClick={() => navigateTo(item.path)}
-                className={`flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors ${isCollapsed ? 'justify-end' : 'justify-start'}`}
+                className={`flex items-center w-full px-2 py-3 hover:bg-gray-700 transition-colors ${isCollapsed ? 'justify-center' : 'justify-start'}`}
               >
                 <span className={`${!isCollapsed && 'mr-3'}`}>{item.icon}</span>
                 {!isCollapsed && <span>{item.label}</span>}
@@ -93,39 +94,7 @@ const SideMenu = () => {
           ))}
         </ul>
 
-        {/* Trade Statistics Section */}
-        {!isCollapsed && (
-          <div className="mt-6 px-4">
-            {/* <button
-              onClick={() => setShowTradeStats(!showTradeStats)}
-              className="flex items-center justify-between w-full py-2 text-gray-300 hover:text-white"
-            >
-              <span>Trade Statistics</span>
-              {showTradeStats ? <FiChevronUp /> : <FiChevronDown />}
-            </button> */}
-            
-            {/* {showTradeStats && (
-              <div className="mt-2 bg-gray-700 rounded-lg p-3">
-                <div className="flex justify-between py-1">
-                  <span className="text-sm text-gray-400">Today</span>
-                  <span className="font-medium">{tradeStats.today}</span>
-                </div>
-                <div className="flex justify-between py-1">
-                  <span className="text-sm text-gray-400">This Week</span>
-                  <span className="font-medium">{tradeStats.week}</span>
-                </div>
-                <div className="flex justify-between py-1">
-                  <span className="text-sm text-gray-400">This Month</span>
-                  <span className="font-medium">{tradeStats.month}</span>
-                </div>
-                <div className="flex justify-between py-1">
-                  <span className="text-sm text-gray-400">This Year</span>
-                  <span className="font-medium">{tradeStats.year}</span>
-                </div>
-              </div>
-            )} */}
-          </div>
-        )}
+       
       </nav>
 
       {/* Bottom Navigation */}

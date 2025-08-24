@@ -11,7 +11,7 @@ import HistoryPage from '../src/pages/HistoryPage/HistoryPage.js'
 import ModelPerformance from '../src/pages/ModelPerformance/ModelPerformance.js'
 import Dashboard2 from '../src/components/Dashboard copy/Dashboard.js';
 import SideMenu from '../src/components/SideMenu copy/SideMenu.js';
-
+import Dashboard from '../src/pages/dashboardPage copy/DashboardPage.js';
 function App() {
   const [isCollapsed, setCollapsed] = useState(false);
   return (
@@ -34,7 +34,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<SideMenu/>} />
+          <Route path="/" element={<Dashboard/>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/dashboard" element={<DashboardPage />} />
