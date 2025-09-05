@@ -51,7 +51,7 @@ const SideMenu = ({ isCollapsed, setCollapsed }) => {
   };
 
   return (
-    <div className={`flex flex-col h-screen side-menu text-white transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-64'}`}>
+    <div className={`flex flex-col h-screen side-menu text-white transition-all duration-300 ${isCollapsed ? "collapsed" : ""} `}>
       {/* Header with logo and collapse button */}
       <div className="flex items-center justify-between p-4 border-b border-gray-700">
         {!isCollapsed && (
@@ -80,7 +80,7 @@ const SideMenu = ({ isCollapsed, setCollapsed }) => {
 
       {/* Main Navigation */}
       <nav className="flex-1 overflow-y-auto py-4">
-        <ul>
+        <ul className={`${isCollapsed ? "menu-list space-y-1":  " "}`}>
           {menuItems.map((item, index) => (
             <li key={index}>
               <button
@@ -99,14 +99,15 @@ const SideMenu = ({ isCollapsed, setCollapsed }) => {
 
       {/* Bottom Navigation */}
       <div className="border-t border-gray-700 py-4">
-        <ul>
+        <ul  className={`${isCollapsed ? "menu-list space-y-1":  " "}`}>
           {bottomMenuItems.map((item, index) => (
             <li key={index}>
               <button
                 onClick={() => navigateTo(item.path)}
-                className={`flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors ${isCollapsed ? 'justify-end' : 'justify-start'}`}
+                className={`flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors ${isCollapsed ? 'justify-center' : 'justify-start'}`}
               >
                 <span className={`${!isCollapsed && 'mr-3'}`}>{item.icon}</span>
+             
                 {!isCollapsed && <span>{item.label}</span>}
               </button>
             </li>
