@@ -36,7 +36,7 @@ const SideMenu = ({ isCollapsed, setCollapsed }) => {
   const bottomMenuItems = [
     { icon: <FiSettings size={20} />, label: 'Settings', path: '/settings' },
     { icon: <FiHelpCircle size={20} />, label: 'Help', path: '/help' },
-    { icon: <FiLogOut size={20} />, label: 'Logout', path: '/logout' }
+    { icon: <FiLogOut size={20} />, label: 'Logout', path: '/signin' }
   ];
 
   const toggleMenu = () => {

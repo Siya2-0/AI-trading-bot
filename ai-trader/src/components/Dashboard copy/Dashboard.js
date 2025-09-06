@@ -59,7 +59,7 @@ const Dashboard = ({ isCollapsed } ) => {
   // Mock broker data
   const brokerInfo = {
     name: 'Quantum Trading',
-    image: 'https://via.placeholder.com/80',
+    image: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%2Fid%2FOIP.sXwU0WepPeYXbkZKX4Ek6QHaGE%3Fpid%3DApi&f=1&ipt=14f195a15a502b41b58ad678575b3c1846d23c12015d4eb8f49f4aec6cd1b173&ipo=images',
     website: 'https://quantumtrading.example.com',
   };
 
@@ -166,7 +166,7 @@ const Dashboard = ({ isCollapsed } ) => {
         {/* Balance Card */}
         <div 
           className="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-shadow"
-          onClick={() => navigate('/balance')}
+          onClick={() => navigate('/performance')}
         >
           <h2 className="text-xl font-semibold text-gray-700 mb-2">Account Balance</h2>
           <p className="text-3xl font-bold text-green-600">${balance.toLocaleString()}</p>
