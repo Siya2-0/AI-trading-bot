@@ -6,7 +6,8 @@
   top:0;
   position: fixed;
   margin:1px;
-  min-height: fit-content;
+  min-height: 100vh;
+  background-color: var(--color-tertiary);
 
 }
 

@@ -120,7 +120,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<TradesPage/>} />
+          <Route path="/" element={<SignIn/>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard />} />
