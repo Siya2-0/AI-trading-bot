@@ -138,10 +138,10 @@ const TradesPage = ( ) => {
   };
 
   return (
-    <>
+    <div className='TradesPage' >
     <SideMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed}/>
     <div className={`trades-container ${isCollapsed ? "collapsed" : ""}`}>
-    <Box sx={{ p: 3, minHeight: '100vh', overflow:'auto' }} >
+    <Box sx={{ p: 3, overflow:'auto' }} >
       <Typography variant="h4" gutterBottom sx={{ mb: 3, fontWeight: 'bold' }}>
         Trades Dashboard
       </Typography>
@@ -329,7 +329,7 @@ const TradesPage = ( ) => {
       )}
     </Box>
     </div>
-    </>
+    </div>
   );
 };
 

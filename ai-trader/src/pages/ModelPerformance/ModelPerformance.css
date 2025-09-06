@@ -17,6 +17,8 @@
   right:0;
   top:0;
   position: fixed;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 .MP-dashboard.collapsed {
