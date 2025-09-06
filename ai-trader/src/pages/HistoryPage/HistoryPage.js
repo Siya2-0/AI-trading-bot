@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './HistoryPage.css';
 import Trade from '../../components/Trade/Trade'
 import SideMenu from '../../components/SideMenu/SideMenu';
+//import SideMenu from '../../components/SideMenu copy/SideMenu.js';
 
 
 const HistoryPage = () => {
