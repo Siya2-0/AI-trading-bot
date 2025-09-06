@@ -29,7 +29,7 @@ const SideMenu = ({ isCollapsed, setCollapsed }) => {
 
   const menuItems = [
     { icon: <FiHome size={20} />, label: 'Dashboard', path: '/dashboard' },
-    { icon: <FiDollarSign size={20} />, label: 'Trades', path: '/history' },
+    { icon: <FiDollarSign size={20} />, label: 'Trades', path: '/trades' },
     { icon: <FiBarChart2 size={20} />, label: 'Model Performance', path: '/performance' }
   ];
 

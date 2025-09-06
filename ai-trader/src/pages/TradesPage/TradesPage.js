@@ -91,7 +91,8 @@ const mockTrades = [
   }
 ];
 
-const TradesPage = ( { isCollapsed }) => {
+const TradesPage = ( ) => {
+    const [isCollapsed, setCollapsed] = useState(false);
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -138,7 +139,7 @@ const TradesPage = ( { isCollapsed }) => {
 
   return (
     <>
-    <SideMenu isCollapsed={isCollapsed} />
+    <SideMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed}/>
     <Box sx={{ p: 3 }} className={`trades-container ${isCollapsed ? "collapsed" : ""}`}>
       <Typography variant="h4" gutterBottom sx={{ mb: 3, fontWeight: 'bold' }}>
         Trades Dashboard

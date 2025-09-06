@@ -3,7 +3,7 @@ import './ModelPerformance.css';
 import MpBox from '../../components/MpBox/MpBox'
 import { MdOutlineTimeline } from "react-icons/md";
 import { IoTime } from "react-icons/io5";
-import SideMenu from '../../components/SideMenu/SideMenu'
+import SideMenu from '../../components/SideMenu copy/SideMenu.js';
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,

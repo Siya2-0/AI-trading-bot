@@ -93,7 +93,7 @@ const exampleTrades = [
     }
     ];
 function App() {
-  const [isCollapsed, setCollapsed] = useState(false);
+  
   return (
     // <div className="App">
     //   <header className="App-header">
@@ -123,9 +123,8 @@ function App() {
           <Route path="/" element={<TradesPage/>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/trades" element={<TradesPage />} />
-          <Route path="/history" element={<HistoryPage />} />
           <Route path="/performance" element={<ModelPerformance />} />
         </Routes>
       </div>
