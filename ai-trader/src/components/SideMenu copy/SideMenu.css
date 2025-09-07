@@ -1,16 +1,7 @@
 /* SideMenu.css */
 @import url('../../variables.css');
 
-/* Hamburger menu (visible only on mobile) */
-.hamburger-menu {
-    display: none; /* Hidden by default */
-    position: fixed;
-    top: 40px;
-    right: 180px;
-    cursor: pointer;
-    font-size: 24px;
-    z-index: -1;
-  }
+
   
   /* Side menu */
   .side-menu {
@@ -43,6 +34,27 @@
   padding-left: 0 !important;
   width: 100%;
 }
+ @media (max-width: 768px) {
+    .menu-button{
+      right:4px;
+    }
+
+  
+    .side-menu {
+      width: 250px;
+      left: 0px;/* Hide menu by default on mobile  */
+      transition: left 0.3s ease;
+      z-index:99;
+      background-color: var(--color-primary)
+    }
+ 
+  
+   
+  
+    .side-menu.collapsed {
+      width: 10%; /* Override collapsed state on mobile */
+    } 
+  }
   
   /* .right-border-icon {
     position: absolute;

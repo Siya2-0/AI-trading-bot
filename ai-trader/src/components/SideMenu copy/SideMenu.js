@@ -51,7 +51,14 @@ const SideMenu = ({ isCollapsed, setCollapsed }) => {
   };
 
   return (
+    <>
     <div className={`flex flex-col h-screen side-menu text-white transition-all duration-300 ${isCollapsed ? "collapsed" : ""} `}>
+      {/* <button 
+          onClick={toggleMenu}
+          className="hamburger-menu text-gray-400 hover:text-white focus:outline-none"
+        >
+          {isCollapsed ? <FiMenu size={24} /> : <FiX size={24} />}
+      </button> */}
       {/* Header with logo and collapse button */}
       <div className="flex items-center justify-between p-4 border-b border-gray-700">
         {!isCollapsed && (
@@ -72,7 +79,7 @@ const SideMenu = ({ isCollapsed, setCollapsed }) => {
         )} */}
         <button 
           onClick={toggleMenu}
-          className="text-gray-400 hover:text-white focus:outline-none"
+          className={`text-gray-400 hover:text-white focus:outline-none ${isCollapsed ? 'menu-button' : ''}`}
         >
           {isCollapsed ? <FiMenu size={24} /> : <FiX size={24} />}
         </button>
@@ -115,6 +122,7 @@ const SideMenu = ({ isCollapsed, setCollapsed }) => {
         </ul>
       </div>
     </div>
+    </>
   );
 };
 
