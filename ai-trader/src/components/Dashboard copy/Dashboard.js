@@ -155,7 +155,7 @@ const Dashboard = ({ isCollapsed } ) => {
             <img 
               src={user.profilePic} 
               alt="Profile" 
-              className="w-10 h-10 rounded-full cursor-pointer"
+              className="profile-image w-10 h-10 rounded-full cursor-pointer"
               onClick={() => navigate('/profile')}
             />
           </div>
