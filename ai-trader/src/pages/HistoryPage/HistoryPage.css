@@ -1,0 +1,54 @@
+.History-Container{
+    width:70%;
+    background-color: var(--color-primary);
+    min-height: 60vh;
+    
+}
+
+.HistoryPage{
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--color-tertiary);
+    
+}
+
+#History-Filter {
+   
+    padding: 10px;
+    border-radius: var(--font-size-small);
+    background-color: var(--color-primary);
+    color: white;
+    border-color: var(--color-secondary);
+    cursor: pointer;
+    align-self: center;
+    margin: 5px;
+
+    
+   
+}
+
+.HistoryPage-Row{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    min-height: 100vh;
+
+    width: calc(100% - 20%);
+    right:0;
+    top:0;
+    position: fixed;
+    
+    
+    
+    
+
+}
+
+ .HistoryPage-Row.collapsed {
+   /*margin-left: 40px;/* Adjusted margin for collapsed side menu */
+   width: calc(100% - 6%);
+   transition: margin-left 0.3s ease; 
+  }

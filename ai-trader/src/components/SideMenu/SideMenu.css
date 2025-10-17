@@ -1,0 +1,146 @@
+/* SideMenu.css */
+@import url('../../variables.css');
+
+/* Hamburger menu (visible only on mobile) */
+.hamburger-menu {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 40px;
+    right: 180px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 1000;
+  }
+  
+  /* Side menu */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 19.5%;
+    background-color: var(--color-primary);
+    color: white;
+    transition: width 0.3s ease;
+    padding-top: 20px;
+    z-index: 999;
+    border-radius: 0rem;
+    margin:0px;
+    /* box-shadow: 16px rgba(0, 0, 0, 0.0); */
+  }
+  .right-border-icon {
+    position: absolute;
+    top: 10%; /* Center vertically */
+    right: -20px; /* Position outside the right border */
+    transform: translateY(-50%);
+    background-color: white; 
+    color: var(--color-primary); /* Match the side menu color */
+    border-radius: 50%; /* Make it circular */
+    padding: 10px; /* Add padding for size */
+    box-shadow: 0 2px 4px var(--color-tertiary) ;/* Optional: Add shadow */
+    cursor: pointer; /* Change cursor to pointer */
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+  
+.LogoContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:24px;
+}
+.side-menu .LogoContainer img{
+    width: 80px;
+    height: 80px;
+    border-radius: var(--font-size-large)
+}
+.side-menu.collapsed .text-caption-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.side-menu.collapsed .LogoContainer img{
+    width: 20px;
+    height: 20px;
+    border-radius: var(--font-size-large)
+}
+
+.side-menu.collapsed .subtext{
+    /* display: none; */
+
+}
+.subtext{
+    padding: 0px 20px;
+    color: black;
+    
+}
+.general-top-spacing{
+  margin-top: 40px;
+}
+  
+  /* Collapsed state */
+  .side-menu.collapsed {
+    width: 5.5%;
+  }
+
+  
+  /* Menu header */
+  .menu-header {
+    padding: 10px 20px;
+    font-size: var(--font-size-large);
+    font-weight: 700;
+    color: var(--color-tertiary);
+}
+  /* Menu items */
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .menu-item:hover {
+    background-color: var(--color-secondary);
+    color: black;
+    border-radius: var(--font-size-large)
+  }
+  
+  .menu-item i {
+    margin-right: 10px;
+  }
+  
+  /* Hide text when collapsed */
+  .side-menu.collapsed .menu-item span {
+    /* display: none; */
+  }
+  .side-menu.collapsed p{
+    margin-right: 0px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .hamburger-menu {
+      display: block; /* Show hamburger menu on mobile */
+    }
+  
+    .side-menu {
+      width: 250px;
+      left: -250px;/* Hide menu by default on mobile  */
+      transition: left 0.3s ease;
+      
+    }
+    .right-border-icon{
+      display: none; /* Hide right border icon on mobile */
+    }
+  
+    .side-menu.open {
+      left: 0; /*Show menu when toggled*/ 
+    }
+  
+    .side-menu.collapsed {
+      width: 250px; /* Override collapsed state on mobile */
+    } 
+  }
