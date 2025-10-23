@@ -22,15 +22,17 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     df['break_15min_low'] = (df['Close', ticker] < df['15min_low'].shift(1)).astype(int)
   
     # 3. VOLUME PROFILE & SURGE
-    # df['volume_20avg'] = df['Volume'].rolling(window=20).mean()
-    # df['volume_surge_ratio'] = df['Volume'] / df['volume_20avg']
+    df['volume_20avg'] = df['Volume'].rolling(window=20).mean()
+    #print(df['Volume']/df['volume_20avg'])
+    
+    #df['volume_surge_ratio'] =  df['Volume']/df['volume_20avg'].head()
     # df['volume_surge'] = (df['volume_surge_ratio'] > 2).astype(int)
     
     # # 4. VWAP (Volume Weighted Average Price) - Daily reset
-    # df['cumulative_volume'] = df['Volume'].cumsum()
-    # df['cumulative_typical_volume'] = (df['Volume'] * (df['High'] + df['Low'] + df['Close']) / 3).cumsum()
-    # df['VWAP'] = df['cumulative_typical_volume'] / df['cumulative_volume']
-    # df['price_vs_vwap'] = (df['Close'] - df['VWAP']) / df['VWAP'] * 100
+    df['cumulative_volume'] = df['Volume'].cumsum()
+    df['cumulative_typical_volume'] = (df['Volume'] * (df['High'] + df['Low'] + df['Close']) / 3).cumsum()
+    df['VWAP'] = df['cumulative_typical_volume'] / df['cumulative_volume']
+    #df['price_vs_vwap'] = (df['Close'] - df['VWAP']) / df['VWAP'] * 100
     
     # # 5. RSI (Relative Strength Index)
     # def calculate_rsi(data, window=14):
@@ -140,6 +142,7 @@ def main():
     
     # Calculate all technical indicators
     enhanced_data = calculate_technical_indicators(aapl_data)
+    print(enhanced_data)
     
     # # Display summary of calculated features
     # print("\n=== CALCULATED FEATURES SUMMARY ===")
