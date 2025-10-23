@@ -35,28 +35,28 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     #df['price_vs_vwap'] = (df['Close'] - df['VWAP']) / df['VWAP'] * 100
     
     # # 5. RSI (Relative Strength Index)
-    # def calculate_rsi(data, window=14):
-    #     delta = data.diff()
-    #     gain = (delta.where(delta > 0, 0)).rolling(window=window).mean()
-    #     loss = (-delta.where(delta < 0, 0)).rolling(window=window).mean()
-    #     rs = gain / loss
-    #     rsi = 100 - (100 / (1 + rs))
-    #     return rsi
+    def calculate_rsi(data, window=14):
+        delta = data.diff()
+        gain = (delta.where(delta > 0, 0)).rolling(window=window).mean()
+        loss = (-delta.where(delta < 0, 0)).rolling(window=window).mean()
+        rs = gain / loss
+        rsi = 100 - (100 / (1 + rs))
+        return rsi
     
-    # df['RSI_14'] = calculate_rsi(df['Close'], 14)
-    # df['RSI_7'] = calculate_rsi(df['Close'], 7)
+    df['RSI_14'] = calculate_rsi(df['Close'], 14)
+    df['RSI_7'] = calculate_rsi(df['Close'], 7)
     
     # # 6. ATR (Average True Range)
-    # def calculate_atr(data, window=14):
-    #     high_low = data['High'] - data['Low']
-    #     high_close = np.abs(data['High'] - data['Close'].shift())
-    #     low_close = np.abs(data['Low'] - data['Close'].shift())
-    #     true_range = np.maximum(high_low, np.maximum(high_close, low_close))
-    #     atr = true_range.rolling(window=window).mean()
-    #     return atr
+    def calculate_atr(data, window=14):
+        high_low = data['High'] - data['Low']
+        high_close = np.abs(data['High'] - data['Close'].shift())
+        low_close = np.abs(data['Low'] - data['Close'].shift())
+        true_range = np.maximum(high_low, np.maximum(high_close, low_close))
+        atr = true_range.rolling(window=window).mean()
+        return atr
     
-    # df['ATR_14'] = calculate_atr(df)
-    # df['ATR_percent'] = (df['ATR_14'] / df['Close']) * 100
+    df['ATR_14'] = calculate_atr(df)
+    #df['ATR_percent'] = (df['ATR_14'] / df['Close']) * 100
     
     # # 7. MARKET INDEX CORRELATION (with SPY)
     # try:
