@@ -74,16 +74,16 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     #     df['market_correlation_30m'] = np.nan
     
     # # 8. SECTOR ETF MOMENTUM (with XLK - Technology ETF)
-    # try:
-    #     xlk_data = yf.download('XLK', period='60d', interval='5m', progress=False)
-    #     # Calculate XLK momentum
-    #     xlk_data['XLK_momentum_15m'] = (xlk_data['Close'] - xlk_data['Close'].shift(3)) / xlk_data['Close'].shift(3) * 100
+    try:
+        xlk_data = yf.download('XLK', period='60d', interval='5m', progress=False)
+        # Calculate XLK momentum
+        xlk_data['XLK_momentum_15m'] = (xlk_data['Close'] - xlk_data['Close'].shift(3)) / xlk_data['Close'].shift(3) * 100
         
-    #     # Merge with main dataframe
-    #     df = df.merge(xlk_data[['XLK_momentum_15m']], left_index=True, right_index=True, how='left')
-    # except:
-    #     print("Warning: Could not download XLK data for sector momentum")
-    #     df['XLK_momentum_15m'] = np.nan
+        # Merge with main dataframe
+        df = df.merge(xlk_data[['XLK_momentum_15m']], left_index=True, right_index=True, how='left')
+    except:
+        print("Warning: Could not download XLK data for sector momentum")
+        df['XLK_momentum_15m'] = np.nan
     
     # # 9. OPENING RANGE BREAK
     # def calculate_opening_range_break(data):
@@ -113,8 +113,8 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     # df['break_opening_high'], df['break_opening_low'] = calculate_opening_range_break(df)
     
     # # 10. BID-ASK SPREAD & DEPTH (Placeholder - Yahoo Finance doesn't provide this historically)
-    # df['bid_ask_spread_pct'] = np.nan  # This would require real-time data
-    # df['market_depth'] = np.nan  # This would require Level 2 data
+    df['bid_ask_spread_pct'] = np.nan  # This would require real-time data
+    df['market_depth'] = np.nan  # This would require Level 2 data
     
     # # Clean up intermediate columns
     # columns_to_drop = ['cumulative_volume', 'cumulative_typical_volume', '15min_high', '15min_low', 'volume_20avg']
