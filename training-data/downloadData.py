@@ -17,22 +17,99 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     # 2. RECENT HIGH/LOW BREAK
     df['15min_high'] = df['High'].rolling(window=3).max()
     df['15min_low'] = df['Low'].rolling(window=3).min()
-
     df['break_15min_high'] = (df['Close', ticker] > df['15min_high'].shift(1)).astype(int)
     df['break_15min_low'] = (df['Close', ticker] < df['15min_low'].shift(1)).astype(int)
   
-    # 3. VOLUME PROFILE & SURGE
+    # 3. VOLUME ANALYSIS - KEY PREDICTIVE INDICATORS
+    # Calculate essential moving averages
+    df['volume_5avg'] = df['Volume'].rolling(window=5).mean()
     df['volume_20avg'] = df['Volume'].rolling(window=20).mean()
-    #print(df['Volume']/df['volume_20avg'])
+    df['volume_60avg'] = df['Volume'].rolling(window=60).mean()
     
-    #df['volume_surge_ratio'] =  df['Volume']/df['volume_20avg'].head()
-    # df['volume_surge'] = (df['volume_surge_ratio'] > 2).astype(int)
+    # Fill NaN values
+    for col in ['volume_5avg', 'volume_20avg', 'volume_60avg']:
+        df[col] = df[col].fillna(df['Volume'].mean())
     
-    # # 4. VWAP (Volume Weighted Average Price) - Daily reset
-    df['cumulative_volume'] = df['Volume'].cumsum()
-    df['cumulative_typical_volume'] = (df['Volume'] * (df['High'] + df['Low'] + df['Close']) / 3).cumsum()
-    df['VWAP'] = df['cumulative_typical_volume'] / df['cumulative_volume']
-    #df['price_vs_vwap'] = (df['Close'] - df['VWAP']) / df['VWAP'] * 100
+    # 3.1. KEY INDICATOR: Volume-Price Surge (Strong predictive value for breakouts)
+    df['volume_surge_ratio'] = df['Volume',ticker] / df['volume_20avg']
+    df['volume_price_surge'] = ((df['volume_surge_ratio'] > 2.0) & 
+                               (abs(df['price_velocity_5m']) > 0.5)).astype(int)
+    
+    # 3.2. KEY INDICATOR: Relative Volume Strength (Historical volume significance)
+    df['relative_volume_strength'] = (df['volume_5avg'] / df['volume_60avg'] - 1) * 100
+    
+    # 3.3. KEY INDICATOR: Volume Trend (Direction and strength of volume)
+    df['volume_trend'] = np.where(
+        df['volume_5avg'] > df['volume_20avg'],
+        np.where(df['volume_20avg'] > df['volume_60avg'], 2,  # Strong uptrend
+                1),  # Moderate uptrend
+        np.where(df['volume_20avg'] < df['volume_60avg'], -2,  # Strong downtrend
+                -1)  # Moderate downtrend
+    )
+    
+    # 3.4. KEY INDICATOR: Consecutive Volume Surge (Sustained buying/selling pressure)
+    df['consecutive_surge'] = ((df['volume_surge_ratio'] > 1.5) & 
+                             (df['volume_surge_ratio'].shift(1) > 1.5)).astype(int)
+    
+    # Composite Volume Signal (-100 to +100 scale)
+    df['volume_signal_strength'] = (
+        # Volume-price surge component (40% weight)
+        df['volume_price_surge'] * 40 +
+        # Relative strength component (30% weight)
+        np.clip(df['relative_volume_strength'], -100, 100) * 0.3 +
+        # Volume trend component (20% weight)
+        df['volume_trend'] * 10 +
+        # Consecutive surge component (10% weight)
+        df['consecutive_surge'] * 10
+    )
+
+  
+    # 4. VWAP (Volume Weighted Average Price) with Daily Reset and Bands
+    # Create date column for grouping
+    df['date'] = df.index.date
+    
+    # Calculate typical price
+    df['typical_price'] = (df['High'] + df['Low'] + df['Close']) / 3
+    
+    # Calculate VWAP with daily reset
+    df['daily_vol_cumsum'] = df.groupby('date')['Volume'].cumsum()
+    df['daily_vol_typical_cumsum'] = df.groupby('date').apply(
+        lambda x: (x['Volume'] * x['typical_price']).cumsum()
+    ).reset_index(level=0, drop=True)
+    
+    # VWAP
+    df['VWAP'] = df['daily_vol_typical_cumsum'] / df['daily_vol_cumsum']
+    
+    # Calculate VWAP Standard Deviation for bands
+    df['vwap_std'] = df.groupby('date').apply(
+        lambda x: np.sqrt(
+            (x['Volume'] * (x['typical_price'] - x['VWAP'])**2).cumsum() / x['Volume'].cumsum()
+        )
+    ).reset_index(level=0, drop=True)
+    
+    # Calculate VWAP Bands
+    df['VWAP_upper_1'] = df['VWAP'] + df['vwap_std']     # 1 standard deviation
+    df['VWAP_lower_1'] = df['VWAP'] - df['vwap_std']
+    df['VWAP_upper_2'] = df['VWAP'] + 2*df['vwap_std']   # 2 standard deviations
+    df['VWAP_lower_2'] = df['VWAP'] - 2*df['vwap_std']
+    
+    # Calculate price deviation from VWAP (as percentage)
+    df['price_vs_vwap'] = ((df['Close'] - df['VWAP']) / df['VWAP']) * 100
+    
+    # VWAP-based signals
+    conditions = [
+        df['Close'] > df['VWAP_upper_2'],    # Strong sell (overbought)
+        df['Close'] > df['VWAP_upper_1'],    # Moderate sell
+        df['Close'] < df['VWAP_lower_2'],    # Strong buy (oversold)
+        df['Close'] < df['VWAP_lower_1']     # Moderate buy
+    ]
+    choices = [-2, -1, 2, 1]
+    df['vwap_signal'] = np.select(conditions, choices, default=0)
+    
+    # Clean up intermediate columns
+    df = df.drop(['daily_vol_cumsum', 'daily_vol_typical_cumsum', 'typical_price', 'vwap_std'], axis=1)
+    # df['price_vs_vwap'] = ((df['Close'] - df['VWAP']) / df['VWAP'])[ticker] * 100
+    # print(df['price_vs_vwap'])
     
     # # 5. RSI (Relative Strength Index)
     def calculate_rsi(data, window=14):
@@ -113,8 +190,8 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     # df['break_opening_high'], df['break_opening_low'] = calculate_opening_range_break(df)
     
     # # 10. BID-ASK SPREAD & DEPTH (Placeholder - Yahoo Finance doesn't provide this historically)
-    df['bid_ask_spread_pct'] = np.nan  # This would require real-time data
-    df['market_depth'] = np.nan  # This would require Level 2 data
+    # df['bid_ask_spread_pct'] = np.nan  # This would require real-time data
+    # df['market_depth'] = np.nan  # This would require Level 2 data
     
     # # Clean up intermediate columns
     # columns_to_drop = ['cumulative_volume', 'cumulative_typical_volume', '15min_high', '15min_low', 'volume_20avg']
@@ -137,12 +214,15 @@ def main():
         print("No data retrieved. Please check your connection.")
         return
     
+    # Ensure Volume column is float type
+    aapl_data['Volume'] = aapl_data['Volume'].astype(float)
+    
     print(f"Downloaded {len(aapl_data)} data points")
     print("Calculating technical indicators...")
     
     # Calculate all technical indicators
     enhanced_data = calculate_technical_indicators(aapl_data)
-    print(enhanced_data)
+    #print(enhanced_data)
     
     # # Display summary of calculated features
     # print("\n=== CALCULATED FEATURES SUMMARY ===")
