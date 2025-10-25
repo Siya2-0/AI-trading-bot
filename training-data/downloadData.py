@@ -9,59 +9,59 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     """
     df = df.copy()
     
-    # 1. PRICE VELOCITY (Rate of change over different periods)
-    df['price_velocity_5m'] = (df['Close'] - df['Close'].shift(1)) / df['Close'].shift(1) * 100
-    df['price_velocity_15m'] = (df['Close'] - df['Close'].shift(3)) / df['Close'].shift(3) * 100
-    df['price_velocity_30m'] = (df['Close'] - df['Close'].shift(6)) / df['Close'].shift(6) * 100
+    # # 1. PRICE VELOCITY (Rate of change over different periods)
+    # df['price_velocity_5m'] = (df['Close'] - df['Close'].shift(1)) / df['Close'].shift(1) * 100
+    # df['price_velocity_15m'] = (df['Close'] - df['Close'].shift(3)) / df['Close'].shift(3) * 100
+    # df['price_velocity_30m'] = (df['Close'] - df['Close'].shift(6)) / df['Close'].shift(6) * 100
     
-    # 2. RECENT HIGH/LOW BREAK
-    df['15min_high'] = df['High'].rolling(window=3).max()
-    df['15min_low'] = df['Low'].rolling(window=3).min()
-    df['break_15min_high'] = (df['Close', ticker] > df['15min_high'].shift(1)).astype(int)
-    df['break_15min_low'] = (df['Close', ticker] < df['15min_low'].shift(1)).astype(int)
+    # # 2. RECENT HIGH/LOW BREAK
+    # df['15min_high'] = df['High'].rolling(window=3).max()
+    # df['15min_low'] = df['Low'].rolling(window=3).min()
+    # df['break_15min_high'] = (df['Close', ticker] > df['15min_high'].shift(1)).astype(int)
+    # df['break_15min_low'] = (df['Close', ticker] < df['15min_low'].shift(1)).astype(int)
   
-    # 3. VOLUME ANALYSIS - KEY PREDICTIVE INDICATORS
-    # Calculate essential moving averages
-    df['volume_5avg'] = df['Volume'].rolling(window=5).mean()
-    df['volume_20avg'] = df['Volume'].rolling(window=20).mean()
-    df['volume_60avg'] = df['Volume'].rolling(window=60).mean()
+    # # 3. VOLUME ANALYSIS - KEY PREDICTIVE INDICATORS
+    # # Calculate essential moving averages
+    # df['volume_5avg'] = df['Volume'].rolling(window=5).mean()
+    # df['volume_20avg'] = df['Volume'].rolling(window=20).mean()
+    # df['volume_60avg'] = df['Volume'].rolling(window=60).mean()
     
-    # Fill NaN values
-    for col in ['volume_5avg', 'volume_20avg', 'volume_60avg']:
-        df[col] = df[col].fillna(df['Volume'].mean())
+    # # Fill NaN values
+    # for col in ['volume_5avg', 'volume_20avg', 'volume_60avg']:
+    #     df[col] = df[col].fillna(df['Volume'].mean())
     
-    # 3.1. KEY INDICATOR: Volume-Price Surge (Strong predictive value for breakouts)
-    df['volume_surge_ratio'] = df['Volume',ticker] / df['volume_20avg']
-    df['volume_price_surge'] = ((df['volume_surge_ratio'] > 2.0) & 
-                               (abs(df['price_velocity_5m']) > 0.5)).astype(int)
+    # # 3.1. KEY INDICATOR: Volume-Price Surge (Strong predictive value for breakouts)
+    # df['volume_surge_ratio'] = df['Volume',ticker] / df['volume_20avg']
+    # df['volume_price_surge'] = ((df['volume_surge_ratio'] > 2.0) & 
+    #                            (abs(df['price_velocity_5m']) > 0.5)).astype(int)
     
-    # 3.2. KEY INDICATOR: Relative Volume Strength (Historical volume significance)
-    df['relative_volume_strength'] = (df['volume_5avg'] / df['volume_60avg'] - 1) * 100
+    # # 3.2. KEY INDICATOR: Relative Volume Strength (Historical volume significance)
+    # df['relative_volume_strength'] = (df['volume_5avg'] / df['volume_60avg'] - 1) * 100
     
-    # 3.3. KEY INDICATOR: Volume Trend (Direction and strength of volume)
-    df['volume_trend'] = np.where(
-        df['volume_5avg'] > df['volume_20avg'],
-        np.where(df['volume_20avg'] > df['volume_60avg'], 2,  # Strong uptrend
-                1),  # Moderate uptrend
-        np.where(df['volume_20avg'] < df['volume_60avg'], -2,  # Strong downtrend
-                -1)  # Moderate downtrend
-    )
+    # # 3.3. KEY INDICATOR: Volume Trend (Direction and strength of volume)
+    # df['volume_trend'] = np.where(
+    #     df['volume_5avg'] > df['volume_20avg'],
+    #     np.where(df['volume_20avg'] > df['volume_60avg'], 2,  # Strong uptrend
+    #             1),  # Moderate uptrend
+    #     np.where(df['volume_20avg'] < df['volume_60avg'], -2,  # Strong downtrend
+    #             -1)  # Moderate downtrend
+    # )
     
-    # 3.4. KEY INDICATOR: Consecutive Volume Surge (Sustained buying/selling pressure)
-    df['consecutive_surge'] = ((df['volume_surge_ratio'] > 1.5) & 
-                             (df['volume_surge_ratio'].shift(1) > 1.5)).astype(int)
+    # # 3.4. KEY INDICATOR: Consecutive Volume Surge (Sustained buying/selling pressure)
+    # df['consecutive_surge'] = ((df['volume_surge_ratio'] > 1.5) & 
+    #                          (df['volume_surge_ratio'].shift(1) > 1.5)).astype(int)
     
-    # Composite Volume Signal (-100 to +100 scale)
-    df['volume_signal_strength'] = (
-        # Volume-price surge component (40% weight)
-        df['volume_price_surge'] * 40 +
-        # Relative strength component (30% weight)
-        np.clip(df['relative_volume_strength'], -100, 100) * 0.3 +
-        # Volume trend component (20% weight)
-        df['volume_trend'] * 10 +
-        # Consecutive surge component (10% weight)
-        df['consecutive_surge'] * 10
-    )
+    # # Composite Volume Signal (-100 to +100 scale)
+    # df['volume_signal_strength'] = (
+    #     # Volume-price surge component (40% weight)
+    #     df['volume_price_surge'] * 40 +
+    #     # Relative strength component (30% weight)
+    #     np.clip(df['relative_volume_strength'], -100, 100) * 0.3 +
+    #     # Volume trend component (20% weight)
+    #     df['volume_trend'] * 10 +
+    #     # Consecutive surge component (10% weight)
+    #     df['consecutive_surge'] * 10
+    # )
 
   
     # # 4. VWAP (Volume Weighted Average Price) - Daily reset
@@ -71,80 +71,80 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     # # df['price_vs_vwap'] = ((df['Close'] - df['VWAP']) / df['VWAP'])[ticker] * 100
     # print(df['price_vs_vwap'])
     
-    # # 5. RSI (Relative Strength Index)
-    def calculate_rsi(data, window=14):
-        delta = data.diff()
-        gain = (delta.where(delta > 0, 0)).rolling(window=window).mean()
-        loss = (-delta.where(delta < 0, 0)).rolling(window=window).mean()
-        rs = gain / loss
-        rsi = 100 - (100 / (1 + rs))
-        return rsi
+    # # # 5. RSI (Relative Strength Index)
+    # def calculate_rsi(data, window=14):
+    #     delta = data.diff()
+    #     gain = (delta.where(delta > 0, 0)).rolling(window=window).mean()
+    #     loss = (-delta.where(delta < 0, 0)).rolling(window=window).mean()
+    #     rs = gain / loss
+    #     rsi = 100 - (100 / (1 + rs))
+    #     return rsi
     
-    df['RSI_14'] = calculate_rsi(df['Close'], 14)
-    df['RSI_7'] = calculate_rsi(df['Close'], 7)
+    # df['RSI_14'] = calculate_rsi(df['Close'], 14)
+    # df['RSI_7'] = calculate_rsi(df['Close'], 7)
     
-    # # 6. ATR (Average True Range)
-    def calculate_atr(data, window=14):
-        high_low = data['High'] - data['Low']
-        high_close = np.abs(data['High'] - data['Close'].shift())
-        low_close = np.abs(data['Low'] - data['Close'].shift())
-        true_range = np.maximum(high_low, np.maximum(high_close, low_close))
-        atr = true_range.rolling(window=window).mean()
-        return atr
+    # # # 6. ATR (Average True Range)
+    # def calculate_atr(data, window=14):
+    #     high_low = data['High'] - data['Low']
+    #     high_close = np.abs(data['High'] - data['Close'].shift())
+    #     low_close = np.abs(data['Low'] - data['Close'].shift())
+    #     true_range = np.maximum(high_low, np.maximum(high_close, low_close))
+    #     atr = true_range.rolling(window=window).mean()
+    #     return atr
     
-    # Calculate ATR and normalized versions
-    df['ATR_14'] = calculate_atr(df)
-    df['ATR_percent'] = (df['ATR_14'] / df['Close',ticker]) * 100
+    # # Calculate ATR and normalized versions
+    # df['ATR_14'] = calculate_atr(df)
+    # df['ATR_percent'] = (df['ATR_14'] / df['Close',ticker]) * 100
     
     
-    # Calculate multiple ATR periods for comparison
-    df['ATR_5'] = calculate_atr(df, window=5)   # Short-term volatility
-    df['ATR_21'] = calculate_atr(df, window=21)  # Longer-term volatility
+    # # Calculate multiple ATR periods for comparison
+    # df['ATR_5'] = calculate_atr(df, window=5)   # Short-term volatility
+    # df['ATR_21'] = calculate_atr(df, window=21)  # Longer-term volatility
     
-    # Volatility state (comparing short vs long term ATR)
-    df['volatility_ratio'] = df['ATR_5'] / df['ATR_21']
-    df['volatility_state'] = np.where(
-        df['volatility_ratio'] > 1.2, 'High',
-        np.where(df['volatility_ratio'] < 0.8, 'Low', 'Normal')
-    )
+    # # Volatility state (comparing short vs long term ATR)
+    # df['volatility_ratio'] = df['ATR_5'] / df['ATR_21']
+    # df['volatility_state'] = np.where(
+    #     df['volatility_ratio'] > 1.2, 'High',
+    #     np.where(df['volatility_ratio'] < 0.8, 'Low', 'Normal')
+    # )
     
-    # ATR-based price channels
-    df['upper_channel'] = df['Close',ticker] + (2 * df['ATR_14'])
-    df['lower_channel'] = df['Close',ticker] - (2 * df['ATR_14'])
+    # # ATR-based price channels
+    # df['upper_channel'] = df['Close',ticker] + (2 * df['ATR_14'])
+    # df['lower_channel'] = df['Close',ticker] - (2 * df['ATR_14'])
     
-    # Volatility breakout signals
-    df['atr_breakout'] = np.where(
-        abs(df['Close',ticker] - df['Close',ticker].shift(1)) > (2 * df['ATR_14'].shift(1)),
-        np.sign(df['Close',ticker] - df['Close',ticker].shift(1)),  # 1 for upside breakout, -1 for downside
-        0
-    )
+    # # Volatility breakout signals
+    # df['atr_breakout'] = np.where(
+    #     abs(df['Close',ticker] - df['Close',ticker].shift(1)) > (2 * df['ATR_14'].shift(1)),
+    #     np.sign(df['Close',ticker] - df['Close',ticker].shift(1)),  # 1 for upside breakout, -1 for downside
+    #     0
+    # )
     
-    # ATR-based position sizing (normalized to account for volatility)
-    df['position_size_factor'] = 1 / df['ATR_percent']  # Inverse relationship with volatility
+    # # ATR-based position sizing (normalized to account for volatility)
+    # df['position_size_factor'] = 1 / df['ATR_percent']  # Inverse relationship with volatility
     
-    # Volatility trend
-    df['volatility_trend'] = np.where(
-        (df['ATR_14'] > df['ATR_14'].rolling(window=5).mean()) &
-        (df['ATR_14'].rolling(window=5).mean() > df['ATR_14'].rolling(window=20).mean()),
-        'Increasing',
-        np.where(
-            (df['ATR_14'] < df['ATR_14'].rolling(window=5).mean()) &
-            (df['ATR_14'].rolling(window=5).mean() < df['ATR_14'].rolling(window=20).mean()),
-            'Decreasing',
-            'Stable'
-        )
-    )
+    # # Volatility trend
+    # df['volatility_trend'] = np.where(
+    #     (df['ATR_14'] > df['ATR_14'].rolling(window=5).mean()) &
+    #     (df['ATR_14'].rolling(window=5).mean() > df['ATR_14'].rolling(window=20).mean()),
+    #     'Increasing',
+    #     np.where(
+    #         (df['ATR_14'] < df['ATR_14'].rolling(window=5).mean()) &
+    #         (df['ATR_14'].rolling(window=5).mean() < df['ATR_14'].rolling(window=20).mean()),
+    #         'Decreasing',
+    #         'Stable'
+    #     )
+    # )
     
-    # Composite volatility score (-100 to +100)
-    df['volatility_score'] = (
-        # Current volatility level vs historical (40%)
-        ((df['ATR_percent'] - df['ATR_percent'].rolling(window=20).mean()) /
-         df['ATR_percent'].rolling(window=20).std()) * 40 +
-        # Volatility trend (30%)
-        (df['volatility_ratio'] - 1) * 30 +
-        # Breakout intensity (30%)
-        (df['atr_breakout'] * 30)
-    )
+    # # Composite volatility score (-100 to +100)
+    # df['volatility_score'] = (
+    #     # Current volatility level vs historical (40%)
+    #     ((df['ATR_percent'] - df['ATR_percent'].rolling(window=20).mean()) /
+    #      df['ATR_percent'].rolling(window=20).std()) * 40 +
+    #     # Volatility trend (30%)
+    #     (df['volatility_ratio'] - 1) * 30 +
+    #     # Breakout intensity (30%)
+    #     (df['atr_breakout'] * 30)
+    # )
 
     
     # # 7. MARKET INDEX CORRELATION (with SPY)
@@ -211,29 +211,31 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     
     return df
 
-def main():
-    print("Downloading AAPL 5-minute data...")
+def main(tickertype='AAPL'):
+    print(f"Downloading {tickertype} 5-minute data...")
     
-    # Download Apple stock data
-    aapl_data = yf.download(
-        tickers="AAPL",
+    # Download stock data
+    stock_data = yf.download(
+        tickers=tickertype,
         period="60d",
         interval="5m",
         progress=True
     )
     
-    if aapl_data.empty:
+    if stock_data.empty:
         print("No data retrieved. Please check your connection.")
         return
     
     # Ensure Volume column is float type
-    aapl_data['Volume'] = aapl_data['Volume'].astype(float)
-    
-    print(f"Downloaded {len(aapl_data)} data points")
-    print("Calculating technical indicators...")
+    stock_data['Volume'] = stock_data['Volume'].astype(float)
+
+
+    # print(f"Downloaded {len(stock_data)} data points")
+    # print("Calculating technical indicators...")
     
     # Calculate all technical indicators
-    enhanced_data = calculate_technical_indicators(aapl_data)
+    enhanced_data = calculate_technical_indicators(stock_data)
+    print(enhanced_data)
     #print(enhanced_data)
     
     # # Display summary of calculated features
@@ -256,10 +258,20 @@ def main():
     #             non_na_count = enhanced_data[feature].notna().sum()
     #             print(f"  - {feature}: {non_na_count} non-NaN values")
     
-    # # Save to CSV
-    # filename = f"AAPL_5m_enhanced_{datetime.now().strftime('%Y%m%d_%H%M')}.csv"
-    # enhanced_data.to_csv(filename)
-    # print(f"\nEnhanced data saved to: {filename}")
+    # Save to CSV with custom header
+    filename = f"AAPL_5m_enhanced_{datetime.now().strftime('%Y%m%d_%H%M')}.csv"
+    
+    # Prepare the data with only the columns we want
+    output_data = enhanced_data[['Close', 'High', 'Low', 'Open', 'Volume']].copy()
+    
+    # Write the custom header and data
+    with open(filename, 'w') as f:
+        # Write first line
+        f.write(f'Ticker,{tickertype}\n')
+        # Write second line (column headers)
+        f.write('Datetime,Close,High,Low,Open,Volume\n')
+        # Write the data without headers
+        output_data.to_csv(f, header=False)
     
     # # Display sample of the data
     # print("\nSample of calculated data (last 5 rows):")
