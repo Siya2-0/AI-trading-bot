@@ -145,7 +145,7 @@ def calculate_technical_indicators(df, ticker='AAPL'):
         # Breakout intensity (30%)
         (df['atr_breakout'] * 30)
     )
-    print(df)
+
     
     # # 7. MARKET INDEX CORRELATION (with SPY)
     # try:
@@ -162,17 +162,17 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     #     print("Warning: Could not download SPY data for correlation")
     #     df['market_correlation_30m'] = np.nan
     
-    # # 8. SECTOR ETF MOMENTUM (with XLK - Technology ETF)
-    try:
-        xlk_data = yf.download('XLK', period='60d', interval='5m', progress=False)
-        # Calculate XLK momentum
-        xlk_data['XLK_momentum_15m'] = (xlk_data['Close'] - xlk_data['Close'].shift(3)) / xlk_data['Close'].shift(3) * 100
+    # # # 8. SECTOR ETF MOMENTUM (with XLK - Technology ETF)
+    # try:
+    #     xlk_data = yf.download('XLK', period='60d', interval='5m', progress=False)
+    #     # Calculate XLK momentum
+    #     xlk_data['XLK_momentum_15m'] = (xlk_data['Close'] - xlk_data['Close'].shift(3)) / xlk_data['Close'].shift(3) * 100
         
-        # Merge with main dataframe
-        df = df.merge(xlk_data[['XLK_momentum_15m']], left_index=True, right_index=True, how='left')
-    except:
-        print("Warning: Could not download XLK data for sector momentum")
-        df['XLK_momentum_15m'] = np.nan
+    #     # Merge with main dataframe
+    #     df = df.merge(xlk_data[['XLK_momentum_15m']], left_index=True, right_index=True, how='left')
+    # except:
+    #     print("Warning: Could not download XLK data for sector momentum")
+    #     df['XLK_momentum_15m'] = np.nan
     
     # # 9. OPENING RANGE BREAK
     # def calculate_opening_range_break(data):
