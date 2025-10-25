@@ -64,51 +64,11 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     )
 
   
-    # 4. VWAP (Volume Weighted Average Price) with Daily Reset and Bands
-    # Create date column for grouping
-    df['date'] = df.index.date
-    
-    # Calculate typical price
-    df['typical_price'] = (df['High'] + df['Low'] + df['Close']) / 3
-    
-    # Calculate VWAP with daily reset
-    df['daily_vol_cumsum'] = df.groupby('date')['Volume'].cumsum()
-    df['daily_vol_typical_cumsum'] = df.groupby('date').apply(
-        lambda x: (x['Volume'] * x['typical_price']).cumsum()
-    ).reset_index(level=0, drop=True)
-    
-    # VWAP
-    df['VWAP'] = df['daily_vol_typical_cumsum'] / df['daily_vol_cumsum']
-    
-    # Calculate VWAP Standard Deviation for bands
-    df['vwap_std'] = df.groupby('date').apply(
-        lambda x: np.sqrt(
-            (x['Volume'] * (x['typical_price'] - x['VWAP'])**2).cumsum() / x['Volume'].cumsum()
-        )
-    ).reset_index(level=0, drop=True)
-    
-    # Calculate VWAP Bands
-    df['VWAP_upper_1'] = df['VWAP'] + df['vwap_std']     # 1 standard deviation
-    df['VWAP_lower_1'] = df['VWAP'] - df['vwap_std']
-    df['VWAP_upper_2'] = df['VWAP'] + 2*df['vwap_std']   # 2 standard deviations
-    df['VWAP_lower_2'] = df['VWAP'] - 2*df['vwap_std']
-    
-    # Calculate price deviation from VWAP (as percentage)
-    df['price_vs_vwap'] = ((df['Close'] - df['VWAP']) / df['VWAP']) * 100
-    
-    # VWAP-based signals
-    conditions = [
-        df['Close'] > df['VWAP_upper_2'],    # Strong sell (overbought)
-        df['Close'] > df['VWAP_upper_1'],    # Moderate sell
-        df['Close'] < df['VWAP_lower_2'],    # Strong buy (oversold)
-        df['Close'] < df['VWAP_lower_1']     # Moderate buy
-    ]
-    choices = [-2, -1, 2, 1]
-    df['vwap_signal'] = np.select(conditions, choices, default=0)
-    
-    # Clean up intermediate columns
-    df = df.drop(['daily_vol_cumsum', 'daily_vol_typical_cumsum', 'typical_price', 'vwap_std'], axis=1)
-    # df['price_vs_vwap'] = ((df['Close'] - df['VWAP']) / df['VWAP'])[ticker] * 100
+    # # 4. VWAP (Volume Weighted Average Price) - Daily reset
+    # df['cumulative_volume'] = df['Volume'].cumsum()
+    # df['cumulative_typical_volume'] = (df['Volume'] * (df['High'] + df['Low'] + df['Close']) / 3).cumsum()
+    # df['VWAP'] = df['cumulative_typical_volume'] / df['cumulative_volume']
+    # # df['price_vs_vwap'] = ((df['Close'] - df['VWAP']) / df['VWAP'])[ticker] * 100
     # print(df['price_vs_vwap'])
     
     # # 5. RSI (Relative Strength Index)
@@ -132,8 +92,60 @@ def calculate_technical_indicators(df, ticker='AAPL'):
         atr = true_range.rolling(window=window).mean()
         return atr
     
+    # Calculate ATR and normalized versions
     df['ATR_14'] = calculate_atr(df)
-    #df['ATR_percent'] = (df['ATR_14'] / df['Close']) * 100
+    df['ATR_percent'] = (df['ATR_14'] / df['Close',ticker]) * 100
+    
+    
+    # Calculate multiple ATR periods for comparison
+    df['ATR_5'] = calculate_atr(df, window=5)   # Short-term volatility
+    df['ATR_21'] = calculate_atr(df, window=21)  # Longer-term volatility
+    
+    # Volatility state (comparing short vs long term ATR)
+    df['volatility_ratio'] = df['ATR_5'] / df['ATR_21']
+    df['volatility_state'] = np.where(
+        df['volatility_ratio'] > 1.2, 'High',
+        np.where(df['volatility_ratio'] < 0.8, 'Low', 'Normal')
+    )
+    
+    # ATR-based price channels
+    df['upper_channel'] = df['Close',ticker] + (2 * df['ATR_14'])
+    df['lower_channel'] = df['Close',ticker] - (2 * df['ATR_14'])
+    
+    # Volatility breakout signals
+    df['atr_breakout'] = np.where(
+        abs(df['Close',ticker] - df['Close',ticker].shift(1)) > (2 * df['ATR_14'].shift(1)),
+        np.sign(df['Close',ticker] - df['Close',ticker].shift(1)),  # 1 for upside breakout, -1 for downside
+        0
+    )
+    
+    # ATR-based position sizing (normalized to account for volatility)
+    df['position_size_factor'] = 1 / df['ATR_percent']  # Inverse relationship with volatility
+    
+    # Volatility trend
+    df['volatility_trend'] = np.where(
+        (df['ATR_14'] > df['ATR_14'].rolling(window=5).mean()) &
+        (df['ATR_14'].rolling(window=5).mean() > df['ATR_14'].rolling(window=20).mean()),
+        'Increasing',
+        np.where(
+            (df['ATR_14'] < df['ATR_14'].rolling(window=5).mean()) &
+            (df['ATR_14'].rolling(window=5).mean() < df['ATR_14'].rolling(window=20).mean()),
+            'Decreasing',
+            'Stable'
+        )
+    )
+    
+    # Composite volatility score (-100 to +100)
+    df['volatility_score'] = (
+        # Current volatility level vs historical (40%)
+        ((df['ATR_percent'] - df['ATR_percent'].rolling(window=20).mean()) /
+         df['ATR_percent'].rolling(window=20).std()) * 40 +
+        # Volatility trend (30%)
+        (df['volatility_ratio'] - 1) * 30 +
+        # Breakout intensity (30%)
+        (df['atr_breakout'] * 30)
+    )
+    print(df)
     
     # # 7. MARKET INDEX CORRELATION (with SPY)
     # try:
