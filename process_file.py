@@ -93,8 +93,11 @@ def check_sell_condition(p, data, current_index):
         # Check both conditions:
         # 1. High is less than (open + 1.785)
         # 2. Low is less than (open - 2*1.785)
-        if high < upper_limit and low <= lower_limit:
+        if high >= upper_limit:
+            return False
+        elif high < upper_limit and low <= lower_limit:
             return True
+        
             
     return False
 
@@ -124,7 +127,9 @@ def check_buy_condition(p, data, current_index):
         # Check both conditions:
         # 1. High is less than (open + 1.785)
         # 2. Low is less than (open - 2*1.785)
-        if high >= upper_limit and low > lower_limit:
+        if low <= lower_limit:
+            return False
+        elif high >= upper_limit and low > lower_limit:
             return True
             
     return False
