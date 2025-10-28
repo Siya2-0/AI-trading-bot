@@ -21,45 +21,52 @@ def process_file_from_third_line(file_path, output_path=None):
             
             # Create CSV reader for remaining lines
             csv_reader = csv.reader(file)
-            
-            # Process each line starting from the 3rd line
+           
+            # First pass: collect all data
             for row in csv_reader:
                 if not row:  # Skip empty lines
                     continue
                     
-                # Process the row (example processing)
+                # Process the row
                 processed_row = {
                     'Datetime': row[0],
                     'Close': float(row[1]),
                     'High': float(row[2]),
                     'Low': float(row[3]),
                     'Open': float(row[4]),
-                    'Volume': int(row[5])
+                    'Volume': float(row[5])
                 }
                 
-                # Add any custom processing here
-                # Calculate price range
-                processed_row['price_range'] = processed_row['High'] - processed_row['Low']
-                
-                # Store the current row
                 processed_data.append(processed_row)
+            
+            # Second pass: process trading decisions
+            total_rows = len(processed_data)
+            for i in range(total_rows):
+                # Check buy and sell conditions
+                is_sell = check_sell_condition(processed_data[i], processed_data, i)
+                is_buy = check_buy_condition(processed_data[i], processed_data, i)
                 
-                # Check sell condition for current row
-                # We subtract 1 to get the current index since we just appended
-                current_index = len(processed_data) - 1
-                processed_row['sell_condition'] = check_sell_condition(processed_row, processed_data, current_index)
-        
-        # Handle output
-        if output_path:
-            save_processed_data(output_path, header1, header2, processed_data)
-        else:
-            # Print first few processed rows as example
-            print(f"First 5 processed rows:")
-            for row in processed_data[:5]:
-                print(row)
-                
-        print(f"Processed {len(processed_data)} rows successfully")
-        return processed_data
+                # Determine the trading decision
+                if is_sell:
+                    processed_data[i]['decision'] = 'sell'
+                elif is_buy:
+                    processed_data[i]['decision'] = 'buy'
+                elif i == total_rows - 1:  # Last row in the dataset
+                    processed_data[i]['decision'] = 'NA'
+                else:
+                    processed_data[i]['decision'] = 'hold'
+
+            # Handle output
+            if output_path:
+                save_processed_data(output_path, header1, header2, processed_data)
+            else:
+                # Print first few processed rows as example
+                print(f"First 5 processed rows:")
+                for row in processed_data[:5]:
+                    print(row)
+                    
+            print(f"Processed {len(processed_data)} rows successfully")
+            return processed_data
             
     except FileNotFoundError:
         print(f"Error: File not found - {file_path}")
@@ -74,7 +81,7 @@ def check_sell_condition(p, data, current_index):
     
     Args:
         p: Current row being processed
-        data: List of all processed rows
+        data: List of all rows
         current_index: Index of current row in data
     
     Returns:
@@ -108,7 +115,7 @@ def check_buy_condition(p, data, current_index):
 
     Args:
         p: Current row being processed
-        data: List of all processed rows
+        data: List of all rows
         current_index: Index of current row in data
     
     Returns:
@@ -161,7 +168,7 @@ if __name__ == "__main__":
     
     processed_data = process_file_from_third_line(input_file, output_file)
     
-    if processed_data:
-        print(f"\nExample of calculated price ranges:")
-        for row in processed_data[:3]:
-            print(f"DateTime: {row['Datetime']}, Price Range: ${row['price_range']:.2f}")
+    # if processed_data:
+    #     print(f"\nExample of calculated price ranges:")
+    #     for row in processed_data[:3]:
+    #         print(f"DateTime: {row['Datetime']}, Price Range: ${row['price_range']:.2f}")
