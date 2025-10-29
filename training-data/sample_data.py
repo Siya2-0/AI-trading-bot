@@ -1,66 +1,56 @@
 import pandas as pd
-import numpy as np
-import os
+import argparse
 
-def sample_csv_data(input_file, output_file, sample_percentage=0.25, random_seed=42):
+def sample_data(input_file, output_file, sample_percentage=0.25, random_seed=42):
     """
-    Randomly sample records from a CSV file and save to a new CSV file.
+    Sample data from a CSV file while keeping the first two rows intact.
     
     Args:
-        input_file (str): Path to input CSV file
+        input_file (str): Path to the input CSV file
         output_file (str): Path to save the sampled data
-        sample_percentage (float): Percentage of records to sample (0.0 to 1.0)
+        sample_percentage (float): Percentage of remaining data to sample (after first two rows)
         random_seed (int): Random seed for reproducibility
-        
-    Returns:
-        tuple: (number of original records, number of sampled records)
     """
     try:
-        # Set random seed for reproducibility
-        np.random.seed(random_seed)
-        
         # Read the CSV file
         print(f"Reading data from {input_file}...")
         df = pd.read_csv(input_file)
         total_records = len(df)
         
-        # Calculate number of records to sample
-        sample_size = int(total_records * sample_percentage)
+        # Keep first two rows
+        first_two_rows = df.iloc[:1]
+        remaining_rows = df.iloc[1:]
         
-        # Randomly sample records
-        sampled_df = df.sample(n=sample_size, random_state=random_seed)
+        # Sample 25% of remaining rows
+        sample_size = int(len(remaining_rows) * sample_percentage)
+        sampled_remaining = remaining_rows.sample(n=sample_size, random_state=random_seed)
+  
+        # Combine first two rows with sampled rows
+        sampled_df = pd.concat([first_two_rows, sampled_remaining])
         
-        # Sort by datetime to maintain chronological order
-        if 'Datetime' in sampled_df.columns:
-            sampled_df = sampled_df.sort_values('Datetime')
-        
-        # Save sampled data to new CSV
+        # Save the sampled data
+        print(f"Saving sampled data to {output_file}...")
         sampled_df.to_csv(output_file, index=False)
         
-        print(f"\nSampling complete:")
-        print(f"Original records: {total_records}")
-        print(f"Sampled records: {sample_size} ({sample_percentage*100:.1f}%)")
-        print(f"Sampled data saved to: {output_file}")
-        
-        return total_records, sample_size
+        # print(f"Original records: {total_records}")
+        # print(f"Sampled records: {len(sampled_df)} (including first two rows)")
         
     except Exception as e:
         print(f"Error: {str(e)}")
-        return None, None
-
-def main():
-    # Get the directory of the current script
-    current_dir = os.path.dirname(os.path.abspath(__file__))
+        return False
     
-    # Set input and output file paths
-    input_file = os.path.join(current_dir, 'AAPL_5m_processed.csv')
-    output_file = os.path.join(current_dir, 'AAPL_5m_sampled.csv')
-    
-    # Sample 25% of the data
-    total, sampled = sample_csv_data(input_file, output_file)
-    
-    if total and sampled:
-        print(f"\nSuccessfully sampled {sampled} records from {total} total records")
+    return True
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Sample data from a CSV file while keeping first two rows")
+    parser.add_argument("input_file", help="Input CSV file path")
+    parser.add_argument("output_file", help="Output CSV file path")
+    parser.add_argument("--sample_percentage", type=float, default=0.25,
+                      help="Percentage of remaining data to sample (default: 0.25)")
+    parser.add_argument("--random_seed", type=int, default=42,
+                      help="Random seed for reproducibility (default: 42)")
+    
+    args = parser.parse_args()
+    
+    success = sample_data(args.input_file, args.output_file, 
+                         args.sample_percentage, args.random_seed)
