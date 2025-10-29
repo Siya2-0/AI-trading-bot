@@ -49,10 +49,10 @@ def process_file_from_third_line(file_path, output_path=None):
                 # Determine the trading decision
                 if is_sell:
                     processed_data[i]['decision'] = 'sell'
-                    processed_data[i]['last_checked_index'] = sell_idx
+                    #processed_data[i]['last_checked_index'] = sell_idx
                 elif is_buy:
                     processed_data[i]['decision'] = 'buy'
-                    processed_data[i]['last_checked_index'] = buy_idx
+                    #processed_data[i]['last_checked_index'] = buy_idx
                 elif not is_sell and not is_buy and sell_idx != -1 and buy_idx != -1:  # Last row in the dataset
                     processed_data[i]['decision'] = 'hold'
                 else:
