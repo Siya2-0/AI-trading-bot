@@ -211,73 +211,102 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     
     return df
 
-def main(tickertype='AAPL'):
-    print(f"Downloading {tickertype} 5-minute data...")
+def download_market_data(ticker='AAPL', start=None, end=None, period=None, interval='5m'):
+    """
+    Download market data with flexible parameters
     
-    # Download stock data
-    stock_data = yf.download(
-        tickers=tickertype,
-        period="60d",
-        interval="5m",
-        progress=True
+    Args:
+        ticker (str): Stock ticker symbol (e.g., 'AAPL', 'MSFT')
+        start (str): Start date in 'YYYY-MM-DD' format (optional)
+        end (str): End date in 'YYYY-MM-DD' format (optional)
+        period (str): Time period (e.g., '1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max')
+        interval (str): Data interval ('1m', '2m', '5m', '15m', '30m', '60m', '90m', '1h', '1d', '5d', '1wk', '1mo', '3mo')
+    """
+    print(f"Downloading {ticker} data...")
+    print(f"Interval: {interval}")
+    if start and end:
+        print(f"Date range: {start} to {end}")
+    elif period:
+        print(f"Period: {period}")
+    
+    try:
+        # Download stock data
+        if start and end:
+            stock_data = yf.download(
+                tickers=ticker,
+                start=start,
+                end=end,
+                interval=interval,
+                progress=True
+            )
+        else:
+            stock_data = yf.download(
+                tickers=ticker,
+                period=period or "60d",  # default to 60d if no period specified
+                interval=interval,
+                progress=True
+            )
+        
+        if stock_data.empty:
+            print("No data retrieved. Please check your parameters and connection.")
+            return None
+            
+        # Ensure Volume column is float type
+        stock_data['Volume'] = stock_data['Volume'].astype(float)
+
+        # Calculate technical indicators if requested
+        enhanced_data = calculate_technical_indicators(stock_data)
+        
+        # Save to CSV with custom header
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M')
+        filename = f"{ticker}_{interval}_{timestamp}.csv"
+        
+        # Prepare the data
+        output_data = enhanced_data[['Close', 'High', 'Low', 'Open', 'Volume']].copy()
+        
+        # Write the custom header and data
+        with open(filename, 'w') as f:
+            # Write first line
+            f.write(f'Ticker,{ticker}\n')
+            # Write second line (column headers)
+            f.write('Datetime,Close,High,Low,Open,Volume\n')
+            # Write the data without headers
+            output_data.to_csv(f, header=False)
+        
+        print(f"\nData saved to {filename}")
+        print(f"Downloaded {len(stock_data)} data points")
+        print(f"Date range: {stock_data.index[0]} to {stock_data.index[-1]}")
+        
+        return stock_data
+        
+    except Exception as e:
+        print(f"Error downloading data: {str(e)}")
+        return None
+
+def main():
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='Download market data with flexible parameters')
+    parser.add_argument('--ticker', type=str, default='AAPL',
+                        help='Stock ticker symbol (default: AAPL)')
+    parser.add_argument('--start', type=str,
+                        help='Start date in YYYY-MM-DD format')
+    parser.add_argument('--end', type=str,
+                        help='End date in YYYY-MM-DD format')
+    parser.add_argument('--period', type=str,
+                        help='Time period (1d,5d,1mo,3mo,6mo,1y,2y,5y,10y,ytd,max)')
+    parser.add_argument('--interval', type=str, default='5m',
+                        help='Data interval (1m,2m,5m,15m,30m,60m,90m,1h,1d,5d,1wk,1mo,3mo)')
+    
+    args = parser.parse_args()
+    
+    download_market_data(
+        ticker=args.ticker,
+        start=args.start,
+        end=args.end,
+        period=args.period,
+        interval=args.interval
     )
-    
-    if stock_data.empty:
-        print("No data retrieved. Please check your connection.")
-        return
-    
-    # Ensure Volume column is float type
-    stock_data['Volume'] = stock_data['Volume'].astype(float)
-
-
-    # print(f"Downloaded {len(stock_data)} data points")
-    # print("Calculating technical indicators...")
-    
-    # Calculate all technical indicators
-    enhanced_data = calculate_technical_indicators(stock_data)
-    print(enhanced_data)
-    #print(enhanced_data)
-    
-    # # Display summary of calculated features
-    # print("\n=== CALCULATED FEATURES SUMMARY ===")
-    # feature_categories = {
-    #     'Price Velocity': ['price_velocity_5m', 'price_velocity_15m', 'price_velocity_30m'],
-    #     'Breakouts': ['break_15min_high', 'break_15min_low', 'break_opening_high', 'break_opening_low'],
-    #     'Volume': ['volume_surge_ratio', 'volume_surge'],
-    #     'Momentum': ['RSI_14', 'RSI_7'],
-    #     'Volatility': ['ATR_14', 'ATR_percent'],
-    #     'Market Context': ['market_correlation_30m', 'XLK_momentum_15m'],
-    #     'VWAP': ['VWAP', 'price_vs_vwap']
-    # }
-    
-    # for category, features in feature_categories.items():
-    #     available_features = [f for f in features if f in enhanced_data.columns]
-    #     if available_features:
-    #         print(f"\n{category}:")
-    #         for feature in available_features:
-    #             non_na_count = enhanced_data[feature].notna().sum()
-    #             print(f"  - {feature}: {non_na_count} non-NaN values")
-    
-    # Save to CSV with custom header
-    filename = f"AAPL_5m_enhanced_{datetime.now().strftime('%Y%m%d_%H%M')}.csv"
-    
-    # Prepare the data with only the columns we want
-    output_data = enhanced_data[['Close', 'High', 'Low', 'Open', 'Volume']].copy()
-    
-    # Write the custom header and data
-    with open(filename, 'w') as f:
-        # Write first line
-        f.write(f'Ticker,{tickertype}\n')
-        # Write second line (column headers)
-        f.write('Datetime,Close,High,Low,Open,Volume\n')
-        # Write the data without headers
-        output_data.to_csv(f, header=False)
-    
-    # # Display sample of the data
-    # print("\nSample of calculated data (last 5 rows):")
-    # sample_columns = ['Close', 'price_velocity_5m', 'RSI_14', 'ATR_14', 'volume_surge_ratio', 'price_vs_vwap']
-    # sample_columns = [col for col in sample_columns if col in enhanced_data.columns]
-    # print(enhanced_data[sample_columns].tail().round(4))
 
 if __name__ == "__main__":
     main()
