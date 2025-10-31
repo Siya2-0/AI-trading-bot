@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 
-def calculate_technical_indicators(df, ticker='AAPL'):
+def calculate_technical_indicators(df):
     """
     Calculate comprehensive technical indicators for trading analysis
     """
@@ -211,7 +211,7 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     
     return df
 
-def download_market_data(ticker='AAPL', start=None, end=None, period=None, interval='5m', output_file=None):
+def download_market_data(ticker='MSFT', start=None, end=None, period=None, interval='5m', output_file=None):
     """
     Download market data with flexible parameters
     
@@ -289,7 +289,7 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(description='Download market data with flexible parameters')
-    parser.add_argument('--ticker', type=str, default='AAPL',
+    parser.add_argument('--ticker', type=str, default='MSFT',
                         help='Stock ticker symbol (default: AAPL)')
     parser.add_argument('--start', type=str,
                         help='Start date in YYYY-MM-DD format')

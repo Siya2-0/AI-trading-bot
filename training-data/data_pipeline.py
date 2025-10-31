@@ -5,7 +5,7 @@ from process_file import process_file_from_third_line
 from sample_data import sample_data
 import os
 
-def run_data_pipeline(ticker='AAPL', interval='5m', period='60d', sample_percentage=0.25, random_seed=42):
+def run_data_pipeline(ticker='MSFT', interval='5m', period='60d', sample_percentage=0.20, random_seed=22):
     """
     Run the complete data processing pipeline:
     1. Download market data
