@@ -211,7 +211,7 @@ def calculate_technical_indicators(df, ticker='AAPL'):
     
     return df
 
-def download_market_data(ticker='AAPL', start=None, end=None, period=None, interval='5m'):
+def download_market_data(ticker='AAPL', start=None, end=None, period=None, interval='5m', output_file=None):
     """
     Download market data with flexible parameters
     
@@ -221,6 +221,7 @@ def download_market_data(ticker='AAPL', start=None, end=None, period=None, inter
         end (str): End date in 'YYYY-MM-DD' format (optional)
         period (str): Time period (e.g., '1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max')
         interval (str): Data interval ('1m', '2m', '5m', '15m', '30m', '60m', '90m', '1h', '1d', '5d', '1wk', '1mo', '3mo')
+        output_file (str): Path to save the downloaded data (optional)
     """
     print(f"Downloading {ticker} data...")
     print(f"Interval: {interval}")
@@ -258,14 +259,15 @@ def download_market_data(ticker='AAPL', start=None, end=None, period=None, inter
         enhanced_data = calculate_technical_indicators(stock_data)
         
         # Save to CSV with custom header
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M')
-        filename = f"{ticker}_{interval}_{timestamp}.csv"
+        if output_file is None:
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M')
+            output_file = f"{ticker}_{interval}_{timestamp}.csv"
         
         # Prepare the data
         output_data = enhanced_data[['Close', 'High', 'Low', 'Open', 'Volume']].copy()
         
         # Write the custom header and data
-        with open(filename, 'w') as f:
+        with open(output_file, 'w') as f:
             # Write first line
             f.write(f'Ticker,{ticker}\n')
             # Write second line (column headers)

@@ -4,7 +4,13 @@ def process_file_from_third_line(file_path, output_path=None):
     """
     Process a CSV file line by line starting from the third line.
     
-    Args:
+              # Write headers
+            file.write(f"{header1}\n")
+            # Add ',Decision' to the second header line
+            header2_with_decision = f"{header2},Decision"
+            file.write(f"{header2_with_decision}\n")
+            
+            # Write processed datas:
         file_path (str): Path to the input CSV file
         output_path (str, optional): Path to save processed data. If None, prints to console.
     
@@ -17,7 +23,7 @@ def process_file_from_third_line(file_path, output_path=None):
         with open(file_path, 'r') as file:
             # Store header lines
             header1 = file.readline().strip()
-            header2 = file.readline().strip()
+            header2 = file.readline().strip() + ',Decision'
             
             # Create CSV reader for remaining lines
             csv_reader = csv.reader(file)
