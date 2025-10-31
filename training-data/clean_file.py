@@ -32,10 +32,23 @@ def clean_file_linebreaks(input_file_path, output_file_path=None):
     except Exception as e:
         print(f"Error: {str(e)}")
 
-# Example usage
-if __name__ == "__main__":
-    # Example with same file
-    clean_file_linebreaks("AAPL_5m_enhanced_20251025_2019.csv")
+def main():
+    import argparse
     
-    # Example with different output file
-    # clean_file_linebreaks("path/to/input.txt", "path/to/output.txt")
+    # Create argument parser
+    parser = argparse.ArgumentParser(description='Clean file by removing extra line breaks and empty lines')
+    
+    # Add arguments
+    parser.add_argument('input', type=str, 
+                      help='Path to the input file')
+    parser.add_argument('--output', type=str, 
+                      help='Path to the output file. If not provided, will overwrite the input file')
+    
+    # Parse arguments
+    args = parser.parse_args()
+    
+    # Clean the file
+    clean_file_linebreaks(args.input, args.output)
+
+if __name__ == "__main__":
+    main()

@@ -34,7 +34,8 @@ def process_file_from_third_line(file_path, output_path=None):
                     'High': float(row[2]),
                     'Low': float(row[3]),
                     'Open': float(row[4]),
-                    'Volume': float(row[5])
+                    'Volume': float(row[5]),
+                    'Decision': 'na',
                 }
                 
                 processed_data.append(processed_row)
@@ -48,15 +49,15 @@ def process_file_from_third_line(file_path, output_path=None):
                 
                 # Determine the trading decision
                 if is_sell:
-                    processed_data[i]['decision'] = 'sell'
+                    processed_data[i]['Decision'] = 'sell'
                     #processed_data[i]['last_checked_index'] = sell_idx
                 elif is_buy:
-                    processed_data[i]['decision'] = 'buy'
+                    processed_data[i]['Decision'] = 'buy'
                     #processed_data[i]['last_checked_index'] = buy_idx
                 elif not is_sell and not is_buy and sell_idx != -1 and buy_idx != -1:  # Last row in the dataset
-                    processed_data[i]['decision'] = 'hold'
+                    processed_data[i]['Decision'] = 'hold'
                 else:
-                    processed_data[i]['decision'] = 'na'
+                    processed_data[i]['Decision'] = 'na'
 
             # Handle output
             if output_path:
@@ -152,32 +153,46 @@ def check_buy_condition(p, data, current_index):
 
 def save_processed_data(output_path, header1, header2, processed_data):
     """
-    Save processed data to a new CSV file.
+    Save processed data to a new CSV file, excluding rows with 'na' decisions.
     """
     try:
+        # Filter out rows with 'na' decisions
+        filtered_data = [row for row in processed_data if row['Decision'] != 'na']
+        
         with open(output_path, 'w', newline='') as file:
             # Write headers
-            file.write(f"{header1}\n")
+            #file.write(f"{header1}\n")
             file.write(f"{header2}\n")
             
             # Write processed data
-            writer = csv.DictWriter(file, fieldnames=processed_data[0].keys())
-            writer.writerows(processed_data)
-            
-        print(f"Processed data saved to: {output_path}")
+            if filtered_data:
+                writer = csv.DictWriter(file, fieldnames=filtered_data[0].keys())
+                writer.writerows(filtered_data)
+                
+                print(f"Original rows: {len(processed_data)}")
+                print(f"Rows after removing 'na' decisions: {len(filtered_data)}")
+                print(f"Processed data saved to: {output_path}")
+            else:
+                print("Warning: No valid trading decisions found in the data")
         
     except Exception as e:
         print(f"Error saving processed data: {str(e)}")
 
 # Example usage
 if __name__ == "__main__":
-    # Example processing
-    input_file = "AAPL_5m_enhanced_20251025_2019.csv"
-    output_file = "AAPL_5m_processed.csv"
+    import argparse
     
-    processed_data = process_file_from_third_line(input_file, output_file)
+    # Create argument parser
+    parser = argparse.ArgumentParser(description='Process stock data file and generate trading decisions')
     
-    # if processed_data:
-    #     print(f"\nExample of calculated price ranges:")
-    #     for row in processed_data[:3]:
-    #         print(f"DateTime: {row['Datetime']}, Price Range: ${row['price_range']:.2f}")
+    # Add arguments
+    parser.add_argument('input', type=str, 
+                      help='Path to the input CSV file')
+    parser.add_argument('--output', type=str, 
+                      help='Path to save processed data. If not provided, will show sample output')
+    
+    # Parse arguments
+    args = parser.parse_args()
+    
+    # Process the file
+    processed_data = process_file_from_third_line(args.input, args.output)
