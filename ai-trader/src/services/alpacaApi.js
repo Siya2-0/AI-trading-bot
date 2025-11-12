@@ -1,205 +1,217 @@
+import Alpaca from '@alpacahq/alpaca-trade-api';
+
 class AlpacaAPI {
   constructor() {
-    this.apiKey = process.env.REACT_APP_ALPACA_API_KEY;
-    this.secretKey = process.env.REACT_APP_ALPACA_SECRET_KEY;
-    this.baseURL = process.env.REACT_APP_ALPACA_BASE_URL;
-    this.dataURL = process.env.REACT_APP_ALPACA_DATA_URL;
-    
-    this.headers = {
-      'APCA-API-KEY-ID': this.apiKey,
-      'APCA-API-SECRET-KEY': this.secretKey,
-      'Content-Type': 'application/json',
-    };
-  }
-
-  async request(endpoint, options = {}) {
-    const url = `${this.baseURL}${endpoint}`;
-    
-    try {
-      const response = await fetch(url, {
-        headers: this.headers,
-        ...options,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(
-          errorData.message || `HTTP error! status: ${response.status}`
-        );
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error('Alpaca API request failed:', error);
-      throw error;
-    }
-  }
-
-  async dataRequest(endpoint, options = {}) {
-    const url = `${this.dataURL}${endpoint}`;
-    
-    try {
-      const response = await fetch(url, {
-        headers: this.headers,
-        ...options,
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error('Alpaca Data API request failed:', error);
-      throw error;
-    }
+    // Initialize Alpaca client
+    this.alpaca = new Alpaca({
+      keyId: process.env.REACT_APP_ALPACA_API_KEY,
+      secretKey: process.env.REACT_APP_ALPACA_SECRET_KEY,
+      paper: true, // Use paper trading
+      usePolygon: false, // Set to true if you have Polygon subscription
+    });
   }
 
   // Account Endpoints
   async getAccount() {
-    return await this.request('/v2/account');
+    return await this.alpaca.getAccount();
   }
 
   async getAccountConfig() {
-    return await this.request('/v2/account/configurations');
+    return await this.alpaca.getAccountConfigurations();
   }
 
   async updateAccountConfig(config) {
-    return await this.request('/v2/account/configurations', {
-      method: 'PATCH',
-      body: JSON.stringify(config),
-    });
+    return await this.alpaca.updateAccountConfigurations(config);
   }
 
   // Orders Endpoints
   async getOrders(params = {}) {
-    const queryParams = new URLSearchParams(params).toString();
-    const endpoint = `/v2/orders${queryParams ? `?${queryParams}` : ''}`;
-    return await this.request(endpoint);
+    return await this.alpaca.getOrders(params);
   }
 
   async getOrderById(orderId) {
-    return await this.request(`/v2/orders/${orderId}`);
+    return await this.alpaca.getOrder(orderId);
   }
 
   async getOrderByClientId(clientOrderId) {
-    const queryParams = new URLSearchParams({ client_order_id: clientOrderId });
-    return await this.request(`/v2/orders:by_client_order_id?${queryParams}`);
+    return await this.alpaca.getOrderByClientOrderId(clientOrderId);
   }
 
   async placeOrder(orderData) {
-    return await this.request('/v2/orders', {
-      method: 'POST',
-      body: JSON.stringify(orderData),
-    });
+    return await this.alpaca.createOrder(orderData);
   }
 
   async cancelOrder(orderId) {
-    return await this.request(`/v2/orders/${orderId}`, {
-      method: 'DELETE',
-    });
+    return await this.alpaca.cancelOrder(orderId);
   }
 
   async cancelAllOrders() {
-    return await this.request('/v2/orders', {
-      method: 'DELETE',
-    });
+    return await this.alpaca.cancelAllOrders();
   }
 
   // Positions Endpoints
   async getPositions() {
-    return await this.request('/v2/positions');
+    return await this.alpaca.getPositions();
   }
 
   async getPosition(symbol) {
-    return await this.request(`/v2/positions/${symbol}`);
+    return await this.alpaca.getPosition(symbol);
   }
 
   async closePosition(symbol) {
-    return await this.request(`/v2/positions/${symbol}`, {
-      method: 'DELETE',
-    });
+    return await this.alpaca.closePosition(symbol);
   }
 
   async closeAllPositions() {
-    return await this.request('/v2/positions', {
-      method: 'DELETE',
-    });
+    return await this.alpaca.closeAllPositions();
   }
 
   // Assets Endpoints
   async getAssets(params = {}) {
-    const queryParams = new URLSearchParams(params).toString();
-    const endpoint = `/v2/assets${queryParams ? `?${queryParams}` : ''}`;
-    return await this.request(endpoint);
+    return await this.alpaca.getAssets(params);
   }
 
   async getAsset(symbol) {
-    return await this.request(`/v2/assets/${symbol}`);
+    return await this.alpaca.getAsset(symbol);
   }
 
   // Market Data Endpoints
   async getBars(symbols, timeframe = '1Day', params = {}) {
-    const queryParams = new URLSearchParams({
-      symbols: Array.isArray(symbols) ? symbols.join(',') : symbols,
-      timeframe,
-      ...params,
-    }).toString();
-    
-    return await this.dataRequest(`/v2/stocks/bars?${queryParams}`);
+    return await this.alpaca.getBarsV2(
+      symbols,
+      {
+        timeframe,
+        ...params
+      }
+    );
   }
 
   async getLatestTrade(symbol) {
-    return await this.dataRequest(`/v2/stocks/${symbol}/trades/latest`);
+    return await this.alpaca.getLatestTrade(symbol);
   }
 
   async getLatestQuote(symbol) {
-    return await this.dataRequest(`/v2/stocks/${symbol}/quotes/latest`);
+    return await this.alpaca.getLatestQuote(symbol);
   }
 
   async getSnapshot(symbol) {
-    return await this.dataRequest(`/v2/stocks/${symbol}/snapshot`);
+    return await this.alpaca.getSnapshot(symbol);
   }
 
   // Watchlist Endpoints
   async getWatchlists() {
-    return await this.request('/v2/watchlists');
+    return await this.alpaca.getWatchlists();
   }
 
   async getWatchlist(watchlistId) {
-    return await this.request(`/v2/watchlists/${watchlistId}`);
+    return await this.alpaca.getWatchlist(watchlistId);
   }
 
   async createWatchlist(watchlistData) {
-    return await this.request('/v2/watchlists', {
-      method: 'POST',
-      body: JSON.stringify(watchlistData),
-    });
+    return await this.alpaca.createWatchlist(watchlistData);
   }
 
   async updateWatchlist(watchlistId, watchlistData) {
-    return await this.request(`/v2/watchlists/${watchlistId}`, {
-      method: 'PUT',
-      body: JSON.stringify(watchlistData),
-    });
+    return await this.alpaca.updateWatchlist(watchlistId, watchlistData);
   }
 
   async deleteWatchlist(watchlistId) {
-    return await this.request(`/v2/watchlists/${watchlistId}`, {
-      method: 'DELETE',
-    });
+    return await this.alpaca.deleteWatchlist(watchlistId);
   }
 
   // Calendar Endpoints
   async getCalendar(params = {}) {
-    const queryParams = new URLSearchParams(params).toString();
-    const endpoint = `/v2/calendar${queryParams ? `?${queryParams}` : ''}`;
-    return await this.request(endpoint);
+    return await this.alpaca.getCalendar(params);
   }
 
   // Clock Endpoint
   async getClock() {
-    return await this.request('/v2/clock');
+    return await this.alpaca.getClock();
+  }
+
+  // Streaming Data
+  async connectToStream(callbacks = {}) {
+    const {
+      onTrade = () => {},
+      onQuote = () => {},
+      onBar = () => {},
+      onError = () => {},
+      onConnected = () => {},
+    } = callbacks;
+
+    this.alpaca.data_stream.onConnect(() => {
+      console.log('Connected to Alpaca stream');
+      onConnected();
+    });
+
+    this.alpaca.data_stream.onError((error) => {
+      console.error('Stream error:', error);
+      onError(error);
+    });
+
+    this.alpaca.data_stream.onStockTrade((trade) => {
+      onTrade(trade);
+    });
+
+    this.alpaca.data_stream.onStockQuote((quote) => {
+      onQuote(quote);
+    });
+
+    this.alpaca.data_stream.onStockBar((bar) => {
+      onBar(bar);
+    });
+
+    this.alpaca.data_stream.connect();
+  }
+
+  async subscribeToSymbols(symbols) {
+    if (this.alpaca.data_stream.connected) {
+      this.alpaca.data_stream.subscribe(symbols);
+    }
+  }
+
+  async unsubscribeFromSymbols(symbols) {
+    if (this.alpaca.data_stream.connected) {
+      this.alpaca.data_stream.unsubscribe(symbols);
+    }
+  }
+
+  async disconnectStream() {
+    this.alpaca.data_stream.disconnect();
+  }
+
+  // Trading Stream (for order updates)
+  async connectToTradingStream(callbacks = {}) {
+    const {
+      onOrderUpdate = () => {},
+      onAccountUpdate = () => {},
+      onError = () => {},
+      onConnected = () => {},
+    } = callbacks;
+
+    this.alpaca.trade_stream.onConnect(() => {
+      console.log('Connected to Alpaca trading stream');
+      onConnected();
+    });
+
+    this.alpaca.trade_stream.onError((error) => {
+      console.error('Trading stream error:', error);
+      onError(error);
+    });
+
+    this.alpaca.trade_stream.onOrderUpdate((order) => {
+      onOrderUpdate(order);
+    });
+
+    this.alpaca.trade_stream.onAccountUpdate((account) => {
+      onAccountUpdate(account);
+    });
+
+    this.alpaca.trade_stream.connect();
+  }
+
+  async disconnectTradingStream() {
+    this.alpaca.trade_stream.disconnect();
   }
 }
 

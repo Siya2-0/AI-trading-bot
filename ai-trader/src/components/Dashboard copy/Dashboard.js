@@ -13,6 +13,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { FiBell, FiMail } from 'react-icons/fi';
 import './Dashboard.css';
+import { useAlpaca } from '../../hooks/useAlpaca';
+import { createMarketOrder, ORDER_SIDES } from '../../services/orderHelpers';
 
 // Register ChartJS components
 ChartJS.register(
@@ -43,6 +45,34 @@ const Dashboard = ({ isCollapsed } ) => {
   const [news, setNews] = useState([]);
   const [unreadMessages, setUnreadMessages] = useState(3);
   const [unreadNotifications, setUnreadNotifications] = useState(2);
+
+  const {
+    loading,
+    error,
+    data,
+    getAccount,
+    getPositions,
+    getOrders,
+    placeOrder,
+    getBars,
+  } = useAlpaca();
+
+   const [symbol, setSymbol] = useState('AAPL');
+   const [accountInfo, setAccountInfo] = useState(null);
+  const loadAccountData = async () => {
+    try {
+      const [account] = await Promise.all([
+        getAccount(),
+        //getPositions(),
+      ]);
+      setAccountInfo(account);
+      console.log('Account Info:', account);
+      //setPositions(positions);
+    } catch (err) {
+      console.error('Failed to load account data:', err);
+    }
+  };
+  
   const user = {
     name: 'David Smith',
     profilePic: 'https://randomuser.me/api/portraits/men/32.jpg',
@@ -70,6 +100,11 @@ const Dashboard = ({ isCollapsed } ) => {
     month: 87,
     year: 412,
   };
+
+  // Load account data on mount
+  useEffect(() => {
+    loadAccountData();
+  }, []);
 
   // Simulate live data updates
   useEffect(() => {

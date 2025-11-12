@@ -24,30 +24,30 @@ export const useAlpaca = () => {
 
   // Account methods
   const getAccount = useCallback(() => 
-    executeRequest(alpacaApi.getAccount), [executeRequest]);
+    executeRequest(() => alpacaApi.getAccount()), [executeRequest]);
 
   const getPositions = useCallback(() => 
-    executeRequest(alpacaApi.getPositions), [executeRequest]);
+    executeRequest(() => alpacaApi.getPositions()), [executeRequest]);
 
   const getOrders = useCallback((params) => 
-    executeRequest(alpacaApi.getOrders, params), [executeRequest]);
+    executeRequest(() => alpacaApi.getOrders(params)), [executeRequest]);
 
   // Trading methods
   const placeOrder = useCallback((orderData) => 
-    executeRequest(alpacaApi.placeOrder, orderData), [executeRequest]);
+    executeRequest(() => alpacaApi.placeOrder(orderData)), [executeRequest]);
 
   const cancelOrder = useCallback((orderId) => 
-    executeRequest(alpacaApi.cancelOrder, orderId), [executeRequest]);
+    executeRequest(() => alpacaApi.cancelOrder(orderId)), [executeRequest]);
 
   const closePosition = useCallback((symbol) => 
-    executeRequest(alpacaApi.closePosition, symbol), [executeRequest]);
+    executeRequest(() => alpacaApi.closePosition(symbol)), [executeRequest]);
 
   // Market data methods
   const getBars = useCallback((symbols, timeframe, params) => 
-    executeRequest(alpacaApi.getBars, symbols, timeframe, params), [executeRequest]);
+    executeRequest(() => alpacaApi.getBars(symbols, timeframe, params)), [executeRequest]);
 
   const getLatestTrade = useCallback((symbol) => 
-    executeRequest(alpacaApi.getLatestTrade, symbol), [executeRequest]);
+    executeRequest(() => alpacaApi.getLatestTrade(symbol)), [executeRequest]);
 
   return {
     loading,
