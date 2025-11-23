@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { FiBell, FiMail } from 'react-icons/fi';
 import './Dashboard.css';
 import AccountCard from '../AccountCard/AccountCard';
+import BrokerCard from '../BrokerCard/BrokerCard';
 //import alpacaApi from '../../services/Api.js';
 // Register ChartJS components
 ChartJS.register(
@@ -198,7 +199,7 @@ const Dashboard = ({ isCollapsed } ) => {
         </div> */}
         <AccountCard />
         {/* Broker Info Card */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        {/* <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold text-gray-700 mb-4">Broker Information</h2>
           <div className="flex items-center">
             <img 
@@ -217,7 +218,8 @@ const Dashboard = ({ isCollapsed } ) => {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
+        <BrokerCard />
 
         {/* Active Trades Card */}
         <div className="bg-white p-6 rounded-lg shadow-md">
