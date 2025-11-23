@@ -13,8 +13,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { FiBell, FiMail } from 'react-icons/fi';
 import './Dashboard.css';
-import { useAlpaca } from '../../hooks/useAlpaca';
-import { createMarketOrder, ORDER_SIDES } from '../../services/orderHelpers';
+import AccountCard from '../AccountCard/AccountCard';
 //import alpacaApi from '../../services/Api.js';
 // Register ChartJS components
 ChartJS.register(
@@ -46,38 +45,22 @@ const Dashboard = ({ isCollapsed } ) => {
   const [unreadMessages, setUnreadMessages] = useState(3);
   const [unreadNotifications, setUnreadNotifications] = useState(2);
 
-  const {
-    loading,
-    error,
-    data,
-    realTimeData,
-    //streamConnected,
-    //tradingStreamConnected,
-    getAccount,
-    getPositions,
-    getOrders,
-    placeOrder,
-    //connectToStream,
-    //connectToTradingStream,
-    //subscribeToSymbols,
-    //disconnectStream,
-  } = useAlpaca();
 
-   const [symbol, setSymbol] = useState('AAPL');
-   const [accountInfo, setAccountInfo] = useState(null);
-  const loadAccountData = async () => {
-    try {
-      const [account] = await Promise.all([
-        getAccount(),
-        //getPositions(),
-      ]);
-      setAccountInfo(account);
-      console.log('Account Info:', account);
-      //setPositions(positions);
-    } catch (err) {
-      console.error('Failed to load account data:', err);
-    }
-  };
+  //  const [symbol, setSymbol] = useState('AAPL');
+  //  const [accountInfo, setAccountInfo] = useState(null);
+  // const loadAccountData = async () => {
+  //   try {
+  //     const [account] = await Promise.all([
+  //       getAccount(),
+  //       //getPositions(),
+  //     ]);
+  //     setAccountInfo(account);
+  //     console.log('Account Info:', account);
+  //     //setPositions(positions);
+  //   } catch (err) {
+  //     console.error('Failed to load account data:', err);
+  //   }
+  // };
   
   const user = {
     name: 'David Smith',
@@ -108,9 +91,9 @@ const Dashboard = ({ isCollapsed } ) => {
   };
 
   // Load account data on mount
-  useEffect(() => {
-    loadAccountData();
-  }, []);
+  // useEffect(() => {
+  //   loadAccountData();
+  // }, [accountInfo]);
 
   // Simulate live data updates
   useEffect(() => {
@@ -205,15 +188,15 @@ const Dashboard = ({ isCollapsed } ) => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Balance Card */}
-        <div 
+        {/* <div 
           className="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-shadow"
           onClick={() => navigate('/performance')}
         >
           <h2 className="text-xl font-semibold text-gray-700 mb-2">Account Balance</h2>
           <p className="text-3xl font-bold text-green-600">${balance.toLocaleString()}</p>
           <p className="text-sm text-gray-500 mt-2">Click to view details</p>
-        </div>
-
+        </div> */}
+        <AccountCard />
         {/* Broker Info Card */}
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold text-gray-700 mb-4">Broker Information</h2>
