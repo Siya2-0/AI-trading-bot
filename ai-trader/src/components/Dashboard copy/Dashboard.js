@@ -15,7 +15,7 @@ import { FiBell, FiMail } from 'react-icons/fi';
 import './Dashboard.css';
 import { useAlpaca } from '../../hooks/useAlpaca';
 import { createMarketOrder, ORDER_SIDES } from '../../services/orderHelpers';
-
+//import alpacaApi from '../../services/Api.js';
 // Register ChartJS components
 ChartJS.register(
   CategoryScale,
@@ -50,11 +50,17 @@ const Dashboard = ({ isCollapsed } ) => {
     loading,
     error,
     data,
+    realTimeData,
+    //streamConnected,
+    //tradingStreamConnected,
     getAccount,
     getPositions,
     getOrders,
     placeOrder,
-    getBars,
+    //connectToStream,
+    //connectToTradingStream,
+    //subscribeToSymbols,
+    //disconnectStream,
   } = useAlpaca();
 
    const [symbol, setSymbol] = useState('AAPL');
