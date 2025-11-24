@@ -16,6 +16,7 @@ import './Dashboard.css';
 import AccountCard from '../AccountCard/AccountCard';
 import BrokerCard from '../BrokerCard/BrokerCard';
 import StockCard from '../StockCard/StockCard';
+import PriceCard from '../PriceCard/PriceCard';
 //import alpacaApi from '../../services/Api.js';
 // Register ChartJS components
 ChartJS.register(
@@ -253,7 +254,7 @@ const Dashboard = ({ isCollapsed } ) => {
         </div> */}
         
         {/* Stock Chart - Takes 2 columns on larger screens */}
-        <div className="bg-white p-6 rounded-lg shadow-md lg:col-span-2">
+        {/* <div className="bg-white p-6 rounded-lg shadow-md lg:col-span-2">
           <h2 className="text-xl font-semibold text-gray-700 mb-4">Live Stock Chart</h2>
           <div className="h-64">
             <Line 
@@ -274,9 +275,11 @@ const Dashboard = ({ isCollapsed } ) => {
               }}
             />
           </div>
-        </div>
+        </div> */}
 
         <StockCard />
+
+        <PriceCard />
 
         {/* News Card */}
         <div className="bg-white p-6 rounded-lg shadow-md lg:col-span-1">
