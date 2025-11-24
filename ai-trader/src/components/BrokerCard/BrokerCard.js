@@ -6,7 +6,7 @@ function BrokerCard() {
         name: "Alpaca",
         image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.TsOzAihG3KPpuWl6i1ucJwHaDt%3Fpid%3DApi&f=1&ipt=b29a8cd88613642aa0dad3ac67a4f223fa38ad7e915dd70664abe6aac7dd3be8&ipo=images",
         website: "https://alpaca.markets",
-       // description: "Commission-free API trading platform for developers",
+        description: "Commission-free API trading platform for developers",
         established: "2015",
         regulation: "FINRA/SIPC Member",
         rating: 4.5,

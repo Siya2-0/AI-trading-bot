@@ -15,6 +15,7 @@ import { FiBell, FiMail } from 'react-icons/fi';
 import './Dashboard.css';
 import AccountCard from '../AccountCard/AccountCard';
 import BrokerCard from '../BrokerCard/BrokerCard';
+import StockCard from '../StockCard/StockCard';
 //import alpacaApi from '../../services/Api.js';
 // Register ChartJS components
 ChartJS.register(
@@ -222,14 +223,14 @@ const Dashboard = ({ isCollapsed } ) => {
         <BrokerCard />
 
         {/* Active Trades Card */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        {/* <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold text-gray-700 mb-2">Active Trades</h2>
           <p className="text-3xl font-bold text-blue-600">{activeTrades}</p>
           <p className="text-sm text-gray-500 mt-2">Currently running</p>
-        </div>
+        </div> */}
 
         {/* Closed Trades Card */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        {/* <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold text-gray-700 mb-4">Closed Trades</h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -249,8 +250,8 @@ const Dashboard = ({ isCollapsed } ) => {
               <p className="text-xl font-semibold">{closedTrades.year}</p>
             </div>
           </div>
-        </div>
-
+        </div> */}
+        
         {/* Stock Chart - Takes 2 columns on larger screens */}
         <div className="bg-white p-6 rounded-lg shadow-md lg:col-span-2">
           <h2 className="text-xl font-semibold text-gray-700 mb-4">Live Stock Chart</h2>
@@ -274,6 +275,8 @@ const Dashboard = ({ isCollapsed } ) => {
             />
           </div>
         </div>
+
+        <StockCard />
 
         {/* News Card */}
         <div className="bg-white p-6 rounded-lg shadow-md lg:col-span-1">

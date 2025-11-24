@@ -35,6 +35,10 @@ export const useAlpaca = () => {
   const getOrders = useCallback((params) => 
     executeRequest(alpacaApi.getOrders, params), [executeRequest]);
 
+  //Assets methods
+  const getAssets = useCallback((params) => 
+    executeRequest(alpacaApi.getAssets, params), [executeRequest]);
+
   // Trading methods
   const placeOrder = useCallback((orderData) => 
     executeRequest(alpacaApi.placeOrder, orderData), [executeRequest]);
@@ -51,6 +55,8 @@ export const useAlpaca = () => {
 
   const getLatestTrade = useCallback((symbol) => 
     executeRequest(alpacaApi.getLatestTrade, symbol), [executeRequest]);
+
+  //
 
   // Streaming methods
   // const connectToStream = useCallback((callbacks = {}) => {
@@ -147,6 +153,7 @@ export const useAlpaca = () => {
     closePosition,
     getBars,
     getLatestTrade,
+    getAssets,
     // connectToStream,
     // connectToTradingStream,
     //subscribeToSymbols,
