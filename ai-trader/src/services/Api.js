@@ -1,6 +1,7 @@
 // API.js
 const BASE_URL = process.env.REACT_APP_ALPACA_BASE_URL;
 const MARKET_URL = process.env.REACT_APP_ALPACA_DATA_URL;
+const NEWS_URL = process.env.REACT_APP_ALPACA_NEWS_URL;
 
 // Default headers for Alpaca API
 const getDefaultHeaders = () => ({
@@ -48,6 +49,24 @@ const alpacaMarketFetch = async (endpoint, options = {}) => {
     throw error;
   }
 };
+const alpacaNewsFetch = async (endpoint, options = {}) => {
+  try {
+   
+    const response = await fetch(`${NEWS_URL}${endpoint}`, {
+      headers: getDefaultHeaders(),
+      ...options
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.json()}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('MARKET API call failed:', error);
+    throw error;
+  }
+}
 // Specific API functions
 export const alpacaAPI = {
   // Account endpoints
@@ -82,6 +101,11 @@ export const alpacaAPI = {
   closePosition: (symbol) => alpacaFetch(`/positions/${symbol}`, {
     method: 'DELETE'
   }),
+  //NEWS endpoints
+  getNews: (params = {}) => {
+    const queryParams = new URLSearchParams(params).toString();
+    return alpacaNewsFetch(`/news?${queryParams}`);
+  },
 
   // Assets endpoints
   getAssets: (params = {}) => {

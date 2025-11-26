@@ -59,7 +59,9 @@ export const useAlpaca = () => {
   const getLatestTrade = useCallback((symbol) => 
     executeRequest(alpacaApi.getLatestTrade, symbol), [executeRequest]);
 
-  //
+  //News methods
+  const getNews = useCallback((params) => 
+    executeRequest(alpacaApi.getNews, params), [executeRequest]);
 
  
 
@@ -80,6 +82,7 @@ export const useAlpaca = () => {
     getHistoricalBars,
     getLatestTrade,
     getAssets,
+    getNews,
     // connectToStream,
     // connectToTradingStream,
     //subscribeToSymbols,
