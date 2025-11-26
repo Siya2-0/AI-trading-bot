@@ -41,7 +41,7 @@ const StockCard = ({ onStockSelect, selectedStock }) => {
         asset_class: 'us_equity'
       });
 
-      console.log('Fetched assets from Alpaca:', assets);
+   
       // Filter for active, tradable US equities and exclude OTC stocks
       const activeStocks = assets.filter(asset => 
         asset.status === 'active' && 

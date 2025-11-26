@@ -17,7 +17,7 @@ import AccountCard from '../AccountCard/AccountCard';
 import BrokerCard from '../BrokerCard/BrokerCard';
 import StockCard from '../StockCard/StockCard';
 import PriceCard from '../PriceCard/PriceCard';
-//import alpacaApi from '../../services/Api.js';
+import {useAlpaca} from '../../hooks/useAlpaca.js';
 // Register ChartJS components
 ChartJS.register(
   CategoryScale,
@@ -31,39 +31,32 @@ ChartJS.register(
 
 const Dashboard = ({ isCollapsed } ) => {
   const navigate = useNavigate();
-  const [activeTrades, setActiveTrades] = useState(12);
-  const [balance, setBalance] = useState(45287.63);
-  const [stockData, setStockData] = useState({
-    labels: [],
-    datasets: [
-      {
-        label: 'Stock Price',
-        data: [],
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1,
-      },
-    ],
-  });
+  const [selectedStock, setSelectedStock] = useState(null);
+  const [priceData, setPriceData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const { getHistoricalBars } = useAlpaca();
+
   const [news, setNews] = useState([]);
   const [unreadMessages, setUnreadMessages] = useState(3);
   const [unreadNotifications, setUnreadNotifications] = useState(2);
+  const handleStockSelect = async (stock) => {
+    setSelectedStock(stock);
+    setLoading(true);
+    try {
+      // Fetch historical data for the selected stock
+      const data = await getHistoricalBars(stock.symbol, '5Min');
+      setPriceData(data);
+      //console.log('Fetched price data:', data);
+      
+    } catch (error) {
+      console.error('Error fetching stock data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
-  //  const [symbol, setSymbol] = useState('AAPL');
-  //  const [accountInfo, setAccountInfo] = useState(null);
-  // const loadAccountData = async () => {
-  //   try {
-  //     const [account] = await Promise.all([
-  //       getAccount(),
-  //       //getPositions(),
-  //     ]);
-  //     setAccountInfo(account);
-  //     console.log('Account Info:', account);
-  //     //setPositions(positions);
-  //   } catch (err) {
-  //     console.error('Failed to load account data:', err);
-  //   }
-  // };
+  
   
   const user = {
     name: 'David Smith',
@@ -78,75 +71,58 @@ const Dashboard = ({ isCollapsed } ) => {
     return 'Good Evening';
   };
 
-  // Mock broker data
-  const brokerInfo = {
-    name: 'Quantum Trading',
-    image: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%2Fid%2FOIP.sXwU0WepPeYXbkZKX4Ek6QHaGE%3Fpid%3DApi&f=1&ipt=14f195a15a502b41b58ad678575b3c1846d23c12015d4eb8f49f4aec6cd1b173&ipo=images',
-    website: 'https://quantumtrading.example.com',
-  };
 
-  // Mock closed trades data
-  const closedTrades = {
-    today: 5,
-    week: 23,
-    month: 87,
-    year: 412,
-  };
 
-  // Load account data on mount
-  // useEffect(() => {
-  //   loadAccountData();
-  // }, [accountInfo]);
 
   // Simulate live data updates
-  useEffect(() => {
-    // Update stock chart data
-    const interval = setInterval(() => {
-      const now = new Date();
-      const time = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-      const newPrice = 150 + Math.random() * 10 - 5; // Random price fluctuation
+  // useEffect(() => {
+  //   // Update stock chart data
+  //   const interval = setInterval(() => {
+  //     const now = new Date();
+  //     const time = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+  //     const newPrice = 150 + Math.random() * 10 - 5; // Random price fluctuation
 
-      setStockData(prev => {
-        const newLabels = [...prev.labels, time].slice(-20);
-        const newData = [...prev.datasets[0].data, newPrice].slice(-20);
+  //     setStockData(prev => {
+  //       const newLabels = [...prev.labels, time].slice(-20);
+  //       const newData = [...prev.datasets[0].data, newPrice].slice(-20);
         
-        return {
-          labels: newLabels,
-          datasets: [
-            {
-              ...prev.datasets[0],
-              data: newData,
-            },
-          ],
-        };
-      });
-    }, 3000);
+  //       return {
+  //         labels: newLabels,
+  //         datasets: [
+  //           {
+  //             ...prev.datasets[0],
+  //             data: newData,
+  //           },
+  //         ],
+  //       };
+  //     });
+  //   }, 3000);
 
     // Fetch news (mock)
-    const newsItems = [
-      {
-        id: 1,
-        title: 'Tech Stocks Rally After Fed Announcement',
-        source: 'Financial Times',
-        timestamp: '2 hours ago',
-      },
-      {
-        id: 2,
-        title: 'AI Trading Algorithms Outperform Humans in Q3',
-        source: 'Wall Street Journal',
-        timestamp: '5 hours ago',
-      },
-      {
-        id: 3,
-        title: 'New Regulations for Algorithmic Trading Expected',
-        source: 'Bloomberg',
-        timestamp: '1 day ago',
-      },
-    ];
-    setNews(newsItems);
+  //   const newsItems = [
+  //     {
+  //       id: 1,
+  //       title: 'Tech Stocks Rally After Fed Announcement',
+  //       source: 'Financial Times',
+  //       timestamp: '2 hours ago',
+  //     },
+  //     {
+  //       id: 2,
+  //       title: 'AI Trading Algorithms Outperform Humans in Q3',
+  //       source: 'Wall Street Journal',
+  //       timestamp: '5 hours ago',
+  //     },
+  //     {
+  //       id: 3,
+  //       title: 'New Regulations for Algorithmic Trading Expected',
+  //       source: 'Bloomberg',
+  //       timestamp: '1 day ago',
+  //     },
+  //   ];
+  //   setNews(newsItems);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <div className={`dashboard-container ${isCollapsed ? "collapsed" : ""} p-6 bg-gray-100 min-h-auto`}>
@@ -277,9 +253,16 @@ const Dashboard = ({ isCollapsed } ) => {
           </div>
         </div> */}
 
-        <StockCard />
+         <StockCard 
+              onStockSelect={handleStockSelect}
+              selectedStock={selectedStock}
+          />
 
-        <PriceCard />
+        <PriceCard 
+              stock={selectedStock}
+              priceData={priceData}
+              loading={loading}
+            />
 
         {/* News Card */}
         <div className="bg-white p-6 rounded-lg shadow-md lg:col-span-1">

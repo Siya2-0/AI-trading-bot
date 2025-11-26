@@ -5,39 +5,84 @@ import {
 } from 'recharts';
 
 const PriceCard = ({ stock, priceData, loading }) => {
-  const [chartType, setChartType] = useState('candlestick'); // 'candlestick' or 'line'
-
+const [chartType, setChartType] = useState('candlestick'); // 'candlestick' or 'line'
+  
   // Calculate current price and changes
-  const currentPriceInfo = useMemo(() => {
-    if (!priceData || priceData.length === 0) return null;
-    
-    const latest = priceData[priceData.length - 1];
-    const previous = priceData[priceData.length - 2];
-    const change = latest.close - previous.close;
-    const changePercent = (change / previous.close) * 100;
-    
-    return {
-      price: latest.close,
-      change,
-      changePercent,
-      high: latest.high,
-      low: latest.low,
-      volume: latest.volume
-    };
-  }, [priceData]);
+const currentPriceInfo = useMemo(() => {
+  // Check if we have the required data structure
+  if (!priceData?.bars?.[stock?.symbol]?.length) {
+    console.log('Missing or invalid price data');
+    return null;
+  }
 
-  // Format data for different chart types
-  const chartData = useMemo(() => {
-    if (!priceData) return [];
-    
-    return priceData.map(item => ({
-      ...item,
-      date: new Date(item.time).toLocaleDateString(),
-      // For candlestick-like display in line chart
-      range: [item.low, item.high],
-      color: item.close >= item.open ? '#10b981' : '#ef4444'
-    }));
-  }, [priceData]);
+  console.log('Price Data in PriceCard:', priceData);
+  
+  // Extract the bars for the specific stock symbol
+  const symbolBars = priceData.bars[stock.symbol];
+  console.log('Processed Price Data in PriceCard:', symbolBars);
+  
+  // Check if we have at least 2 data points for change calculation
+  if (symbolBars.length < 2) {
+    console.log('Not enough data points for comparison');
+    // If only one data point, return just that without change calculations
+    const latest = symbolBars[symbolBars.length - 1];
+    return {
+      price: latest.c,      // Use 'c' for close price
+      change: 0,
+      changePercent: 0,
+      high: latest.h,       // Use 'h' for high
+      low: latest.l,        // Use 'l' for low
+      volume: latest.v      // Use 'v' for volume
+    };
+  }
+  
+  const latest = symbolBars[symbolBars.length - 1];
+  const previous = symbolBars[symbolBars.length - 2];
+  
+  console.log('Latest Price Point:', latest);
+  console.log('Previous Price Point:', previous);
+  
+  const change = latest.c - previous.c;
+  const changePercent = (change / previous.c) * 100;
+  
+  return {
+    price: latest.c,        // Use 'c' for close price
+    change,
+    changePercent,
+    high: latest.h,         // Use 'h' for high
+    low: latest.l,          // Use 'l' for low
+    volume: latest.v        // Use 'v' for volume
+  };
+}, [priceData, stock?.symbol]); // Add stock.symbol as dependency
+
+// Format data for different chart types
+const chartData = useMemo(() => {
+  // Check if we have the required data structure
+  if (!priceData?.bars?.[stock?.symbol]?.length) {
+    return [];
+  }
+
+  // Extract the bars for the specific stock symbol
+  const symbolBars = priceData.bars[stock.symbol];
+  
+  return symbolBars.map(bar => ({
+    // Spread the original bar properties
+    ...bar,
+    // Use 't' for timestamp and convert to formatted date
+    date: new Date(bar.t).toLocaleDateString(),
+    // For candlestick-like display - use 'l' for low and 'h' for high
+    range: [bar.l, bar.h],
+    // Use 'c' for close and 'o' for open to determine color
+    color: bar.c >= bar.o ? '#10b981' : '#ef4444',
+    // Add explicit properties for easier access in charts
+    open: bar.o,
+    high: bar.h, 
+    low: bar.l,
+    close: bar.c,
+    volume: bar.v,
+    time: bar.t
+  }));
+}, [priceData, stock?.symbol]); // Add stock.symbol as dependency
 
   if (!stock) {
     return (
@@ -59,11 +104,7 @@ const PriceCard = ({ stock, priceData, loading }) => {
       <div className="flex justify-between items-start mb-6">
         <div>
           <div className="flex items-center space-x-3 mb-2">
-            <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">
-                {stock.symbol.substring(0, 2)}
-              </span>
-            </div>
+            {/* removed  symbol */}
             <div>
               <h2 className="text-2xl font-bold text-gray-800">{stock.symbol}</h2>
               <p className="text-gray-600">{stock.name}</p>

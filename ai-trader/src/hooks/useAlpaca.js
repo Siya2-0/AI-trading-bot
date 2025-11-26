@@ -50,93 +50,18 @@ export const useAlpaca = () => {
     executeRequest(alpacaApi.closePosition, symbol), [executeRequest]);
 
   // Market data methods
-  const getBars = useCallback((symbols, timeframe, params) => 
-    executeRequest(alpacaApi.getBars, symbols, timeframe, params), [executeRequest]);
+  const getLatestBars = useCallback((symbols, timeframe, params) => 
+    executeRequest(alpacaApi.getLatestBars, symbols, timeframe, params), [executeRequest]);
+
+  const getHistoricalBars = useCallback((symbols, timeframe, params) => 
+    executeRequest(alpacaApi.getHistoricalBars, symbols, timeframe, params), [executeRequest]);
 
   const getLatestTrade = useCallback((symbol) => 
     executeRequest(alpacaApi.getLatestTrade, symbol), [executeRequest]);
 
   //
 
-  // Streaming methods
-  // const connectToStream = useCallback((callbacks = {}) => {
-  //   alpacaApi.connectToStream({
-  //     onTrade: (trade) => {
-  //       setRealTimeData(prev => ({
-  //         ...prev,
-  //         [trade.S]: { ...prev[trade.S], trade }
-  //       }));
-  //       callbacks.onTrade?.(trade);
-  //     },
-  //     onQuote: (quote) => {
-  //       setRealTimeData(prev => ({
-  //         ...prev,
-  //         [quote.S]: { ...prev[quote.S], quote }
-  //       }));
-  //       callbacks.onQuote?.(quote);
-  //     },
-  //     onBar: (bar) => {
-  //       setRealTimeData(prev => ({
-  //         ...prev,
-  //         [bar.S]: { ...prev[bar.S], bar }
-  //       }));
-  //       callbacks.onBar?.(bar);
-  //     },
-  //     onError: (error) => {
-  //       setError(error.message);
-  //       callbacks.onError?.(error);
-  //     },
-  //     onConnected: () => {
-  //       setStreamConnected(true);
-  //       callbacks.onConnected?.();
-  //     },
-  //   });
-  // }, []);
-
-  // const connectToTradingStream = useCallback((callbacks = {}) => {
-  //   alpacaApi.connectToTradingStream({
-  //     onOrderUpdate: (order) => {
-  //       callbacks.onOrderUpdate?.(order);
-  //     },
-  //     onAccountUpdate: (account) => {
-  //       callbacks.onAccountUpdate?.(account);
-  //     },
-  //     onError: (error) => {
-  //       setError(error.message);
-  //       callbacks.onError?.(error);
-  //     },
-  //     onConnected: () => {
-  //       setTradingStreamConnected(true);
-  //       callbacks.onConnected?.();
-  //     },
-  //   });
-  // }, []);
-
-  // const subscribeToSymbols = useCallback((symbols) => {
-  //   alpacaApi.subscribeToSymbols(symbols);
-  // }, []);
-
-  // const unsubscribeFromSymbols = useCallback((symbols) => {
-  //   alpacaApi.unsubscribeFromSymbols(symbols);
-  // }, []);
-
-  // const disconnectStream = useCallback(() => {
-  //   alpacaApi.disconnectStream();
-  //   setStreamConnected(false);
-  // }, []);
-
-  // const disconnectTradingStream = useCallback(() => {
-  //   alpacaApi.disconnectTradingStream();
-  //   setTradingStreamConnected(false);
-  // }, []);
-
-  // Cleanup on unmount
-  // useEffect(() => {
-  //   return () => {
-  //     disconnectStream();
-  //     disconnectTradingStream();
-  //   };
-  // }, [disconnectStream, disconnectTradingStream]);
+ 
 
   return {
     loading,
@@ -151,7 +76,8 @@ export const useAlpaca = () => {
     placeOrder,
     cancelOrder,
     closePosition,
-    getBars,
+    getLatestBars,
+    getHistoricalBars,
     getLatestTrade,
     getAssets,
     // connectToStream,
