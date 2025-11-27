@@ -2,4 +2,6 @@
 .env
 
 # Ignore the venv folder
-venv/
+.venv/
+
+__pycache__/
