@@ -1,0 +1,231 @@
+@import url('../../variables.css');
+
+
+
+/* Dashboard.css */
+
+.dashboard-container{
+  width: calc(100% - 20%);
+  transition: margin-left 0.3s ease;
+  overflow-y: auto;  /*Scrollable content if needed */
+  right:0;
+  top:0;
+  position: fixed;
+  margin:1px;
+  max-height: 100vh;
+  background-color: var(--color-tertiary);
+}
+.dashboard-container.collapsed {
+   /*margin-left: 40px;/* Adjusted margin for collapsed side menu */
+   width: calc(100% - 6%);
+   transition: margin-left 0.3s ease; 
+  }
+
+  
+  /* Full width on mobile */
+  @media (max-width: 768px) {
+    .dashboard-container {
+      margin-left: 0; /* No margin on mobile */
+      width: calc(100% - 10%);
+      z-index: -1;
+    }
+    .dashboard-container.collapsed{
+      width: calc(100% - 10%);
+      transition: margin-left 0.3s ease;
+    }
+    .profile-image{
+      width:5rem;
+     
+    
+    }
+ 
+  }
+
+/* .dashboard {
+  
+    background-color: var(--color-tertiary); 
+   
+    border-radius: 0rem; /* Rounded borders 
+
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+    height: 100vh; 
+    width: calc(100% - 20%);
+    overflow-y: auto; 
+    right:0;
+    top:0;
+    position: fixed;
+    margin:1px;
+
+    
+  } */
+  
+  /* Adjust margin when side menu is collapsed */
+  /* .dashboard.collapsed {
+   
+   width: calc(100% - 6%);
+   transition: margin-left 0.3s ease; 
+  } */
+
+  
+  /* Full width on mobile */
+  /* @media (max-width: 768px) {
+    .dashboard {
+      margin-left: 0;
+      width: calc(100% - 10%);
+    }
+ 
+  } */
+
+/* .profileImage{
+  width:60px;
+  height:60px;
+  border-radius: 50%;
+  margin-left: 20px;
+  border: 1px solid white;
+} */
+
+/* .user-detail-container{
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+  justify-content: space-between;
+} */
+/* .greeting-text p{
+  font-size: var(--font-size-xlarge);
+  font-weight: 700;
+  height:100%;
+  color:white;
+} */
+
+/* .profile {
+  display: flex;
+  
+  align-items: center;
+  height:100%
+} */
+
+
+/* .bell-icon{
+  font-size:1.6rem ;
+  color: white
+} */
+
+
+/* .dashboard-content {
+ 
+
+ 
+  display: flex;
+  flex-direction:row;
+  justify-content :space-evenly;
+
+  flex-wrap:wrap;
+} */
+/* 
+.broker-container
+{
+  height: 6rem;
+ 
+  width: 20rem; 
+  background-color: var(--color-secondary);
+  border-radius: var(--font-size-xlarge);
+  margin: 15px;
+
+  border: 1px solid var(--color-tertiary);
+
+} */
+
+/* .broker-container{
+background-image : url('../../assets/images/0_nof8z5IpZaQiG1-7.png');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+} */
+/* .balance-container{
+  height:6rem;
+  width: 20rem;
+  background-color: var(--color-secondary);
+  border-radius: var(--font-size-xlarge);
+  margin: 15px;
+  border: 1px solid var(--color-tertiary);
+  text-align:center
+
+} */
+/* .open-trades-container{
+  text-align:center;
+  height:6rem;
+  width: 10rem;
+  background-color: rgb(21, 135, 33);
+  border-radius: var(--font-size-xlarge);
+  margin: 15px;
+  border: 1px solid var(--color-tertiary);
+} */
+
+/* .closed-trades-container{
+  text-align:center;
+  height:6rem;
+  width: 10rem;
+  background-color: rgb(208, 22, 22);
+  border-radius: var(--font-size-xlarge);
+  margin: 15px;
+  border: 1px solid var(--color-tertiary);
+
+} */
+
+/* .chart-container,
+.news-events-container {
+  height: 20rem;
+  width: 20rem; 
+  background-color: var(--color-secondary);
+  border-radius: var(--font-size-xlarge);
+  margin: 15px;
+  border: 1px solid var(--color-tertiary);
+} */
+
+/*.wallet-container {
+  font-size: 2rem; /* Adjust the size as needed 
+  color: #333; /* Optional: Change the color 
+}*/
+/*.balance{
+  color: grey;
+  /*text-align:center;
+
+}*/
+/* .amount{
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin:0;
+  padding: 0;
+ /* text-align:center;
+  line-height: 1.5px;
+} */
+/* .title_trades_block{
+  color: white;
+}
+
+.amount_trades_block{
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin:0;
+  padding: 0;
+  line-height: 1.5px;
+  
+}
+
+
+@media (max-width: 768px) {
+  .stats-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+} */

@@ -1,0 +1,79 @@
+/* @import url('../../variables.css');
+
+.Temp-Trade-Container{
+    width:90%;
+    background-color: var(--color-primary);
+    height: 100vh;
+}
+
+.stock-header{
+    background-color: var(--color-secondary) ;
+}
+
+.stock-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.stock-name {
+  flex: 0 0 auto;     
+  font-weight: bold;
+}
+
+.stock-status-buy {
+  margin-left: 1rem;   
+  color: green;       
+}
+
+.stock-status-sell {
+  margin-left: 1rem;   
+  color: red;       
+}
+
+.stock-losing {
+  margin-left: auto;   
+  font-weight: bold;
+  color: red;      
+  margin-right: 1rem; 
+}
+
+.stock-winning {
+  margin-left: auto;  
+  font-weight: bold;
+  color: green;      
+  margin-right: 1rem;
+}
+
+.acc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+  /* color:rgb(117, 117, 117); 
+  color:rgb(226, 11, 11);
+  z-index: 10;
+}
+
+.acc-left {
+  flex: 0 0 auto;
+  text-align: left;
+}
+
+.acc-center {
+  flex: 1  1 auto; 
+  text-align:right; 
+  margin-right: 40%; 
+  
+}
+
+.acc-right {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.trade-accordion{
+  margin: 5px; 
+  
+
+} */ 
