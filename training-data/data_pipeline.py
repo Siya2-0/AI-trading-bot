@@ -148,7 +148,84 @@ def plot_loss_curve(losses, output_file='training_loss.png'):
     plt.close()
     print(f"Loss curve saved to: {output_file}")
 
-def train_and_test_model(training_file, testing_file, epochs=2500, learning_rate=0.01):
+def predict_decision(model, scaler, open_price, high_price, low_price, close_price, volume):
+    """
+    Predict trading decision for given OHLCV data
+    """
+    # Create input array
+    input_data = np.array([[open_price, high_price, low_price, close_price, volume]])
+    
+    # Standardize using the scaler
+    input_scaled = scaler.transform(input_data)
+    
+    # Get prediction
+    output = model.forward(input_scaled[0])
+    
+    # Decode prediction
+    decisions = ['buy', 'sell', 'hold']
+    decision_idx = np.argmax(output)
+    decision = decisions[decision_idx]
+    confidence = output[decision_idx]
+    
+    return decision, confidence, output
+
+def interactive_prediction_mode(model, scaler):
+    """
+    Interactive mode for making predictions with user input
+    """
+    print("\n" + "="*60)
+    print("=== Interactive Prediction Mode ===")
+    print("="*60)
+    print("Enter market data to get trading decision.")
+    print("Type 'quit' or 'exit' to stop.\n")
+    
+    while True:
+        try:
+            # Get user input
+            user_input = input("\nEnter data (Datetime,Open,High,Low,Close,Volume): ").strip()
+            
+            if user_input.lower() in ['quit', 'exit', 'q']:
+                print("\nExiting prediction mode...")
+                break
+            
+            # Parse input
+            parts = user_input.split(',')
+            if len(parts) != 6:
+                print("Error: Please enter exactly 6 values separated by commas.")
+                print("Format: Datetime,Open,High,Low,Close,Volume")
+                continue
+            
+            datetime_str = parts[0].strip()
+            open_price = float(parts[1].strip())
+            high_price = float(parts[2].strip())
+            low_price = float(parts[3].strip())
+            close_price = float(parts[4].strip())
+            volume = float(parts[5].strip())
+            
+            # Get prediction
+            decision, confidence, probabilities = predict_decision(
+                model, scaler, open_price, high_price, low_price, close_price, volume
+            )
+            
+            # Display results
+            print("\n" + "-"*60)
+            print(f"Datetime: {datetime_str}")
+            print(f"Input: Open={open_price}, High={high_price}, Low={low_price}, Close={close_price}, Volume={volume}")
+            print(f"\n🎯 Decision: {decision.upper()}")
+            print(f"Confidence: {confidence:.2%}")
+            print(f"\nProbabilities:")
+            print(f"  Buy:  {probabilities[0]:.2%}")
+            print(f"  Sell: {probabilities[1]:.2%}")
+            print(f"  Hold: {probabilities[2]:.2%}")
+            print("-"*60)
+            
+        except ValueError as e:
+            print(f"Error: Invalid input. Please enter numeric values for OHLCV data.")
+            print(f"Details: {str(e)}")
+        except Exception as e:
+            print(f"Error: {str(e)}")
+
+def train_and_test_model(training_file, testing_file, epochs=2500, learning_rate=0.01, interactive=False):
     """
     Train and test the neural network model
     """
@@ -190,6 +267,10 @@ def train_and_test_model(training_file, testing_file, epochs=2500, learning_rate
         print("\nTest Classification Report:")
         print(test_report)
         
+        # Enter interactive mode if requested
+        if interactive:
+            interactive_prediction_mode(model, scaler)
+        
         return True
         
     except Exception as e:
@@ -219,6 +300,8 @@ def main():
                       help='Learning rate for training (default: 0.01)')
     parser.add_argument('--train_only', action='store_true',
                       help='Only train and test (skip data pipeline)')
+    parser.add_argument('--interactive', action='store_true',
+                      help='Enter interactive prediction mode after training')
     
     args = parser.parse_args()
     
@@ -245,7 +328,8 @@ def main():
             training_file=training_file,
             testing_file=testing_file,
             epochs=args.epochs,
-            learning_rate=args.learning_rate
+            learning_rate=args.learning_rate,
+            interactive=args.interactive
         )
         
         if not success:
@@ -253,3 +337,18 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# === Interactive Prediction Mode ===
+# Enter market data to get trading decision.
+# Type 'quit' or 'exit' to stop.
+
+# Enter data (Datetime,Open,High,Low,Close,Volume): 2024-11-27 09:30:00,150.25,151.50,149.80,150.90,1000000
+
+# 🎯 Decision: BUY
+# Confidence: 67.45%
+
+# Probabilities:
+#   Buy:  67.45%
+#   Sell: 15.32%
+#   Hold: 17.23%
