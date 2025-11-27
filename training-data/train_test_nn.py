@@ -94,7 +94,7 @@ def plot_loss_curve(losses):
 def main():
     # Load training data (sampled)
     print("Loading training data...")
-    X_train, y_train, scaler = load_and_preprocess_data('MSFT_5m_training.csv')
+    X_train, y_train, scaler = load_and_preprocess_data('AAPL_5m_training.csv')
     
     # Train the model
     print("\nTraining neural network...")
@@ -105,7 +105,7 @@ def main():
     
     # Load test data (full dataset)
     print("\nLoading test data...")
-    X_test, y_test, _ = load_and_preprocess_data('MSFT_5m_testing.csv')
+    X_test, y_test, _ = load_and_preprocess_data('AAPL_5m_testing.csv')
     
     # Evaluate on training data
     print("\nEvaluating on training data...")
