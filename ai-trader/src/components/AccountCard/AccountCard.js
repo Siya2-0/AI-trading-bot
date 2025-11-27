@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAlpaca } from '../../hooks/useAlpaca';
 
-function AccountCard() {
+function AccountCard({ className = '' }) {
     const {
         getAccount,
 
@@ -49,10 +49,10 @@ function AccountCard() {
   }
 
   return (
-    <div className="relative">
+    <div className={`relative ${className}`}>
       {/* Account Card */}
       <div 
-        className="bg-white rounded-lg shadow-md p-6 w-64 cursor-pointer hover:shadow-lg transition-shadow duration-200 border-2 border-transparent hover:border-blue-500"
+        className="bg-white rounded-lg shadow-md p-4 cursor-pointer hover:shadow-lg transition-shadow duration-200 border-2 border-transparent hover:border-blue-500"
         onClick={togglePopup}
       >
         <h3 className="text-sm font-medium text-gray-500 mb-2">Account Balance</h3>

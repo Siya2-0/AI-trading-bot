@@ -122,54 +122,28 @@ const Dashboard = ({ isCollapsed } ) => {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Balance Card */}
-        {/* <div 
-          className="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-shadow"
-          onClick={() => navigate('/performance')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-2">Account Balance</h2>
-          <p className="text-3xl font-bold text-green-600">${balance.toLocaleString()}</p>
-          <p className="text-sm text-gray-500 mt-2">Click to view details</p>
-        </div> */}
-        <AccountCard />
-        {/* Broker Info Card */}
-        {/* <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Broker Information</h2>
-          <div className="flex items-center">
-            <img 
-              src={brokerInfo.image} 
-              alt={brokerInfo.name} 
-              className="w-16 h-16 rounded-full mr-4 cursor-pointer"
-              onClick={() => window.open(brokerInfo.website, '_blank')}
-            />
-            <div>
-              <h3 className="font-medium text-gray-800">{brokerInfo.name}</h3>
-              <p 
-                className="text-blue-500 hover:underline cursor-pointer text-sm"
-                onClick={() => window.open(brokerInfo.website, '_blank')}
-              >
-                Visit broker website
-              </p>
-            </div>
-          </div>
-        </div> */}
-        <BrokerCard />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-auto">
+       
+        <AccountCard className="h-fit" />
+       
+        <BrokerCard className="h-fit" />
+        <NewsCard className="md:col-span-2 h-fit max-h-96 overflow-y-auto" />
 
-        
          <StockCard 
               onStockSelect={handleStockSelect}
               selectedStock={selectedStock}
+              className="md:col-span-2 lg:col-span-2 h-fit"
           />
 
         <PriceCard 
               stock={selectedStock}
               priceData={priceData}
               loading={loading}
+              className="md:col-span-2 lg:col-span-2 h-fit"
             />
 
   
-         <NewsCard  />
+      
 
 
       </div>

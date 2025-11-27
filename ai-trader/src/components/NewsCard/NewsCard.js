@@ -2,14 +2,14 @@ import React, { useState,useEffect } from 'react';
 import {useAlpaca} from '../../hooks/useAlpaca.js';
  
 
-const NewsCard = () => {
+const NewsCard = ({ className = '' }) => {
   const [expandedNews, setExpandedNews] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const newsPerPage = 5;
   const [newsData, setNewsData] = useState(null);
   const [loading, setLoading] = useState(false);
   const { getNews } = useAlpaca();
-  
+
 
   // Fetch news data (example)
   const fetchNews = async () => {
@@ -31,7 +31,7 @@ const NewsCard = () => {
 
   if (!newsData?.news || newsData.news.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow-lg p-6 h-full">
+      <div className={`bg-white rounded-lg shadow-lg p-4 ${className}`}>
         <h2 className="text-xl font-bold text-gray-800 mb-4">Market News</h2>
         <div className="text-center py-8 text-gray-500">
           <svg className="w-12 h-12 mx-auto text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -88,7 +88,7 @@ const NewsCard = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 h-full">
+    <div className={`bg-white rounded-lg shadow-lg p-4 ${className}`}>
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold text-gray-800">Market News</h2>

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useAlpaca } from '../../hooks/useAlpaca';
 
-const StockCard = ({ onStockSelect, selectedStock }) => {
+const StockCard = ({ onStockSelect, selectedStock, className = '' }) => {
   const [stocks, setStocks] = useState([]);
   const [filteredStocks, setFilteredStocks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const stocksPerPage = 8;
+  const stocksPerPage = 6;
 
   const { getAssets } = useAlpaca();
 
@@ -118,7 +118,7 @@ const StockCard = ({ onStockSelect, selectedStock }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 h-full">
+    <div className={`bg-white rounded-lg shadow-lg p-4 ${className}`}>
       <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 mb-6">
   <div className="flex flex-col space-y-3">
     <div className="flex items-center justify-between">

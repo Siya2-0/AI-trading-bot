@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function BrokerCard() {
+function BrokerCard({ className = '' }) {
     
     const brokerInfo = {
         name: "Alpaca",
@@ -18,15 +18,15 @@ function BrokerCard() {
     return(
 
         <div 
-  className="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-all duration-200 border-2 border-transparent hover:border-blue-500"
+  className={`bg-white p-4 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-all duration-200 border-2 border-transparent hover:border-blue-500 ${className}`}
   onClick={() => window.open(brokerInfo.website, '_blank')}
 >
-  <h2 className="text-xl font-semibold text-gray-700 mb-4">Broker Information</h2>
+  <h2 className="text-lg font-semibold text-gray-700 mb-3">Broker Information</h2>
   <div className="flex items-center">
     <img 
       src={brokerInfo.image} 
       alt={brokerInfo.name} 
-      className="w-16 h-16 rounded-full mr-4 object-cover border-2 border-gray-200"
+      className="w-12 h-12 rounded-full mr-3 object-cover border-2 border-gray-200"
     />
     <div>
       <h3 className="font-medium text-gray-800 text-lg">{brokerInfo.name}</h3>
