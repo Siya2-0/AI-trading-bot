@@ -1,9 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import {useAlpaca} from '../../hooks/useAlpaca.js';
+ 
 
-const NewsCard = ({ newsData }) => {
+const NewsCard = () => {
   const [expandedNews, setExpandedNews] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const newsPerPage = 5;
+  const [newsData, setNewsData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const { getNews } = useAlpaca();
+  
+
+  // Fetch news data (example)
+  const fetchNews = async () => {
+    setLoading(true);
+    try {
+      // Your API call to get news data
+      const response = await getNews();
+      setNewsData(response);
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+   useEffect(() => {
+      fetchNews();
+    }, []);
 
   if (!newsData?.news || newsData.news.length === 0) {
     return (

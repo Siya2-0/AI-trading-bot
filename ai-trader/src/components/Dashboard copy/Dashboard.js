@@ -18,6 +18,7 @@ import BrokerCard from '../BrokerCard/BrokerCard';
 import StockCard from '../StockCard/StockCard';
 import PriceCard from '../PriceCard/PriceCard';
 import {useAlpaca} from '../../hooks/useAlpaca.js';
+import NewsCard from '../NewsCard/NewsCard';
 // Register ChartJS components
 ChartJS.register(
   CategoryScale,
@@ -39,9 +40,12 @@ const Dashboard = ({ isCollapsed } ) => {
   const [news, setNews] = useState([]);
   const [unreadMessages, setUnreadMessages] = useState(3);
   const [unreadNotifications, setUnreadNotifications] = useState(2);
+  
+
   const handleStockSelect = async (stock) => {
     setSelectedStock(stock);
     setLoading(true);
+
     try {
       // Fetch historical data for the selected stock
       const data = await getHistoricalBars(stock.symbol, '5Min');
@@ -75,54 +79,7 @@ const Dashboard = ({ isCollapsed } ) => {
 
 
   // Simulate live data updates
-  // useEffect(() => {
-  //   // Update stock chart data
-  //   const interval = setInterval(() => {
-  //     const now = new Date();
-  //     const time = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-  //     const newPrice = 150 + Math.random() * 10 - 5; // Random price fluctuation
 
-  //     setStockData(prev => {
-  //       const newLabels = [...prev.labels, time].slice(-20);
-  //       const newData = [...prev.datasets[0].data, newPrice].slice(-20);
-        
-  //       return {
-  //         labels: newLabels,
-  //         datasets: [
-  //           {
-  //             ...prev.datasets[0],
-  //             data: newData,
-  //           },
-  //         ],
-  //       };
-  //     });
-  //   }, 3000);
-
-    // Fetch news (mock)
-  //   const newsItems = [
-  //     {
-  //       id: 1,
-  //       title: 'Tech Stocks Rally After Fed Announcement',
-  //       source: 'Financial Times',
-  //       timestamp: '2 hours ago',
-  //     },
-  //     {
-  //       id: 2,
-  //       title: 'AI Trading Algorithms Outperform Humans in Q3',
-  //       source: 'Wall Street Journal',
-  //       timestamp: '5 hours ago',
-  //     },
-  //     {
-  //       id: 3,
-  //       title: 'New Regulations for Algorithmic Trading Expected',
-  //       source: 'Bloomberg',
-  //       timestamp: '1 day ago',
-  //     },
-  //   ];
-  //   setNews(newsItems);
-
-  //   return () => clearInterval(interval);
-  // }, []);
 
   return (
     <div className={`dashboard-container ${isCollapsed ? "collapsed" : ""} p-6 bg-gray-100 min-h-auto`}>
@@ -199,60 +156,7 @@ const Dashboard = ({ isCollapsed } ) => {
         </div> */}
         <BrokerCard />
 
-        {/* Active Trades Card */}
-        {/* <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-700 mb-2">Active Trades</h2>
-          <p className="text-3xl font-bold text-blue-600">{activeTrades}</p>
-          <p className="text-sm text-gray-500 mt-2">Currently running</p>
-        </div> */}
-
-        {/* Closed Trades Card */}
-        {/* <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Closed Trades</h2>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <p className="text-sm text-gray-500">Today</p>
-              <p className="text-xl font-semibold">{closedTrades.today}</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">This Week</p>
-              <p className="text-xl font-semibold">{closedTrades.week}</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">This Month</p>
-              <p className="text-xl font-semibold">{closedTrades.month}</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">This Year</p>
-              <p className="text-xl font-semibold">{closedTrades.year}</p>
-            </div>
-          </div>
-        </div> */}
         
-        {/* Stock Chart - Takes 2 columns on larger screens */}
-        {/* <div className="bg-white p-6 rounded-lg shadow-md lg:col-span-2">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Live Stock Chart</h2>
-          <div className="h-64">
-            <Line 
-              data={stockData}
-              options={{
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                  legend: {
-                    position: 'top',
-                  },
-                },
-                scales: {
-                  y: {
-                    beginAtZero: false,
-                  },
-                },
-              }}
-            />
-          </div>
-        </div> */}
-
          <StockCard 
               onStockSelect={handleStockSelect}
               selectedStock={selectedStock}
@@ -264,22 +168,10 @@ const Dashboard = ({ isCollapsed } ) => {
               loading={loading}
             />
 
-        {/* News Card */}
-        <div className="bg-white p-6 rounded-lg shadow-md lg:col-span-1">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Market News</h2>
-          <div className="space-y-4">
-            {news.map(item => (
-              <div key={item.id} className="border-b pb-3 last:border-0 last:pb-0">
-                <h3 className="font-medium text-gray-800 hover:text-blue-600 cursor-pointer">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-gray-500">
-                  {item.source} · {item.timestamp}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
+  
+         <NewsCard  />
+
+
       </div>
     </div>
   );
